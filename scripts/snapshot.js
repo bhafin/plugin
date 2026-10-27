@@ -1,7 +1,11 @@
 // Maintainer-only exact public allowlist. Does not execute marketing source.
 import { readFileSync, writeFileSync } from "node:fs";
 import { createHash } from "node:crypto";
-const root = new URL("../../marketing/", import.meta.url);
+import { resolve, sep } from "node:path";
+import { pathToFileURL } from "node:url";
+const root = process.env.BHAROSA_MARKETING_ROOT
+  ? pathToFileURL(resolve(process.env.BHAROSA_MARKETING_ROOT) + sep)
+  : new URL("../../marketing/", import.meta.url);
 const policy = JSON.parse(
   readFileSync(new URL("./source-checkpoint.json", import.meta.url), "utf8"),
 );
@@ -138,7 +142,7 @@ const referenceDoc = (id, title, pointer, value) => ({
   sourcePointer: pointer,
   sourceRoute: "/docs/reference",
   sourceSha256: hash(texts[publicPaths[2]]),
-  content: `# ${title}\n\nLocal unreleased public contract snapshot; not proof of live v8 availability.\n\n\`\`\`json\n${JSON.stringify(value, null, 2)}\n\`\`\``,
+  content: `# ${title}\n\nVersioned public contract snapshot; not proof of hosted API availability.\n\n\`\`\`json\n${JSON.stringify(value, null, 2)}\n\`\`\``,
 });
 const pointer = (key) => key.replaceAll("~", "~0").replaceAll("/", "~1");
 for (const [path, methods] of Object.entries(contract.paths)) {
@@ -192,7 +196,7 @@ for (const doc of docs) {
     throw Error(`Private marker in ${doc.id}`);
 }
 const bundle = {
-  bundleVersion: "0.1.0-prototype.8",
+  bundleVersion: "0.2.0-docs.1",
   contractVersion,
   contractSourcePath: "marketing/src/content/product.ts",
   contractSourceSha256: hash(product),
@@ -201,9 +205,9 @@ const bundle = {
   approvedManifestSha256: policy.approvedManifestSha256,
   checkpointDate: policy.checkpointDate,
   reviewedOn,
-  availability: "local-prototype",
+  availability: "bundled-snapshot",
   notice:
-    "Local unreleased public-documentation snapshot, not live v8 documentation or deployed API/release evidence. API routes are reference text only; this MCP server has no account access or financial tools. Guide prose omits executable examples; public JSON schemas are design contracts.",
+    "Versioned public-documentation snapshot, not a live website fetch or proof of deployed API availability. API routes are reference text only; this MCP server has no account access. Guide prose and API schemas are supplemented by separately indexed canonical examples.",
   docs,
 };
 const target = new URL("../assets/docs.json", import.meta.url);
@@ -212,6 +216,16 @@ if (process.argv.includes("--check")) {
   if (readFileSync(target, "utf8") !== output)
     throw Error("Bundle differs from approved public checkpoint");
 } else writeFileSync(target, output);
+const runtimePath = new URL("../src/catalog.js", import.meta.url);
+const runtime = readFileSync(runtimePath, "utf8");
+const pinned = runtime.replace(
+  /(export const snapshotSha256 =\s*)"[a-f0-9]{64}"/,
+  `$1"${hash(output)}"`,
+);
+if (process.argv.includes("--check")) {
+  if (runtime !== pinned)
+    throw Error("Runtime documentation integrity pin differs");
+} else writeFileSync(runtimePath, pinned);
 console.log(
   `Verified ${docs.length} public documentation entries against approved checkpoint.`,
 );

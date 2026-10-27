@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { z } from "zod";
+import { createCodingTools } from "./coding-catalog.js";
 
 const document = z
   .object({
@@ -20,7 +21,7 @@ const document = z
   .strict();
 const bundleSchema = z
   .object({
-    bundleVersion: z.literal("0.1.0-prototype.8"),
+    bundleVersion: z.literal("0.2.0-docs.1"),
     contractVersion: z.literal("API v1"),
     contractSourcePath: z.literal("marketing/src/content/product.ts"),
     contractSourceSha256: z.string().regex(/^[a-f0-9]{64}$/),
@@ -29,13 +30,13 @@ const bundleSchema = z
     approvedManifestSha256: z.string().regex(/^[a-f0-9]{64}$/),
     checkpointDate: z.string(),
     reviewedOn: z.string(),
-    availability: z.literal("local-prototype"),
+    availability: z.literal("bundled-snapshot"),
     notice: z.string(),
     docs: z.array(document).min(1).max(128),
   })
   .strict();
 export const snapshotSha256 =
-  "9d1d9a58ba177a6676e9c0fcee6835369899e0f2148186ac8a379eb4e5ac1000";
+  "e327ccd423ee5be8a0d599164ac809fa30a6ff8c7758716269b92a7afecd66b7";
 const bundledText = readFileSync(
   new URL("../assets/docs.json", import.meta.url),
   "utf8",
@@ -48,20 +49,27 @@ export const bundle = bundleSchema.parse(JSON.parse(bundledText));
 if (new Set(bundle.docs.map((d) => d.id)).size !== bundle.docs.length)
   throw new Error("Duplicate document ID");
 const { docs, ...metadata } = bundle;
+const metadataShape = bundleSchema.omit({ docs: true }).shape;
+const coding = createCodingTools(
+  metadataShape,
+  snapshotSha256,
+  metadata.approvedManifestSha256,
+);
 export const inputs = {
-  docs_list: z
+  ...coding.inputs,
+  bharosa_docs_list: z
     .object({
       offset: z.number().int().min(0).max(128).default(0),
       limit: z.number().int().min(1).max(20).default(10),
     })
     .strict(),
-  docs_search: z
+  bharosa_docs_search: z
     .object({
       query: z.string().max(120).trim().min(1),
       limit: z.number().int().min(1).max(20).default(5),
     })
     .strict(),
-  docs_read: z
+  bharosa_docs_read: z
     .object({
       id: z.string().regex(/^[a-z-]{1,64}$/),
       offset: z.number().int().min(0).max(30000).default(0),
@@ -69,13 +77,13 @@ export const inputs = {
     })
     .strict(),
 };
-const metadataShape = bundleSchema.omit({ docs: true }).shape;
 const summarySchema = document
   .omit({ content: true })
   .extend({ totalChars: z.number().int().nonnegative() });
 const nextOffset = z.number().int().nonnegative().nullable();
 export const outputs = {
-  docs_list: z
+  ...coding.outputs,
+  bharosa_docs_list: z
     .object({
       ...metadataShape,
       documents: z.array(summarySchema).max(20),
@@ -83,7 +91,7 @@ export const outputs = {
       nextOffset,
     })
     .strict(),
-  docs_search: z
+  bharosa_docs_search: z
     .object({
       ...metadataShape,
       matches: z
@@ -92,7 +100,7 @@ export const outputs = {
       total: z.number().int(),
     })
     .strict(),
-  docs_read: z
+  bharosa_docs_read: z
     .object({
       ...metadataShape,
       document: summarySchema,
@@ -110,7 +118,7 @@ export function execute(name, raw) {
   if (!Object.hasOwn(inputs, name))
     return failure(
       "unknown_tool",
-      "Use docs_list, docs_search or docs_read; no account or filesystem tools are available.",
+      "Use the advertised bharosa_ documentation, API-reference and example tools; no account or filesystem tools are available.",
     );
   // Inspect the original object before Zod can normalize special keys.
   if (
@@ -131,17 +139,21 @@ export function execute(name, raw) {
     return failure(
       "invalid_arguments",
       {
-        docs_list:
+        bharosa_docs_list:
           "Use integer offset 0–128 and limit 1–20; omit both for the first page.",
-        docs_search:
+        bharosa_docs_search:
           "Use a nonblank query of at most 120 raw characters and integer limit 1–20. Whitespace counts toward the raw bound.",
-        docs_read:
-          "Choose an ID from docs_list; use integer offset 0–30000 and maxChars 1–8000.",
-      }[name],
+        bharosa_docs_read:
+          "Choose an ID from bharosa_docs_list; use integer offset 0–30000 and maxChars 1–8000.",
+      }[name] ??
+        "Use only the advertised fields and bounds. Search queries must be nonblank and at most 120 raw characters.",
     );
   const args = parsed.data;
   let data;
-  if (name === "docs_list") {
+  if (Object.hasOwn(coding.inputs, name)) {
+    data = coding.execute(name, args);
+    if (data.error) return failure(data.error.code, data.error.message);
+  } else if (name === "bharosa_docs_list") {
     if (args.offset > docs.length)
       return failure(
         "invalid_offset",
@@ -153,7 +165,7 @@ export function execute(name, raw) {
       total: docs.length,
       nextOffset: end < docs.length ? end : null,
     };
-  } else if (name === "docs_search") {
+  } else if (name === "bharosa_docs_search") {
     const query = args.query.toLowerCase().replace(/\s+/gu, " ");
     const terms = [...new Set(query.split(" "))];
     const matches = docs
@@ -196,7 +208,7 @@ export function execute(name, raw) {
     if (!doc)
       return failure(
         "document_not_found",
-        "Use docs_list to select a bundled document ID.",
+        "Use bharosa_docs_list to select a bundled document ID.",
       );
     if (args.offset > doc.content.length)
       return failure(

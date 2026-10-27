@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const version = "0.1.0";
+const version = "0.2.0";
 const args = process.argv.slice(2);
 const mode = args[0] ?? "--stdio";
 if (

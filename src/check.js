@@ -25,34 +25,60 @@ export async function runCheck(entry) {
     await client.connect(transport);
     const { tools } = await client.listTools();
     assert.deepEqual(tools.map((t) => t.name).sort(), [
-      "docs_list",
-      "docs_read",
-      "docs_search",
+      "bharosa_api_details",
+      "bharosa_api_search",
+      "bharosa_docs_list",
+      "bharosa_docs_read",
+      "bharosa_docs_search",
+      "bharosa_examples_read",
+      "bharosa_examples_search",
     ]);
     const list = await client.callTool({
-      name: "docs_list",
+      name: "bharosa_docs_list",
       arguments: { limit: 1 },
     });
     assert.equal(list.structuredContent.total, bundle.docs.length);
     const search = await client.callTool({
-      name: "docs_search",
+      name: "bharosa_docs_search",
       arguments: { query: "authentication" },
     });
     assert.equal(search.structuredContent.matches[0].id, "authentication");
     const read = await client.callTool({
-      name: "docs_read",
+      name: "bharosa_docs_read",
       arguments: { id: "authentication", maxChars: 80 },
     });
     assert.equal(read.structuredContent.content.length, 80);
     assert.equal(
       (
         await client.callTool({
-          name: "docs_read",
+          name: "bharosa_docs_read",
           arguments: { id: "../secret" },
         })
       ).isError,
       true,
     );
+    const api = await client.callTool({
+      name: "bharosa_api_search",
+      arguments: { query: "retrieve_account" },
+    });
+    const op = await client.callTool({
+      name: "bharosa_api_details",
+      arguments: { operationId: api.structuredContent.matches[0].id },
+    });
+    assert.equal(op.structuredContent.operation.method, "GET");
+    const examples = await client.callTool({
+      name: "bharosa_examples_search",
+      arguments: {
+        query: "retrieve",
+        operationId: "retrieve_account",
+        language: "typescript",
+      },
+    });
+    const example = await client.callTool({
+      name: "bharosa_examples_read",
+      arguments: { id: examples.structuredContent.matches[0].id },
+    });
+    assert.match(example.structuredContent.code, /bharosa.accounts.retrieve/);
     assert.equal(stderr, "");
     return {
       status: "pass",

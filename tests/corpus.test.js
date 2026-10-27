@@ -7,7 +7,7 @@ const json = (doc) =>
 test("expanded corpus is pinned to approved public checkpoint and excludes private sources", () => {
   assert.equal(
     bundle.approvedManifestSha256,
-    "0abf626f75a8538829b46fd8ac5417a9833265d319502252ba003f4d15e4d8ff",
+    "4c223925f048e40ca1762c781848c677055db447870031328fee017ceb5ee1ac",
   );
   assert.equal(
     bundle.publicContractSha256,
@@ -15,7 +15,7 @@ test("expanded corpus is pinned to approved public checkpoint and excludes priva
   );
   assert.equal(bundle.docs.length, 96);
   assert.equal(bundle.docs.filter((d) => d.kind === "guide").length, 27);
-  assert.match(bundle.notice, /not live v8/);
+  assert.match(bundle.notice, /not a live website fetch/);
   for (const doc of bundle.docs) {
     assert.ok(
       [
@@ -43,7 +43,7 @@ test("four-decimal units, null valuation and unreleased guidance remain discover
   assert.match(byId("first-portfolio").content, /four fractional digits/);
   assert.match(byId("first-portfolio").content, /total_current_value.*null/);
   assert.ok(
-    execute("docs_search", {
+    execute("bharosa_docs_search", {
       query: "four fractional digits",
       limit: 20,
     }).structuredContent.matches.some((d) => d.id === "first-portfolio"),
@@ -93,10 +93,7 @@ test("reconciled setup guides preserve local scope and name the predecessor chec
     /local rehearsal packages, not a published marketplace listing/,
   );
   assert.match(assistant, /Claude Code installation was verified/);
-  assert.match(
-    assistant,
-    /Public distribution and final licensing are still pending/,
-  );
+  assert.match(assistant, /source is now public under MIT/);
   assert.match(byId("event-rehearsal").content, /fictional/);
   assert.match(byId("event-rehearsal").content, /authorized account/);
 });

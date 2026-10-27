@@ -4,3 +4,5 @@ artifacts/
 assets/docs.json
 npm-shrinkwrap.json
 THIRD-PARTY-NOTICES.txt
+
+assets/coding.json

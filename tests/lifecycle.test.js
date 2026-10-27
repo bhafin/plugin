@@ -74,7 +74,7 @@ test(
     const h = host();
     try {
       const early = await h.request("tools/call", {
-        name: "docs_list",
+        name: "bharosa_docs_list",
         arguments: {},
       });
       assert.equal(
@@ -95,12 +95,16 @@ test(
         assert.equal((await h.next()).error.code, -32600);
       }
       await h.initialize();
-      assert.equal((await h.request("tools/list", {})).result.tools.length, 3);
+      assert.equal((await h.request("tools/list", {})).result.tools.length, 7);
       const bad = await h.request("tools/call", { name: false, arguments: {} });
       assert.ok(bad.error);
       assert.equal(
-        (await h.request("tools/call", { name: "docs_list", arguments: {} }))
-          .result.structuredContent.total,
+        (
+          await h.request("tools/call", {
+            name: "bharosa_docs_list",
+            arguments: {},
+          })
+        ).result.structuredContent.total,
         96,
       );
       assert.equal(h.stderr(), "");
@@ -144,7 +148,7 @@ test(
   () => {
     for (const [args, status, pattern] of [
       [["--help"], 0, /Usage:/],
-      [["--version"], 0, /0.1.0/],
+      [["--version"], 0, /0.2.0/],
       [["--bad"], 2, /Unknown option/],
     ]) {
       const run = spawnSync(process.execPath, [entry, ...args], {

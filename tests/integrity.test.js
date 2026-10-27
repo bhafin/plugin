@@ -18,27 +18,37 @@ test("tampered or missing bundle refuses startup with actionable non-leaking dia
     mkdirSync(join(dir, "assets"));
     writeFileSync(join(dir, "package.json"), '{"type":"module"}');
     symlinkSync(resolve("node_modules"), join(dir, "node_modules"), "dir");
-    for (const file of ["cli.js", "check.js", "server.js", "catalog.js"])
+    for (const file of [
+      "cli.js",
+      "check.js",
+      "server.js",
+      "catalog.js",
+      "coding-catalog.js",
+    ])
       copyFileSync(resolve("src", file), join(dir, "src", file));
-    for (const tampered of [false, true]) {
-      if (tampered)
-        writeFileSync(
-          join(dir, "assets/docs.json"),
-          "synthetic-private-value-not-for-logs",
+    for (const target of ["docs.json", "coding.json"])
+      for (const tampered of [false, true]) {
+        for (const asset of ["docs.json", "coding.json"])
+          copyFileSync(resolve("assets", asset), join(dir, "assets", asset));
+        if (tampered)
+          writeFileSync(
+            join(dir, "assets", target),
+            "synthetic-private-value-not-for-logs",
+          );
+        else rmSync(join(dir, "assets", target));
+        const run = spawnSync(
+          process.execPath,
+          [join(dir, "src/cli.js"), "--stdio"],
+          { encoding: "utf8", timeout: 3000 },
         );
-      const run = spawnSync(
-        process.execPath,
-        [join(dir, "src/cli.js"), "--stdio"],
-        { encoding: "utf8", timeout: 3000 },
-      );
-      assert.equal(run.status, 1);
-      assert.equal(run.stdout, "");
-      assert.match(run.stderr, /reinstall the reviewed local tarball/);
-      assert.doesNotMatch(
-        run.stderr,
-        /synthetic-private-value| at |ENOENT|SyntaxError/,
-      );
-    }
+        assert.equal(run.status, 1);
+        assert.equal(run.stdout, "");
+        assert.match(run.stderr, /reinstall the reviewed local tarball/);
+        assert.doesNotMatch(
+          run.stderr,
+          /synthetic-private-value| at |ENOENT|SyntaxError/,
+        );
+      }
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }

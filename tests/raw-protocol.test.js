@@ -69,49 +69,63 @@ test(
         const tools = (await request("tools/list", {})).result.tools;
         assert.deepEqual(
           tools.map((t) => t.name),
-          ["docs_list", "docs_search", "docs_read"],
+          [
+            "bharosa_api_search",
+            "bharosa_api_details",
+            "bharosa_examples_search",
+            "bharosa_examples_read",
+            "bharosa_docs_list",
+            "bharosa_docs_search",
+            "bharosa_docs_read",
+          ],
         );
         for (const t of tools) {
           assert.equal(t.inputSchema.additionalProperties, false);
           assert.equal(t.outputSchema.type, "object");
         }
-        const listing = await success("docs_list", {});
+        const listing = await success("bharosa_docs_list", {});
         assert.equal(listing.contractVersion, "API v1");
-        assert.equal(listing.availability, "local-prototype");
+        assert.equal(listing.availability, "bundled-snapshot");
         assert.equal(listing.total, 96);
         const allDocuments = [...listing.documents];
         let next = listing.nextOffset;
         while (next !== null) {
-          const page = await success("docs_list", { offset: next, limit: 20 });
+          const page = await success("bharosa_docs_list", {
+            offset: next,
+            limit: 20,
+          });
           allDocuments.push(...page.documents);
           next = page.nextOffset;
         }
         assert.equal(new Set(allDocuments.map((d) => d.id)).size, 96);
         assert.ok(allDocuments.some((d) => d.id === "schema-unit-input"));
-        const first = await success("docs_search", { query: "the", limit: 20 });
+        const first = await success("bharosa_docs_search", {
+          query: "the",
+          limit: 20,
+        });
         assert.deepEqual(
           first,
-          await success("docs_search", { query: "THE", limit: 20 }),
+          await success("bharosa_docs_search", { query: "THE", limit: 20 }),
         );
         assert.equal(
-          (await success("docs_search", { query: "authentication" })).matches[0]
-            .id,
+          (await success("bharosa_docs_search", { query: "authentication" }))
+            .matches[0].id,
           "authentication",
         );
         assert.equal(
-          (await success("docs_search", { query: "create portfolio" }))
+          (await success("bharosa_docs_search", { query: "create portfolio" }))
             .matches[0].id,
           "reference-create-portfolio",
         );
         for (const doc of allDocuments) {
-          const read = await success("docs_read", {
+          const read = await success("bharosa_docs_read", {
             id: doc.id,
             maxChars: 8000,
           });
           assert.ok(read.content.length <= 8000);
           assert.equal(read.document.sourceSha256, doc.sourceSha256);
           assert.equal(read.document.sourcePath, doc.sourcePath);
-          const end = await success("docs_read", {
+          const end = await success("bharosa_docs_read", {
             id: doc.id,
             offset: doc.totalChars,
             maxChars: 1,
@@ -130,24 +144,27 @@ test(
           "__proto__",
         ];
         for (const query of attacks) {
-          const r = await success("docs_search", { query });
+          const r = await success("bharosa_docs_search", { query });
           assert.equal(r.total, 0);
-          assert.equal((await call("docs_read", { id: query })).isError, true);
+          assert.equal(
+            (await call("bharosa_docs_read", { id: query })).isError,
+            true,
+          );
           assertions += 2;
         }
         for (const [name, args] of [
-          ["docs_list", { limit: 0 }],
-          ["docs_list", { limit: 21 }],
-          ["docs_list", { limit: 1.1 }],
-          ["docs_list", { offset: 97 }],
-          ["docs_list", { offset: -1 }],
-          ["docs_read", { id: "authentication", maxChars: 8001 }],
-          ["docs_read", { id: "authentication", maxChars: 0 }],
-          ["docs_read", { id: "authentication", offset: 30001 }],
-          ["docs_search", { query: "a".repeat(121) }],
-          ["docs_search", { query: " " }],
-          ["docs_search", { query: [] }],
-          ["docs_search", { query: "OAuth", path: "/etc/passwd" }],
+          ["bharosa_docs_list", { limit: 0 }],
+          ["bharosa_docs_list", { limit: 21 }],
+          ["bharosa_docs_list", { limit: 1.1 }],
+          ["bharosa_docs_list", { offset: 97 }],
+          ["bharosa_docs_list", { offset: -1 }],
+          ["bharosa_docs_read", { id: "authentication", maxChars: 8001 }],
+          ["bharosa_docs_read", { id: "authentication", maxChars: 0 }],
+          ["bharosa_docs_read", { id: "authentication", offset: 30001 }],
+          ["bharosa_docs_search", { query: "a".repeat(121) }],
+          ["bharosa_docs_search", { query: " " }],
+          ["bharosa_docs_search", { query: [] }],
+          ["bharosa_docs_search", { query: "OAuth", path: "/etc/passwd" }],
           ["nonexistent", {}],
         ]) {
           assert.equal(
@@ -157,13 +174,19 @@ test(
           );
           assertions++;
         }
-        for (const name of ["docs_list", "docs_search", "docs_read"]) {
-          const valid =
-            name === "docs_list"
-              ? {}
-              : name === "docs_search"
-                ? { query: "OAuth" }
-                : { id: "authentication" };
+        for (const [name, valid] of Object.entries({
+          bharosa_docs_list: {},
+          bharosa_docs_search: { query: "OAuth" },
+          bharosa_docs_read: { id: "authentication" },
+          bharosa_api_search: { query: "retrieve_account" },
+          bharosa_api_details: { operationId: "retrieve_account" },
+          bharosa_examples_search: {
+            query: "retrieve",
+            operationId: "retrieve_account",
+          },
+          bharosa_examples_read: { id: "sdk-account-retrieve-account" },
+        })) {
+          await success(name, valid);
           for (const key of [
             "__proto__",
             "constructor",
@@ -185,18 +208,19 @@ test(
         }
         assert.equal(
           (
-            await call("docs_search", {
+            await call("bharosa_docs_search", {
               query: " ".repeat(200) + "OAuth" + " ".repeat(200),
             })
           ).isError,
           true,
         );
         assert.deepEqual(
-          await success("docs_search", { query: " OAuth " }),
-          await success("docs_search", { query: "OAuth" }),
+          await success("bharosa_docs_search", { query: " OAuth " }),
+          await success("bharosa_docs_search", { query: "OAuth" }),
         );
         assert.equal(
-          (await success("docs_search", { query: "a".repeat(120) })).total,
+          (await success("bharosa_docs_search", { query: "a".repeat(120) }))
+            .total,
           0,
         );
         assertions++;
@@ -205,7 +229,7 @@ test(
           -32601,
         );
         assert.equal(existsSync("/tmp/bharosa-mcp-review-executed"), false);
-        assert.equal((await success("docs_list", {})).total, 96);
+        assert.equal((await success("bharosa_docs_list", {})).total, 96);
         assert.equal(stderr, "");
         console.log(
           JSON.stringify({

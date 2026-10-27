@@ -1,9 +1,9 @@
 {
-  "approvedManifestSha256": "0abf626f75a8538829b46fd8ac5417a9833265d319502252ba003f4d15e4d8ff",
+  "approvedManifestSha256": "4c223925f048e40ca1762c781848c677055db447870031328fee017ceb5ee1ac",
   "checkpointDate": "2026-10-27",
   "sources": {
-    "src/content/guides.ts": "ba182af3625fd46537967caacd6ceeb5a6264f6df03a0e426cb3b55c4a3fe85a",
-    "src/content/product.ts": "e407359ec709344e3eca9bc7f5658a15b2b26dbe6a28496088c0ab540c096632",
+    "src/content/guides.ts": "738e0f1f1c2078759908225cc76e47b8c3f8dba04446eb1faf82bd99a78969c7",
+    "src/content/product.ts": "62c01ecc3e6aabc74ba66128724fa64a20e154ab6457b804df8a102992959db5",
     "contracts/openapi.json": "5ae700e29c7f54df12d5634f36cad08785240ee5b019d5921bf0792f53b7866c"
   }
 }
