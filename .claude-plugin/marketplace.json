@@ -1,0 +1,15 @@
+{
+  "name": "bharosa",
+  "owner": {
+    "name": "Bharosa"
+  },
+  "metadata": {
+    "description": "Bharosa documentation integrations"
+  },
+  "plugins": [
+    {
+      "name": "bharosa-docs",
+      "source": "./plugins/bharosa-docs"
+    }
+  ]
+}

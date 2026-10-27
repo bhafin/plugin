@@ -1,0 +1,54 @@
+{
+  "name": "bharosa-docs-mcp",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Read-only MCP search and reading over versioned Bharosa public developer documentation",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "bin": {
+    "bharosa-docs-mcp": "dist/cli.js"
+  },
+  "files": [
+    "dist/cli.js",
+    "dist/server.js",
+    "dist/catalog.js",
+    "dist/check.js",
+    "assets/docs.json",
+    "README.md",
+    "LICENSE",
+    "THIRD-PARTY-NOTICES.txt",
+    "npm-shrinkwrap.json"
+  ],
+  "scripts": {
+    "start": "node dist/cli.js --stdio",
+    "build": "node scripts/build.js",
+    "test": "node --test tests/*.test.js",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "prepack": "npm run build",
+    "check": "node dist/cli.js --check",
+    "docs:check": "node scripts/snapshot.js --check",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.2",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "prettier": "3.6.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bhafin/plugin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bhafin/plugin/issues"
+  },
+  "homepage": "https://github.com/bhafin/plugin#readme",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}

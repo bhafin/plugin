@@ -1,0 +1,6 @@
+node_modules/
+dist/
+artifacts/
+assets/docs.json
+npm-shrinkwrap.json
+THIRD-PARTY-NOTICES.txt

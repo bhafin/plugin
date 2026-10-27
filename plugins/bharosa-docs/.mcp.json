@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "bharosa_docs": {
+      "command": "npx",
+      "args": [
+        "--yes",
+        "--package=bharosa-docs-mcp@0.1.0",
+        "bharosa-docs-mcp",
+        "--stdio"
+      ]
+    }
+  }
+}

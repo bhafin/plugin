@@ -1,0 +1,235 @@
+import { readFileSync } from "node:fs";
+import { createHash } from "node:crypto";
+import { z } from "zod";
+
+const document = z
+  .object({
+    id: z.string().regex(/^[a-z-]+$/),
+    title: z.string(),
+    sourcePath: z.enum([
+      "marketing/src/content/guides.ts",
+      "marketing/contracts/openapi.json",
+    ]),
+    sourceLine: z.number().int().positive(),
+    sourcePointer: z.string().nullable(),
+    kind: z.enum(["guide", "reference"]),
+    sourceRoute: z.string(),
+    sourceSha256: z.string().regex(/^[a-f0-9]{64}$/),
+    content: z.string().max(30000),
+  })
+  .strict();
+const bundleSchema = z
+  .object({
+    bundleVersion: z.literal("0.1.0-prototype.8"),
+    contractVersion: z.literal("API v1"),
+    contractSourcePath: z.literal("marketing/src/content/product.ts"),
+    contractSourceSha256: z.string().regex(/^[a-f0-9]{64}$/),
+    publicContractSha256: z.string().regex(/^[a-f0-9]{64}$/),
+    publicContractVersion: z.string(),
+    approvedManifestSha256: z.string().regex(/^[a-f0-9]{64}$/),
+    checkpointDate: z.string(),
+    reviewedOn: z.string(),
+    availability: z.literal("local-prototype"),
+    notice: z.string(),
+    docs: z.array(document).min(1).max(128),
+  })
+  .strict();
+export const snapshotSha256 =
+  "9d1d9a58ba177a6676e9c0fcee6835369899e0f2148186ac8a379eb4e5ac1000";
+const bundledText = readFileSync(
+  new URL("../assets/docs.json", import.meta.url),
+  "utf8",
+);
+if (createHash("sha256").update(bundledText).digest("hex") !== snapshotSha256)
+  throw new Error(
+    "Bundled documentation integrity check failed. Reinstall the reviewed local package.",
+  );
+export const bundle = bundleSchema.parse(JSON.parse(bundledText));
+if (new Set(bundle.docs.map((d) => d.id)).size !== bundle.docs.length)
+  throw new Error("Duplicate document ID");
+const { docs, ...metadata } = bundle;
+export const inputs = {
+  docs_list: z
+    .object({
+      offset: z.number().int().min(0).max(128).default(0),
+      limit: z.number().int().min(1).max(20).default(10),
+    })
+    .strict(),
+  docs_search: z
+    .object({
+      query: z.string().max(120).trim().min(1),
+      limit: z.number().int().min(1).max(20).default(5),
+    })
+    .strict(),
+  docs_read: z
+    .object({
+      id: z.string().regex(/^[a-z-]{1,64}$/),
+      offset: z.number().int().min(0).max(30000).default(0),
+      maxChars: z.number().int().min(1).max(8000).default(4000),
+    })
+    .strict(),
+};
+const metadataShape = bundleSchema.omit({ docs: true }).shape;
+const summarySchema = document
+  .omit({ content: true })
+  .extend({ totalChars: z.number().int().nonnegative() });
+const nextOffset = z.number().int().nonnegative().nullable();
+export const outputs = {
+  docs_list: z
+    .object({
+      ...metadataShape,
+      documents: z.array(summarySchema).max(20),
+      total: z.number().int(),
+      nextOffset,
+    })
+    .strict(),
+  docs_search: z
+    .object({
+      ...metadataShape,
+      matches: z
+        .array(summarySchema.extend({ snippet: z.string().max(300) }))
+        .max(20),
+      total: z.number().int(),
+    })
+    .strict(),
+  docs_read: z
+    .object({
+      ...metadataShape,
+      document: summarySchema,
+      content: z.string().max(8000),
+      offset: z.number().int(),
+      nextOffset,
+    })
+    .strict(),
+};
+const summary = ({ content, ...rest }) => ({
+  ...rest,
+  totalChars: content.length,
+});
+export function execute(name, raw) {
+  if (!Object.hasOwn(inputs, name))
+    return failure(
+      "unknown_tool",
+      "Use docs_list, docs_search or docs_read; no account or filesystem tools are available.",
+    );
+  // Inspect the original object before Zod can normalize special keys.
+  if (
+    raw === null ||
+    typeof raw !== "object" ||
+    Array.isArray(raw) ||
+    Reflect.ownKeys(raw).some(
+      (key) =>
+        typeof key !== "string" || !Object.hasOwn(inputs[name].shape, key),
+    )
+  )
+    return failure(
+      "invalid_arguments",
+      "Pass a JSON object containing only the fields shown by tools/list; remove unknown fields.",
+    );
+  const parsed = inputs[name].safeParse(raw);
+  if (!parsed.success)
+    return failure(
+      "invalid_arguments",
+      {
+        docs_list:
+          "Use integer offset 0–128 and limit 1–20; omit both for the first page.",
+        docs_search:
+          "Use a nonblank query of at most 120 raw characters and integer limit 1–20. Whitespace counts toward the raw bound.",
+        docs_read:
+          "Choose an ID from docs_list; use integer offset 0–30000 and maxChars 1–8000.",
+      }[name],
+    );
+  const args = parsed.data;
+  let data;
+  if (name === "docs_list") {
+    if (args.offset > docs.length)
+      return failure(
+        "invalid_offset",
+        `Use an offset from 0 through ${docs.length}, or follow the previous page’s nextOffset.`,
+      );
+    const end = args.offset + args.limit;
+    data = {
+      documents: docs.slice(args.offset, end).map(summary),
+      total: docs.length,
+      nextOffset: end < docs.length ? end : null,
+    };
+  } else if (name === "docs_search") {
+    const query = args.query.toLowerCase().replace(/\s+/gu, " ");
+    const terms = [...new Set(query.split(" "))];
+    const matches = docs
+      .map((doc, index) => {
+        const title = doc.title.toLowerCase(),
+          id = doc.id.toLowerCase(),
+          body = doc.content.toLowerCase();
+        const searchable = `${id}\n${title}\n${body}`;
+        if (!terms.every((term) => searchable.includes(term))) return null;
+        // Exact IDs/titles, then title matches. Stable source order breaks ties.
+        const score =
+          (id === query ? 1000 : 0) +
+          (title === query ? 900 : 0) +
+          (title.includes(query) ? 200 : 0) +
+          (terms.every((term) => title.includes(term)) ? 100 : 0) +
+          terms.filter((term) => title.includes(term)).length * 10;
+        return { doc, index, score };
+      })
+      .filter(Boolean)
+      .sort((a, b) => b.score - a.score || a.index - b.index);
+    data = {
+      matches: matches.slice(0, args.limit).map(({ doc }) => {
+        const lower = doc.content.toLowerCase();
+        const positions = terms
+          .map((term) => lower.indexOf(term))
+          .filter((position) => position >= 0);
+        const position = Math.max(
+          0,
+          (positions.length ? Math.min(...positions) : 0) - 60,
+        );
+        return {
+          ...summary(doc),
+          snippet: doc.content.slice(position, position + 300),
+        };
+      }),
+      total: matches.length,
+    };
+  } else {
+    const doc = docs.find((d) => d.id === args.id);
+    if (!doc)
+      return failure(
+        "document_not_found",
+        "Use docs_list to select a bundled document ID.",
+      );
+    if (args.offset > doc.content.length)
+      return failure(
+        "invalid_offset",
+        `Use an offset from 0 through ${doc.content.length}, or follow the previous chunk’s nextOffset.`,
+      );
+    const end = args.offset + args.maxChars;
+    data = {
+      document: summary(doc),
+      content: doc.content.slice(args.offset, end),
+      offset: args.offset,
+      nextOffset: end < doc.content.length ? end : null,
+    };
+  }
+  const result = { ...metadata, ...data };
+  if (!outputs[name].safeParse(result).success)
+    return failure(
+      "invalid_result",
+      "Documentation result did not match its advertised schema.",
+    );
+  return {
+    content: [{ type: "text", text: JSON.stringify(result) }],
+    structuredContent: result,
+  };
+}
+export function failure(code, message) {
+  return {
+    isError: true,
+    content: [
+      {
+        type: "text",
+        text: JSON.stringify({ ...metadata, error: { code, message } }),
+      },
+    ],
+  };
+}

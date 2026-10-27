@@ -1,0 +1,17 @@
+{
+  "name": "bharosa",
+  "plugins": [
+    {
+      "name": "bharosa-docs",
+      "source": {
+        "source": "local",
+        "path": "./plugins/bharosa-docs"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

@@ -1,0 +1,217 @@
+// Maintainer-only exact public allowlist. Does not execute marketing source.
+import { readFileSync, writeFileSync } from "node:fs";
+import { createHash } from "node:crypto";
+const root = new URL("../../marketing/", import.meta.url);
+const policy = JSON.parse(
+  readFileSync(new URL("./source-checkpoint.json", import.meta.url), "utf8"),
+);
+const hash = (s) => createHash("sha256").update(s).digest("hex");
+const publicPaths = [
+  "src/content/guides.ts",
+  "src/content/product.ts",
+  "contracts/openapi.json",
+];
+const texts = Object.fromEntries(
+  publicPaths.map((path) => {
+    const text = readFileSync(new URL(path, root), "utf8");
+    if (hash(text) !== policy.sources[path])
+      throw new Error(`Unapproved source drift: ${path}`);
+    return [path, text];
+  }),
+);
+const source = texts[publicPaths[0]],
+  product = texts[publicPaths[1]],
+  contract = JSON.parse(texts[publicPaths[2]]);
+const contractVersion = product.match(
+  /export const contractVersion = "([^"]+)";/,
+)?.[1];
+const reviewedOn = product.match(/export const reviewedOn = "([^"]+)";/)?.[1];
+if (!contractVersion || !reviewedOn)
+  throw new Error("Missing canonical contract references; prototype unready");
+
+// Parse only literal prose arrays. Reject expressions/unknown escape forms instead
+// of executing TS or silently dropping paragraphs. Code/example arguments omitted.
+function proseReader(text, start) {
+  let i = start;
+  const ws = () => {
+    while (/\s/.test(text[i] ?? "") && i < text.length) i++;
+  };
+  const take = (token) => {
+    ws();
+    if (text[i] !== token) throw Error(`Expected ${token} at ${i}`);
+    i++;
+  };
+  const string = () => {
+    ws();
+    const quote = text[i++];
+    if (quote !== "'" && quote !== '"')
+      throw Error("Expected literal prose string");
+    let value = "";
+    while (i < text.length) {
+      let char = text[i++];
+      if (char === quote) return value;
+      if (char === "\\") {
+        char = text[i++];
+        const escapes = {
+          n: "\n",
+          r: "\r",
+          t: "\t",
+          b: "\b",
+          f: "\f",
+          v: "\v",
+          "'": "'",
+          '"': '"',
+          "\\": "\\",
+        };
+        if (Object.hasOwn(escapes, char)) value += escapes[char];
+        else if (char === "u" || char === "x") {
+          const count = char === "u" ? 4 : 2;
+          const digits = text.slice(i, i + count);
+          if (!new RegExp(`^[a-fA-F0-9]{${count}}$`).test(digits))
+            throw Error("Invalid escape");
+          value += String.fromCharCode(parseInt(digits, 16));
+          i += count;
+        } else throw Error("Unsupported prose escape");
+      } else {
+        if (char === "\n" || char === "\r")
+          throw Error("Multiline literal unsupported");
+        value += char;
+      }
+    }
+    throw Error("Unterminated prose string");
+  };
+  return {
+    take,
+    string,
+    array: () => {
+      const values = [];
+      take("[");
+      ws();
+      while (text[i] !== "]") {
+        values.push(string());
+        ws();
+        if (text[i] !== ",") break;
+        i++;
+        ws();
+      }
+      take("]");
+      return values;
+    },
+  };
+}
+const guideStarts = [...source.matchAll(/^    slug: "([a-z-]+)",/gm)];
+const docs = guideStarts.map((match, index) => {
+  const excerpt = source.slice(
+    match.index,
+    guideStarts[index + 1]?.index ?? source.length,
+  );
+  const title = JSON.parse(excerpt.match(/title: ("[^\n]+"),/)[1]);
+  const sections = [...excerpt.matchAll(/^\s*section\(/gm)].map((section) => {
+    const reader = proseReader(excerpt, section.index + section[0].length);
+    reader.string();
+    reader.take(",");
+    const heading = reader.string();
+    reader.take(",");
+    const paragraphs = reader.array();
+    if (!paragraphs.length) throw Error("Empty public section");
+    return `## ${heading}\n\n${paragraphs.join("\n\n")}`;
+  });
+  if (!sections.length) throw Error(`No public sections: ${match[1]}`);
+  return {
+    id: match[1],
+    title,
+    kind: "guide",
+    sourcePath: "marketing/src/content/guides.ts",
+    sourceLine: source.slice(0, match.index).split("\n").length,
+    sourcePointer: null,
+    sourceRoute: `/docs/${match[1]}`,
+    sourceSha256: hash(source),
+    content: `# ${title}\n\n${sections.join("\n\n")}`,
+  };
+});
+const referenceDoc = (id, title, pointer, value) => ({
+  id,
+  title,
+  kind: "reference",
+  sourcePath: "marketing/contracts/openapi.json",
+  sourceLine: 1,
+  sourcePointer: pointer,
+  sourceRoute: "/docs/reference",
+  sourceSha256: hash(texts[publicPaths[2]]),
+  content: `# ${title}\n\nLocal unreleased public contract snapshot; not proof of live v8 availability.\n\n\`\`\`json\n${JSON.stringify(value, null, 2)}\n\`\`\``,
+});
+const pointer = (key) => key.replaceAll("~", "~0").replaceAll("/", "~1");
+for (const [path, methods] of Object.entries(contract.paths)) {
+  if (!path.startsWith("/v1/accounts/"))
+    throw Error("Unexpected public route scope");
+  for (const [method, operation] of Object.entries(methods)) {
+    if (!["get", "post", "patch", "put", "delete"].includes(method))
+      throw Error("Unexpected operation shape");
+    docs.push(
+      referenceDoc(
+        `reference-${operation.operationId.replaceAll("_", "-")}`,
+        operation.summary,
+        `#/paths/${pointer(path)}/${method}`,
+        { method: method.toUpperCase(), path, ...operation },
+      ),
+    );
+  }
+}
+const kebab = (s) => s.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+for (const [name, schema] of Object.entries(contract.components.schemas))
+  docs.push(
+    referenceDoc(
+      `schema-${kebab(name)}`,
+      `${name} schema`,
+      `#/components/schemas/${pointer(name)}`,
+      schema,
+    ),
+  );
+docs.push(
+  referenceDoc(
+    "reference-authentication",
+    "Resource API authentication schemes",
+    "#/components/securitySchemes",
+    contract.components.securitySchemes,
+  ),
+);
+const forbidden = [
+  /\/app-api\//,
+  /first-party-md-/,
+  /first-party-current-/,
+  /"md_current_/,
+  /"md_navs"/,
+  /For Bharosa apps/,
+  /docs\/internal\//,
+  /src\/ui\/catalyst/,
+];
+for (const doc of docs) {
+  if (doc.content.length > 30000)
+    throw Error(`Document exceeds bound: ${doc.id}`);
+  if (forbidden.some((pattern) => pattern.test(doc.content)))
+    throw Error(`Private marker in ${doc.id}`);
+}
+const bundle = {
+  bundleVersion: "0.1.0-prototype.8",
+  contractVersion,
+  contractSourcePath: "marketing/src/content/product.ts",
+  contractSourceSha256: hash(product),
+  publicContractSha256: hash(texts[publicPaths[2]]),
+  publicContractVersion: contract.info.version,
+  approvedManifestSha256: policy.approvedManifestSha256,
+  checkpointDate: policy.checkpointDate,
+  reviewedOn,
+  availability: "local-prototype",
+  notice:
+    "Local unreleased public-documentation snapshot, not live v8 documentation or deployed API/release evidence. API routes are reference text only; this MCP server has no account access or financial tools. Guide prose omits executable examples; public JSON schemas are design contracts.",
+  docs,
+};
+const target = new URL("../assets/docs.json", import.meta.url);
+const output = JSON.stringify(bundle, null, 2) + "\n";
+if (process.argv.includes("--check")) {
+  if (readFileSync(target, "utf8") !== output)
+    throw Error("Bundle differs from approved public checkpoint");
+} else writeFileSync(target, output);
+console.log(
+  `Verified ${docs.length} public documentation entries against approved checkpoint.`,
+);
