@@ -1,13 +1,8 @@
 {
   "mcpServers": {
     "bharosa_docs": {
-      "command": "npx",
-      "args": [
-        "--yes",
-        "--package=bharosa-docs-mcp@0.2.0",
-        "bharosa-docs-mcp",
-        "--stdio"
-      ]
+      "type": "http",
+      "url": "https://mcp.bharosa.finance/"
     }
   }
 }

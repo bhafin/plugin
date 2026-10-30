@@ -1,89 +1,73 @@
-# Bharosa coding assistant
+# Bharosa
 
-`bharosa-docs-mcp` supplies seven read-only, `bharosa_`-prefixed MCP tools and a host integration skill. Its bundled canonical references contain 96 documentation entries, 28 API operations and 116 SDK/cURL/guide examples. It does not access accounts, execute API operations or require Bharosa credentials.
+Bharosa helps coding assistants plan and build integrations using an integration skill and seven read-only documentation tools. It cannot access accounts, execute API requests, transfer assets, or run examples.
 
-## Install and check
+## Release and scope
 
-Use a supported Node.js LTS release >=22.12. The candidate is tested with Node 24.22.1 on macOS arm64. Version 0.2.0 remains a release candidate until its npm publication is verified; do not assume the registry command below succeeds before that gate.
+Version `0.3.0` is distributed through the bhafin/plugin repository and GitHub release assets. This does not imply public directory acceptance or an npm 0.3.0 publication. Its reviewed snapshot combines website v24 with the public contracts from published `bharosa@0.4.0`, plus its reviewed documentation-only analytics metadata correction: 102 documents, 31 API operations and 121 examples. Both SDK clients default to `https://api.bharosa.finance`; the console is `https://app.bharosa.finance`.
 
-```sh
-npm install --ignore-scripts bharosa-docs-mcp@0.2.0
-node node_modules/bharosa-docs-mcp/dist/cli.js --check
-```
+The hosted service is `https://mcp.bharosa.finance/`; `/up` is its health check and `/mcp` is retired. The service serves a pinned documentation snapshot. Check tool response provenance when comparing it with the website.
 
-For a supplied local archive, replace the package specifier with its absolute path. The archive bundles all pinned production dependencies. The check initializes a stdio connection, discovers all seven tools and exercises docs, APIs, examples and invalid input. It reports `desktopHostVerified: false`: this command alone does not test an AI host. `--stdio` waits silently; `--help` and `--version` do not start a server.
+## Full plugin installation
 
-## Host plugins
-
-Claude Code:
+Extract the reviewed marketplace archive and run from its root:
 
 ```sh
-claude plugin marketplace add bhafin/plugin
-claude plugin install bharosa-docs@bharosa --scope user
-```
-
-Codex:
-
-```sh
-codex plugin marketplace add bhafin/plugin
+codex plugin marketplace add .
 codex plugin add bharosa-docs@bharosa
 ```
 
-Start a new host session with supported Node and `npx` on PATH. The manifests pin `bharosa-docs-mcp@0.2.0`; they require that version to be published before registry-backed launch. The `bharosa-integration` skill helps the coding agent retrieve a contract, select examples, create a grounded plan and test a synthetic app. These repository-marketplace plugins are not hosted connectors or public directory listings. npm installation alone does not register either plugin. A host's own model login is separate; no Bharosa key or OAuth connection is needed.
-
-Manifests and the shared skill are under `plugins/bharosa-docs/`. Marketplace catalogs are `.claude-plugin/marketplace.json` and `.agents/plugins/marketplace.json`. For another stdio host use an absolute supported Node executable with the absolute installed `dist/cli.js` path and `--stdio`. Avoid `npm start`, whose banners can disrupt protocol output.
-
-## Tool contract
-
-| Tool                      | Inputs                                                        | Result                                                              |
-| ------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `bharosa_docs_list`       | offset 0–128; limit 1–20                                      | Document metadata and next offset                                   |
-| `bharosa_docs_search`     | query; limit 1–20                                             | Ranked document matches and snippets                                |
-| `bharosa_docs_read`       | document ID; offset 0–30000; maxChars 1–8000                  | Document text chunk                                                 |
-| `bharosa_api_search`      | query; limit 1–20; optional method and resource/monthly group | Operation IDs, paths and provenance                                 |
-| `bharosa_api_details`     | operationId                                                   | Canonical operation definition, schema-document IDs and example IDs |
-| `bharosa_examples_search` | query; limit 1–20; optional language and operationId          | Example metadata and validation scope                               |
-| `bharosa_examples_read`   | example ID; offset 0–30000; maxChars 1–8000                   | Code chunk, initialization context and provenance                   |
-
-Queries are nonblank and limited to 120 raw characters before trimming. Search uses case-insensitive literal AND terms, exact ID/title priority and source-order ties; it is not fuzzy or semantic. Reads count UTF-16 code units and return nextOffset. IDs are allowlisted identifiers, not paths. Unknown fields, dangerous own keys, invalid bounds and malformed requests produce bounded errors. There are no unprefixed compatibility aliases, authenticated account tools, remote fetches, arbitrary filesystem reads or code-execution tools.
-
-API references cover 23 public resource operations and five monthly-market operations. Documentation includes 27 guides, the 23 resource references, 45 schemas and authentication. Examples include 62 TypeScript, 52 shell and two JSON snippets. All TypeScript examples compile against published `bharosa@0.1.0`; 46 canonical SDK examples also execute with synthetic transport. Shell examples receive syntax checks, JSON examples parse checks. These checks do not establish live API behavior. API details contain synthetic sample responses where provided by the canonical source.
-
-## Canonical source and updates
-
-Both the developer website and this package derive from the marketing repository. The MCP reads its bundled snapshot, never the live website. Release 0.2.0 uses docs snapshot `0.2.0-docs.1` and coding snapshot `0.2.0-coding.1`, based on the October 27 v11 checkpoint. Some canonical installation prose describes predecessor packages; this README defines this candidate's installation contract. Snapshot availability fields preserve the reviewed source status and do not certify a deployed user journey.
-
-Primary source inputs:
-
-- `src/content/guides.ts`: approved guide prose and examples, SHA256 `738e0f1f1c2078759908225cc76e47b8c3f8dba04446eb1faf82bd99a78969c7`.
-- `contracts/openapi.json`: resource operations/schemas/authentication, SHA256 `5ae700e29c7f54df12d5634f36cad08785240ee5b019d5921bf0792f53b7866c`.
-- `src/content/product.ts`: endpoint metadata and synthetic fixtures.
-- `src/content/examples.ts`, `monthly.ts`, `monthly-schema.json` and their pinned public-content dependencies: canonical code examples and monthly definitions.
-
-`scripts/source-checkpoint.json` and `scripts/coding-source-checkpoint.json` record all input hashes. Generated assets retain source paths, selectors/pointers, hashes and version metadata. Proposal-only guides, private/internal docs, account data and licensed UI assets are excluded. Website changes require review, checkpoint updates, deterministic regeneration, tests and a new package release. Never maintain a divergent hand-edited copy of the docs.
-
-## Development and verification
-
-Use Node 24 LTS for source generation and development example tests.
+For Claude Code, use a session-only full plugin:
 
 ```sh
-npm ci --ignore-scripts
+claude --plugin-dir ./plugins/bharosa-docs
+```
+
+Or install its local catalogue persistently:
+
+```sh
+claude plugin marketplace add .
+claude plugin install bharosa-docs@bharosa
+```
+
+Start a new session. Ask: “Use the Bharosa integration skill to plan an own-account portfolio dashboard. Retrieve the relevant guides and examples, state their versions, and propose synthetic tests. Do not use real credentials.” In Claude Code the explicit skill is `/bharosa-docs:bharosa-integration`.
+
+These install the skill and MCP connection together. A bare MCP connection does not install the skill. Codex desktop UI installation and Claude web skill loading are not proven by CLI tests. Your AI host needs its own login and usage allowance; the public documentation MCP needs no Bharosa login or key. No public directory approval is required for the local catalogue route.
+
+## Tools
+
+- `bharosa_docs_list`, `bharosa_docs_search`, `bharosa_docs_read`
+- `bharosa_api_search`, `bharosa_api_details`
+- `bharosa_examples_search`, `bharosa_examples_read`
+
+All responses carry snapshot/source provenance. Search is literal and deterministic. Use returned IDs and pagination; reads are capped at 8,000 UTF-16 code units, with a universal serialized result cap of 131,072 bytes. API method filters select reference text, never an action. The integration skill provides grounded planning; there is no autonomous planner or account-action tool.
+
+## Local server and maintainer checks
+
+Use Node.js 22.12 or later on a supported LTS line. Install the reviewed tarball in an isolated project, then run its CLI directly:
+
+```sh
+npm install --ignore-scripts /absolute/path/bharosa-docs-mcp-0.3.0.tgz
+node node_modules/bharosa-docs-mcp/dist/cli.js --check
+node node_modules/bharosa-docs-mcp/dist/cli.js --stdio
+```
+
+No credentials, remote fetch or arbitrary filesystem paths are accepted by tools. Keep stdout reserved for MCP protocol messages.
+
+Source organization: `src/` runtime; `scripts/` pinned generators/build/package verification; `tests/` synthetic protocol/security/example checks; `assets/` generated public corpus; `plugins/` host manifests and skill. The dependency shrinkwrap is committed to the candidate and runtime dependencies are bundled for offline installation. Source development requires the pinned public dependencies; clean archive consumption is separately tested.
+
+```sh
 npm run build
 npm test
-npm run format:check
-npm run check
 npm run verify:package
+BHAROSA_MARKETING_ROOT=/path/to/reviewed/staged/public/input npm run docs:check
+BHAROSA_MARKETING_ROOT=/path/to/reviewed/staged/public/input npm run coding:check
 ```
 
-`src/` contains runtime modules; `tests/` covers examples, protocol, malformed requests, input boundaries and integrity. `verify:package` installs the archive in npm offline mode with an empty cache and checks every bundled production dependency version plus all seven tool families. It does not configure a desktop host. Runtime dependencies are bundled with their licenses; SDK/compiler dev dependencies are not shipped.
+Generators accept only pinned public source files. Website modules retain marketing source paths; separately staged public SDK contracts retain their original `sdk/test/` paths and hashes. No private first-party contracts or licensed UI assets are included. Changing a source requires a reviewed checkpoint, regeneration, tests and a new release; installed snapshots do not refresh themselves.
 
-Maintainers need the reviewed marketing checkout, selected explicitly:
+The analytics reference includes the reviewed production metadata correction. Synthetic checks are not proof of an authenticated production journey. General delegated onboarding remains unavailable; do not invent OAuth endpoints or grant credentials.
 
-```sh
-BHAROSA_MARKETING_ROOT=/absolute/path/to/marketing node scripts/snapshot.js
-BHAROSA_MARKETING_ROOT=/absolute/path/to/marketing node scripts/coding-snapshot.js
-BHAROSA_MARKETING_ROOT=/absolute/path/to/marketing npm run docs:check
-BHAROSA_MARKETING_ROOT=/absolute/path/to/marketing npm run coding:check
-```
+## Support and license
 
-Ordinary build, tests and runtime need no website checkout or credentials. MIT applies to this project's code and bundled developer documentation. Dependencies retain their original licenses; see `THIRD-PARTY-NOTICES.txt`. Issues: https://github.com/bhafin/plugin/issues.
+MIT, with dependency notices in `THIRD-PARTY-NOTICES.txt`. Report issues at https://github.com/bhafin/plugin/issues using synthetic examples only. Never post credentials, financial records or private logs. Public docs: https://developers.bharosa.finance/docs/documentation-assistant#hosted . Directory listings remain pending.

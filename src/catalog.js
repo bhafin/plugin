@@ -9,7 +9,9 @@ const document = z
     title: z.string(),
     sourcePath: z.enum([
       "marketing/src/content/guides.ts",
-      "marketing/contracts/openapi.json",
+      "marketing/src/content/analytics-guides.ts",
+      "sdk/test/openapi.json",
+      "sdk/test/analytics.openapi.json",
     ]),
     sourceLine: z.number().int().positive(),
     sourcePointer: z.string().nullable(),
@@ -21,7 +23,7 @@ const document = z
   .strict();
 const bundleSchema = z
   .object({
-    bundleVersion: z.literal("0.2.0-docs.1"),
+    bundleVersion: z.literal("0.3.0-docs.1"),
     contractVersion: z.literal("API v1"),
     contractSourcePath: z.literal("marketing/src/content/product.ts"),
     contractSourceSha256: z.string().regex(/^[a-f0-9]{64}$/),
@@ -36,7 +38,7 @@ const bundleSchema = z
   })
   .strict();
 export const snapshotSha256 =
-  "e327ccd423ee5be8a0d599164ac809fa30a6ff8c7758716269b92a7afecd66b7";
+  "b5a77d197f9ddb6f2eb151e7724caf1b4e41de092a57ab744f3e27c404ccddc6";
 const bundledText = readFileSync(
   new URL("../assets/docs.json", import.meta.url),
   "utf8",

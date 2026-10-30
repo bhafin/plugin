@@ -1,6 +1,6 @@
 {
   "name": "bharosa-docs-mcp",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "type": "module",
   "description": "Read-only MCP search and reading over versioned Bharosa public developer documentation",
   "license": "MIT",
@@ -21,7 +21,10 @@
     "THIRD-PARTY-NOTICES.txt",
     "npm-shrinkwrap.json",
     "dist/coding-catalog.js",
-    "assets/coding.json"
+    "assets/coding.json",
+    "dist/mcp-server.js",
+    "dist/http-server.js",
+    "dist/admission.js"
   ],
   "scripts": {
     "start": "node dist/cli.js --stdio",
@@ -41,7 +44,7 @@
     "zod": "4.6.7"
   },
   "devDependencies": {
-    "bharosa": "0.1.0",
+    "bharosa": "0.4.0",
     "prettier": "3.6.2",
     "typescript": "7.0.2"
   },

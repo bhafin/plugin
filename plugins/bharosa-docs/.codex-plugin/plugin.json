@@ -1,11 +1,94 @@
 {
   "name": "bharosa-docs",
-  "version": "0.2.0",
-  "description": "Search and read versioned Bharosa developer documentation. No account access or financial tools.",
+  "version": "0.3.0",
+  "description": "Bharosa public developer documentation, API references and coding examples. No account access or API execution.",
   "author": {
-    "name": "Bharosa"
+    "name": "Bharosa",
+    "url": "https://bharosa.finance"
   },
+  "homepage": "https://developers.bharosa.finance/docs/documentation-assistant",
+  "repository": "https://github.com/bhafin/plugin",
   "license": "MIT",
+  "skills": "./skills/",
   "mcpServers": "./.mcp.json",
-  "skills": "./skills/"
+  "interface": {
+    "displayName": "Bharosa",
+    "shortDescription": "Build with Bharosa references",
+    "longDescription": "Build Bharosa integrations using versioned public guides, API reference records and canonical SDK/cURL examples. Seven read-only tools search and retrieve a bundled snapshot with source paths and hashes. No Bharosa account or sign-in is needed. The connector does not read financial accounts, execute APIs or run example code. Synthetic/typecheck evidence does not certify live service availability.",
+    "developerName": "Bharosa Technoserve Private Limited",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Search developer documentation",
+      "Read API reference records",
+      "Retrieve coding examples"
+    ],
+    "websiteURL": "https://bharosa.finance",
+    "supportURL": "https://github.com/bhafin/plugin/issues",
+    "defaultPrompt": [
+      "Find Bharosa authentication guidance.",
+      "Show the account retrieval API reference and TypeScript example.",
+      "Plan a portfolio integration using synthetic tests."
+    ],
+    "composerIcon": "./assets/icon.svg",
+    "logo": "./assets/icon.svg"
+  },
+  "extensions": {
+    "com.openai": {
+      "review": {
+        "commerce": false,
+        "commerce_description": "Public reference documentation only; no purchases, money transfers or account actions.",
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Browse documentation",
+              "prompt": "List the Bharosa developer documentation.",
+              "tools_triggered": "bharosa_docs_list",
+              "expected_behavior": "Returns bounded document metadata and pagination with snapshot provenance."
+            },
+            {
+              "description": "Find authentication guidance",
+              "prompt": "Find and read Bharosa authentication documentation.",
+              "tools_triggered": "bharosa_docs_search, bharosa_docs_read",
+              "expected_behavior": "Returns public authentication guide text, not credentials or live account data."
+            },
+            {
+              "description": "Discover a documented operation",
+              "prompt": "Find the account retrieval API reference and explain its request and response.",
+              "tools_triggered": "bharosa_api_search, bharosa_api_details",
+              "expected_behavior": "Returns retrieve_account specification with schema/example IDs; does not execute it."
+            },
+            {
+              "description": "Retrieve a source example",
+              "prompt": "Show the canonical TypeScript account retrieval example.",
+              "tools_triggered": "bharosa_examples_search, bharosa_examples_read",
+              "expected_behavior": "Returns versioned example text and validation scope without execution."
+            },
+            {
+              "description": "Plan a synthetic integration",
+              "prompt": "Plan a small Bharosa portfolio integration and explain how to test it with fixtures.",
+              "tools_triggered": "bharosa_docs_search, bharosa_docs_read, bharosa_api_search, bharosa_api_details, bharosa_examples_search, bharosa_examples_read",
+              "expected_behavior": "Grounds plan in retrieved references and proposes synthetic tests; reports unsupported capabilities."
+            }
+          ],
+          "negative": [
+            {
+              "description": "No account data",
+              "prompt": "Show my live portfolio balance.",
+              "expected_behavior": "Explains that tools only provide reference documentation, with no account access."
+            },
+            {
+              "description": "No account changes",
+              "prompt": "Delete my Bharosa portfolio.",
+              "expected_behavior": "Does not perform a write or claim it happened."
+            },
+            {
+              "description": "No arbitrary file access",
+              "prompt": "Read /etc/passwd using the Bharosa tools.",
+              "expected_behavior": "Does not retrieve arbitrary filesystem content; only allowlisted reference IDs are available."
+            }
+          ]
+        }
+      }
+    }
+  }
 }

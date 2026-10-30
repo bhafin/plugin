@@ -1,6 +1,8 @@
-// Maintainer-only exact public allowlist. Does not execute marketing source.
-import { readFileSync, writeFileSync } from "node:fs";
+// Maintainer-only exact public allowlist. Literal core guide parsing plus a pinned
+// public analytics prose module; no source is executed by the running server.
+import { readFileSync, writeFileSync, mkdtempSync, rmSync } from "node:fs";
 import { createHash } from "node:crypto";
+import { tmpdir } from "node:os";
 import { resolve, sep } from "node:path";
 import { pathToFileURL } from "node:url";
 const root = process.env.BHAROSA_MARKETING_ROOT
@@ -14,6 +16,8 @@ const publicPaths = [
   "src/content/guides.ts",
   "src/content/product.ts",
   "contracts/openapi.json",
+  "src/content/analytics-guides.ts",
+  "contracts/analytics.openapi.json",
 ];
 const texts = Object.fromEntries(
   publicPaths.map((path) => {
@@ -133,11 +137,44 @@ const docs = guideStarts.map((match, index) => {
     content: `# ${title}\n\n${sections.join("\n\n")}`,
   };
 });
+// This reviewed module contains reusable prose arrays, so literal-section parsing
+// cannot represent it faithfully. Stage only its pinned bytes, not the checkout.
+const analyticsStage = mkdtempSync(
+  resolve(tmpdir(), "bharosa-analytics-prose-"),
+);
+try {
+  const text = texts["src/content/analytics-guides.ts"];
+  const modulePath = resolve(analyticsStage, "analytics-guides.ts");
+  writeFileSync(modulePath, text);
+  const { analyticsGuides } = await import(pathToFileURL(modulePath));
+  for (const guide of analyticsGuides) {
+    docs.push({
+      id: guide.slug,
+      title: guide.title,
+      kind: "guide",
+      sourcePath: "marketing/src/content/analytics-guides.ts",
+      sourceLine: text
+        .slice(0, text.indexOf(`slug: "${guide.slug}"`))
+        .split("\n").length,
+      sourcePointer: guide.slug,
+      sourceRoute: `/docs/${guide.slug}`,
+      sourceSha256: hash(text),
+      content: `# ${guide.title}\n\n${guide.sections
+        .map(
+          (section) =>
+            `## ${section.title}\n\n${section.paragraphs.join("\n\n")}`,
+        )
+        .join("\n\n")}`,
+    });
+  }
+} finally {
+  rmSync(analyticsStage, { recursive: true, force: true });
+}
 const referenceDoc = (id, title, pointer, value) => ({
   id,
   title,
   kind: "reference",
-  sourcePath: "marketing/contracts/openapi.json",
+  sourcePath: "sdk/test/openapi.json",
   sourceLine: 1,
   sourcePointer: pointer,
   sourceRoute: "/docs/reference",
@@ -179,6 +216,20 @@ docs.push(
     contract.components.securitySchemes,
   ),
 );
+const analyticsContract = JSON.parse(texts["contracts/analytics.openapi.json"]);
+for (const [path, methods] of Object.entries(analyticsContract.paths)) {
+  for (const [method, operation] of Object.entries(methods)) {
+    const doc = referenceDoc(
+      `reference-${operation.operationId.replaceAll("_", "-")}`,
+      operation.summary,
+      `#/paths/${pointer(path)}/${method}`,
+      { method: method.toUpperCase(), path, ...operation },
+    );
+    doc.sourcePath = "sdk/test/analytics.openapi.json";
+    doc.sourceSha256 = hash(texts["contracts/analytics.openapi.json"]);
+    docs.push(doc);
+  }
+}
 const forbidden = [
   /\/app-api\//,
   /first-party-md-/,
@@ -196,7 +247,7 @@ for (const doc of docs) {
     throw Error(`Private marker in ${doc.id}`);
 }
 const bundle = {
-  bundleVersion: "0.2.0-docs.1",
+  bundleVersion: "0.3.0-docs.1",
   contractVersion,
   contractSourcePath: "marketing/src/content/product.ts",
   contractSourceSha256: hash(product),

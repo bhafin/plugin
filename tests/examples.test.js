@@ -1,11 +1,28 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { mkdtempSync, writeFileSync, rmSync, mkdirSync } from "node:fs";
+import {
+  mkdtempSync,
+  writeFileSync,
+  rmSync,
+  mkdirSync,
+  readFileSync,
+} from "node:fs";
 import { spawnSync } from "node:child_process";
 import { stripTypeScriptTypes } from "node:module";
 import { Bharosa } from "bharosa";
 import { codingBundle as bundle } from "../src/coding-catalog.js";
-test("every exported example passes its advertised validation against published SDK 0.1.0", () => {
+const sdkFixtures = JSON.parse(
+  readFileSync(new URL("./public-sdk-fixtures.json", import.meta.url)),
+);
+const installedSdkVersion = JSON.parse(
+  readFileSync(
+    new URL("../node_modules/bharosa/package.json", import.meta.url),
+  ),
+).version;
+test(`every exported example passes its advertised validation against published SDK ${installedSdkVersion}`, () => {
+  assert.equal(bundle.sdkVersion, installedSdkVersion);
+  for (const example of bundle.examples)
+    assert.equal(example.sdkVersion, installedSdkVersion, example.id);
   mkdirSync("artifacts", { recursive: true });
   const work = mkdtempSync("artifacts/examples-");
   try {
@@ -77,16 +94,23 @@ test("46 canonical SDK examples execute only through synthetic transport", async
       constructor(config) {
         super({
           ...config,
+          baseUrl: env.BHAROSA_API_BASE_URL,
           fetch: async (url, init) => {
             assert.equal(new URL(url).origin, env.BHAROSA_API_BASE_URL);
-            const op = bundle.operations.find(
-              (o) =>
-                o.group === "resource" &&
-                o.method === init.method &&
-                new RegExp(
-                  "^" + o.path.replace(/\{[^}]+\}/g, "[^/]+") + "$",
-                ).test(new URL(url).pathname),
-            );
+            const op = [...bundle.operations]
+              .sort(
+                (a, b) =>
+                  (a.path.match(/\{/g)?.length ?? 0) -
+                  (b.path.match(/\{/g)?.length ?? 0),
+              )
+              .find(
+                (o) =>
+                  o.group === "resource" &&
+                  o.method === init.method &&
+                  new RegExp(
+                    "^" + o.path.replace(/\{[^}]+\}/g, "[^/]+") + "$",
+                  ).test(new URL(url).pathname),
+              );
             assert.ok(op, e.id + " unexpected operation");
             seen.push(op.id);
             assert.equal(
@@ -98,12 +122,12 @@ test("46 canonical SDK examples execute only through synthetic transport", async
               delegated ? "Bearer synthetic-token" : undefined,
             );
             assert.equal(init.redirect, "error");
+            const fixture = sdkFixtures.find((f) => f.operation_id === op.id);
+            assert.ok(fixture, op.id);
             return new Response(
-              op.sampleStatus === 204
-                ? null
-                : JSON.stringify(op.sampleResponse),
+              fixture.status === 204 ? null : JSON.stringify(fixture.response),
               {
-                status: op.sampleStatus,
+                status: fixture.status,
                 headers: {
                   "Content-Type": "application/json",
                   "Request-Id": "req_synthetic",
@@ -117,11 +141,15 @@ test("46 canonical SDK examples execute only through synthetic transport", async
     const js = stripTypeScriptTypes(
       e.code.replace('import { Bharosa } from "bharosa";', ""),
     );
-    await new AsyncFunction("Bharosa", "process", "crypto", js)(
-      SyntheticClient,
-      { env },
-      { randomUUID: () => "synthetic-example-key" },
-    );
+    try {
+      await new AsyncFunction("Bharosa", "process", "crypto", js)(
+        SyntheticClient,
+        { env },
+        { randomUUID: () => "synthetic-example-key" },
+      );
+    } catch (error) {
+      throw new Error(e.id + ": " + error.message, { cause: error });
+    }
     assert.equal(seen.at(-1), e.operationIds[0], e.id);
     assert.ok(seen.length >= 1 && seen.length <= 3);
     count++;

@@ -1,16 +1,33 @@
 {
-  "canonicalCheckpointSha256": "4c223925f048e40ca1762c781848c677055db447870031328fee017ceb5ee1ac",
+  "canonicalCheckpointSha256": "d8a99bf46e2c709f72ea65b55c23aae1fd57f9208306553fa0ab9174af949721",
   "sources": {
-    "src/content/guides.ts": "738e0f1f1c2078759908225cc76e47b8c3f8dba04446eb1faf82bd99a78969c7",
-    "src/content/product.ts": "62c01ecc3e6aabc74ba66128724fa64a20e154ab6457b804df8a102992959db5",
+    "src/content/guides.ts": "55dd618bd5691d60b9a9e0add8bc5956aa9e636a394296e98eef4d62b669e821",
+    "src/content/product.ts": "38fb0188f6894c23e190ae040c154df77b35a5a29ea1f6b25572215f78ad25f2",
     "src/content/examples.ts": "c1384a04fb97da9765fd10e51c582f53c3202076003b3cc22e2fcf09efdf91db",
     "src/content/availability.ts": "47d7ff128e70e3b8b6a7dbe28d5b6f1697745cff51c233ab335a53ebf0d0f446",
-    "src/content/saved-portfolio-example.ts": "36f526d80cec6b9c6cbad2d696755c5bf5fd1379d027cd508d549792af84129b",
+    "src/content/saved-portfolio-example.ts": "c3306111e030a0c62a91c10f53e0828476cf2c9e903e8ccd82aaec036f28f3b4",
     "src/content/doc-labels.ts": "2c6d64fd7bd710328b55a7112ec741768295dd04c1caf779d7d8be5fef57d3e2",
     "src/content/reference-design.ts": "a7431b6f0c0ef718f8464a8dfc27d2a29747eb9724436563edff3f4b6e13fa25",
-    "src/content/monthly.ts": "ece38aefdd9d102bd1bef19530255670e7525855d755fb851f10d0a331506ae0",
+    "src/content/monthly.ts": "e465251f35122ce8993baf04cc7c35c1ae1dd86243a662a0cbdf12415d943b51",
     "src/content/monthly-schema.json": "f6a6eaa749340436e852145fcde3bf6634c26c37ec0ff8f8f807974528a4bd36",
     "src/content/history.ts": "f5a5ad7a227e8e80a6d685817a1a9c0acaae5be3207b9f3dc261d52bc43ff799",
-    "src/content/doc-schema.ts": "6d0991e38384b4ee93e1da27dcc70b87891db65771db75d1ba90f9448d515ee8"
+    "src/content/doc-schema.ts": "6d0991e38384b4ee93e1da27dcc70b87891db65771db75d1ba90f9448d515ee8",
+    "src/content/analytics-guides.ts": "ab4056e010901bf5a4c74137b5c5fba3d3b51f32deb0495efbf0767d65269d1b"
+  },
+  "contracts": {
+    "contracts/openapi.json": "3b791799bf705fd36a257e27a2520257f135e772d617b03bb22063ccea4d04e2",
+    "contracts/analytics.openapi.json": "1d2d37edf6ea65cdd3bac707119c6815ee73c89770a791d7dfdfadc9630b6f2b",
+    "contracts/monthly-market-data.openapi.json": "29463b6a150e368a47ac11e2f8f841e3808d94d3ff9b70221fe3804c93b91004"
+  },
+  "analyticsMetadataCorrection": {
+    "source": "sdk/test/analytics.openapi.json",
+    "sha256": "1d2d37edf6ea65cdd3bac707119c6815ee73c89770a791d7dfdfadc9630b6f2b",
+    "publishedSdk040HistoricalSha256": "ebab801a241565a3b115993b6ae8470d144f8d69f79cdb8acc274ff8c200cf3e",
+    "scope": "Reviewed documentation metadata correction only; not a replacement of the published SDK archive."
+  },
+  "approvedQuickstartCommentRemoval": {
+    "commit": "c717ea64c6b8523600f15a8e7daa83cd8d3f96ee",
+    "sourceSha256": "55dd618bd5691d60b9a9e0add8bc5956aa9e636a394296e98eef4d62b669e821",
+    "scope": "One redundant comment removed; exact comparison to v24 passed."
   }
 }

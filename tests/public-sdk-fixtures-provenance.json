@@ -1,0 +1,6 @@
+{
+  "source": "sdk/test/http-examples.json",
+  "sourceSha256": "591e912fdd781470d69c4d956c7b0ca136dc270dcd968d10d4bfe383c0ea7b96",
+  "selection": "resource operation IDs present in the reviewed public coding index",
+  "sdkVersion": "0.4.0"
+}

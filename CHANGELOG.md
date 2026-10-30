@@ -1,3 +1,7 @@
+# 0.3.0
+
+Full Bharosa plugin with hosted root MCP and integration skill for published SDK 0.4.0. Reviewed public corpus includes 102 documents, 31 operations and 121 examples, including Growth analytics reference. Documentation-only; no account access or API execution. Direct installation does not require public directory acceptance. Server archive is a GitHub release asset; no npm 0.3.0 publication is implied.
+
 # Changelog
 
 ## 0.2.0

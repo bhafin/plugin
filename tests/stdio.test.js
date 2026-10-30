@@ -51,7 +51,7 @@ test(
         name: "bharosa_docs_list",
         arguments: {},
       });
-      assert.equal(list.structuredContent.total, 96);
+      assert.equal(list.structuredContent.total, 102);
       assert.deepEqual(
         JSON.parse(list.content[0].text),
         list.structuredContent,

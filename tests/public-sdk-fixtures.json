@@ -1,0 +1,1099 @@
+[
+  {
+    "operation_id": "retrieve_account",
+    "method": "GET",
+    "path": "/v1/accounts/{account}",
+    "query": "",
+    "status": 200,
+    "request": null,
+    "response": {
+      "id": "acct_0123456789abcdef0123456789abcdef",
+      "object": "account",
+      "created": 1792281600,
+      "name": "Rao Family",
+      "primary_investor": "inv_11111111111111111111111111111111"
+    }
+  },
+  {
+    "operation_id": "list_clients",
+    "method": "GET",
+    "path": "/v1/accounts/{account}/clients",
+    "query": "?limit=10",
+    "status": 200,
+    "request": null,
+    "response": {
+      "object": "list",
+      "data": [
+        {
+          "id": "clt_0123456789abcdef0123456789abcdef",
+          "object": "client",
+          "created": 1792281600,
+          "account": "acct_0123456789abcdef0123456789abcdef",
+          "name": "My family"
+        }
+      ],
+      "has_more": false,
+      "url": "/v1/accounts/acct_0123456789abcdef0123456789abcdef/clients"
+    }
+  },
+  {
+    "operation_id": "retrieve_client",
+    "method": "GET",
+    "path": "/v1/accounts/{account}/clients/{client}",
+    "query": "",
+    "status": 200,
+    "request": null,
+    "response": {
+      "id": "clt_0123456789abcdef0123456789abcdef",
+      "object": "client",
+      "created": 1792281600,
+      "account": "acct_0123456789abcdef0123456789abcdef",
+      "name": "My family"
+    }
+  },
+  {
+    "operation_id": "list_investors",
+    "method": "GET",
+    "path": "/v1/accounts/{account}/investors",
+    "query": "?limit=10",
+    "status": 200,
+    "request": null,
+    "response": {
+      "object": "list",
+      "data": [
+        {
+          "id": "inv_0123456789abcdef0123456789abcdef",
+          "object": "investor",
+          "created": 1792281600,
+          "account": "acct_0123456789abcdef0123456789abcdef",
+          "client": "clt_0123456789abcdef0123456789abcdef",
+          "name": "Meera Rao",
+          "relationship_to_owner": "spouse"
+        }
+      ],
+      "has_more": false,
+      "url": "/v1/accounts/acct_0123456789abcdef0123456789abcdef/investors"
+    }
+  },
+  {
+    "operation_id": "retrieve_investor",
+    "method": "GET",
+    "path": "/v1/accounts/{account}/investors/{investor}",
+    "query": "",
+    "status": 200,
+    "request": null,
+    "response": {
+      "id": "inv_0123456789abcdef0123456789abcdef",
+      "object": "investor",
+      "created": 1792281600,
+      "account": "acct_0123456789abcdef0123456789abcdef",
+      "client": "clt_0123456789abcdef0123456789abcdef",
+      "name": "Meera Rao",
+      "relationship_to_owner": "spouse"
+    }
+  },
+  {
+    "operation_id": "list_portfolios",
+    "method": "GET",
+    "path": "/v1/accounts/{account}/portfolios",
+    "query": "?limit=10",
+    "status": 200,
+    "request": null,
+    "response": {
+      "object": "list",
+      "data": [
+        {
+          "id": "ptf_0123456789abcdef0123456789abcdef",
+          "object": "portfolio",
+          "created": 1792281600,
+          "account": "acct_0123456789abcdef0123456789abcdef",
+          "investor": "inv_0123456789abcdef0123456789abcdef",
+          "name": "Long-term savings",
+          "reporting_currency": "INR"
+        }
+      ],
+      "has_more": false,
+      "url": "/v1/accounts/acct_0123456789abcdef0123456789abcdef/portfolios"
+    }
+  },
+  {
+    "operation_id": "retrieve_portfolio",
+    "method": "GET",
+    "path": "/v1/accounts/{account}/portfolios/{portfolio}",
+    "query": "",
+    "status": 200,
+    "request": null,
+    "response": {
+      "id": "ptf_0123456789abcdef0123456789abcdef",
+      "object": "portfolio",
+      "created": 1792281600,
+      "account": "acct_0123456789abcdef0123456789abcdef",
+      "investor": "inv_0123456789abcdef0123456789abcdef",
+      "name": "Long-term savings",
+      "reporting_currency": "INR"
+    }
+  },
+  {
+    "operation_id": "update_portfolio",
+    "method": "POST",
+    "path": "/v1/accounts/{account}/portfolios/{portfolio}",
+    "query": "",
+    "status": 200,
+    "request": {
+      "name": "Long-term savings",
+      "expected_name": "Previous name"
+    },
+    "response": {
+      "id": "ptf_0123456789abcdef0123456789abcdef",
+      "object": "portfolio",
+      "created": 1792281600,
+      "account": "acct_0123456789abcdef0123456789abcdef",
+      "investor": "inv_0123456789abcdef0123456789abcdef",
+      "name": "Long-term savings",
+      "reporting_currency": "INR"
+    }
+  },
+  {
+    "operation_id": "create_investor",
+    "method": "POST",
+    "path": "/v1/accounts/{account}/investors",
+    "query": "",
+    "status": 201,
+    "request": {
+      "name": "Meera Rao",
+      "relationship_to_owner": "spouse",
+      "client": "clt_0123456789abcdef0123456789abcdef"
+    },
+    "response": {
+      "id": "inv_0123456789abcdef0123456789abcdef",
+      "object": "investor",
+      "created": 1792281600,
+      "account": "acct_0123456789abcdef0123456789abcdef",
+      "client": "clt_0123456789abcdef0123456789abcdef",
+      "name": "Meera Rao",
+      "relationship_to_owner": "spouse"
+    }
+  },
+  {
+    "operation_id": "update_investor",
+    "method": "POST",
+    "path": "/v1/accounts/{account}/investors/{investor}",
+    "query": "",
+    "status": 200,
+    "request": {
+      "name": "Meera R. Rao"
+    },
+    "response": {
+      "id": "inv_0123456789abcdef0123456789abcdef",
+      "object": "investor",
+      "created": 1792281600,
+      "account": "acct_0123456789abcdef0123456789abcdef",
+      "client": "clt_0123456789abcdef0123456789abcdef",
+      "name": "Meera R. Rao",
+      "relationship_to_owner": "spouse"
+    }
+  },
+  {
+    "operation_id": "search_funds",
+    "method": "GET",
+    "path": "/v1/accounts/{account}/mutual_funds",
+    "query": "?query=Example&limit=10",
+    "status": 200,
+    "request": null,
+    "response": {
+      "object": "list",
+      "data": [
+        {
+          "instrument": {
+            "id": "ins_markets_scheme_101",
+            "object": "instrument",
+            "created": 1792281600,
+            "name": "Example Equity Fund \u2014 Direct Growth",
+            "identifiers": [],
+            "domicile_country": "IN",
+            "type": "mutual_fund",
+            "mutual_fund": {
+              "fund_name": "Example Equity Fund",
+              "share_class": "Direct Growth",
+              "class_currency": "INR",
+              "distribution_policy": "accumulating"
+            }
+          },
+          "market": "IN",
+          "currency": "INR",
+          "scheme_id": "101",
+          "plan_label": "Direct",
+          "option_label": "Growth",
+          "amfi_code": null,
+          "isin": null,
+          "identity_status": "resolved",
+          "latest_nav": {
+            "amount": "42.125",
+            "currency": "INR",
+            "date": "2026-10-16"
+          },
+          "data_mode": "live",
+          "source": "calcengine_market_db",
+          "freshness": {
+            "status": "recent",
+            "checked_at": "2026-10-18T08:00:00Z",
+            "as_of": "2026-10-18",
+            "time_zone": "Asia/Kolkata",
+            "age_days": 2,
+            "recent_within_days": 3
+          }
+        }
+      ],
+      "has_more": false,
+      "url": "/v1/accounts/acct_0123456789abcdef0123456789abcdef/mutual_funds",
+      "market_data": {
+        "mode": "live",
+        "notice": "Reference NAV is separate from entered holdings."
+      }
+    }
+  },
+  {
+    "operation_id": "fund_references",
+    "method": "GET",
+    "path": "/v1/accounts/{account}/mutual_funds/references",
+    "query": "?instruments=ins_markets_scheme_101",
+    "status": 200,
+    "request": null,
+    "response": {
+      "object": "list",
+      "data": [
+        {
+          "instrument": {
+            "id": "ins_markets_scheme_101",
+            "object": "instrument",
+            "created": 1792281600,
+            "name": "Example Equity Fund \u2014 Direct Growth",
+            "identifiers": [],
+            "domicile_country": "IN",
+            "type": "mutual_fund",
+            "mutual_fund": {
+              "fund_name": "Example Equity Fund",
+              "share_class": "Direct Growth",
+              "class_currency": "INR",
+              "distribution_policy": "accumulating"
+            }
+          },
+          "market": "IN",
+          "currency": "INR",
+          "scheme_id": "101",
+          "plan_label": "Direct",
+          "option_label": "Growth",
+          "amfi_code": null,
+          "isin": null,
+          "identity_status": "resolved",
+          "latest_nav": {
+            "amount": "42.125",
+            "currency": "INR",
+            "date": "2026-10-16"
+          },
+          "data_mode": "live",
+          "source": "calcengine_market_db",
+          "freshness": {
+            "status": "recent",
+            "checked_at": "2026-10-18T08:00:00Z",
+            "as_of": "2026-10-18",
+            "time_zone": "Asia/Kolkata",
+            "age_days": 2,
+            "recent_within_days": 3
+          }
+        }
+      ],
+      "has_more": false,
+      "url": "/v1/accounts/acct_0123456789abcdef0123456789abcdef/mutual_funds/references",
+      "missing": [],
+      "market_data": {
+        "mode": "live",
+        "notice": "Reference NAV is separate from entered holdings."
+      }
+    }
+  },
+  {
+    "operation_id": "create_portfolio",
+    "method": "POST",
+    "path": "/v1/accounts/{account}/portfolios",
+    "query": "",
+    "status": 201,
+    "request": {
+      "name": "Long-term savings",
+      "investor": "inv_0123456789abcdef0123456789abcdef",
+      "as_of": "2026-10-18",
+      "positions": [
+        {
+          "instrument": "ins_markets_scheme_101",
+          "current_value": "125000.50"
+        }
+      ]
+    },
+    "response": {
+      "portfolio": {
+        "id": "ptf_0123456789abcdef0123456789abcdef",
+        "object": "portfolio",
+        "created": 1792281600,
+        "account": "acct_0123456789abcdef0123456789abcdef",
+        "investor": "inv_0123456789abcdef0123456789abcdef",
+        "name": "Long-term savings",
+        "reporting_currency": "INR"
+      },
+      "investment_account": {
+        "id": "iac_0123456789abcdef0123456789abcdef",
+        "object": "investment_account",
+        "created": 1792281600,
+        "account": "acct_0123456789abcdef0123456789abcdef",
+        "portfolio": "ptf_0123456789abcdef0123456789abcdef",
+        "name": "Manual holdings",
+        "kind": "manual",
+        "institution_name": null,
+        "reference_masked": null,
+        "latest_snapshot": "psn_0123456789abcdef0123456789abcdef"
+      },
+      "snapshot": {
+        "id": "psn_0123456789abcdef0123456789abcdef",
+        "object": "position_snapshot",
+        "created": 1792281600,
+        "account": "acct_0123456789abcdef0123456789abcdef",
+        "investment_account": "iac_0123456789abcdef0123456789abcdef",
+        "as_of": {
+          "precision": "date",
+          "date": "2026-10-18",
+          "time_zone": "Asia/Kolkata"
+        },
+        "source": {
+          "kind": "manual",
+          "name": "User supplied"
+        },
+        "position_count": 1
+      },
+      "positions": [
+        {
+          "id": "pos_0123456789abcdef0123456789abcdef",
+          "object": "position",
+          "created": 1792281600,
+          "account": "acct_0123456789abcdef0123456789abcdef",
+          "snapshot": "psn_0123456789abcdef0123456789abcdef",
+          "instrument": "ins_markets_scheme_101",
+          "listing": null,
+          "quantity": null,
+          "cost_basis": null,
+          "valuation": {
+            "method": "reported",
+            "market_value": {
+              "amount": "125000.5",
+              "currency": "INR"
+            },
+            "as_of": {
+              "precision": "date",
+              "date": "2026-10-18",
+              "time_zone": "Asia/Kolkata"
+            },
+            "source": {
+              "kind": "manual",
+              "name": "User supplied"
+            },
+            "unit_price": null
+          }
+        }
+      ],
+      "instruments": [
+        {
+          "id": "ins_markets_scheme_101",
+          "object": "instrument",
+          "created": 1792281600,
+          "name": "Example Equity Fund \u2014 Direct Growth",
+          "identifiers": [],
+          "domicile_country": "IN",
+          "type": "mutual_fund",
+          "mutual_fund": {
+            "fund_name": "Example Equity Fund",
+            "share_class": "Direct Growth",
+            "class_currency": "INR",
+            "distribution_policy": "accumulating"
+          }
+        }
+      ],
+      "total_current_value": {
+        "amount": "125000.5",
+        "currency": "INR"
+      },
+      "valuation_basis": "manual_current_value",
+      "market_data": {
+        "mode": "live",
+        "notice": "Reference NAV is separate from entered holdings."
+      }
+    }
+  },
+  {
+    "operation_id": "current_snapshot",
+    "method": "GET",
+    "path": "/v1/accounts/{account}/portfolios/{portfolio}/current_snapshot",
+    "query": "",
+    "status": 200,
+    "request": null,
+    "response": {
+      "portfolio": {
+        "id": "ptf_0123456789abcdef0123456789abcdef",
+        "object": "portfolio",
+        "created": 1792281600,
+        "account": "acct_0123456789abcdef0123456789abcdef",
+        "investor": "inv_0123456789abcdef0123456789abcdef",
+        "name": "Long-term savings",
+        "reporting_currency": "INR"
+      },
+      "investment_account": {
+        "id": "iac_0123456789abcdef0123456789abcdef",
+        "object": "investment_account",
+        "created": 1792281600,
+        "account": "acct_0123456789abcdef0123456789abcdef",
+        "portfolio": "ptf_0123456789abcdef0123456789abcdef",
+        "name": "Manual holdings",
+        "kind": "manual",
+        "institution_name": null,
+        "reference_masked": null,
+        "latest_snapshot": "psn_0123456789abcdef0123456789abcdef"
+      },
+      "snapshot": {
+        "id": "psn_0123456789abcdef0123456789abcdef",
+        "object": "position_snapshot",
+        "created": 1792281600,
+        "account": "acct_0123456789abcdef0123456789abcdef",
+        "investment_account": "iac_0123456789abcdef0123456789abcdef",
+        "as_of": {
+          "precision": "date",
+          "date": "2026-10-18",
+          "time_zone": "Asia/Kolkata"
+        },
+        "source": {
+          "kind": "manual",
+          "name": "User supplied"
+        },
+        "position_count": 1
+      },
+      "positions": [
+        {
+          "id": "pos_0123456789abcdef0123456789abcdef",
+          "object": "position",
+          "created": 1792281600,
+          "account": "acct_0123456789abcdef0123456789abcdef",
+          "snapshot": "psn_0123456789abcdef0123456789abcdef",
+          "instrument": "ins_markets_scheme_101",
+          "listing": null,
+          "quantity": null,
+          "cost_basis": null,
+          "valuation": {
+            "method": "reported",
+            "market_value": {
+              "amount": "125000.5",
+              "currency": "INR"
+            },
+            "as_of": {
+              "precision": "date",
+              "date": "2026-10-18",
+              "time_zone": "Asia/Kolkata"
+            },
+            "source": {
+              "kind": "manual",
+              "name": "User supplied"
+            },
+            "unit_price": null
+          }
+        }
+      ],
+      "instruments": [
+        {
+          "id": "ins_markets_scheme_101",
+          "object": "instrument",
+          "created": 1792281600,
+          "name": "Example Equity Fund \u2014 Direct Growth",
+          "identifiers": [],
+          "domicile_country": "IN",
+          "type": "mutual_fund",
+          "mutual_fund": {
+            "fund_name": "Example Equity Fund",
+            "share_class": "Direct Growth",
+            "class_currency": "INR",
+            "distribution_policy": "accumulating"
+          }
+        }
+      ],
+      "total_current_value": {
+        "amount": "125000.5",
+        "currency": "INR"
+      },
+      "valuation_basis": "manual_current_value",
+      "market_data": {
+        "mode": "live",
+        "notice": "Reference NAV is separate from entered holdings."
+      }
+    }
+  },
+  {
+    "operation_id": "replace_snapshot",
+    "method": "POST",
+    "path": "/v1/accounts/{account}/portfolios/{portfolio}/snapshots",
+    "query": "",
+    "status": 201,
+    "request": {
+      "expected_snapshot": "psn_0123456789abcdef0123456789abcdef",
+      "as_of": "2026-10-18",
+      "positions": [
+        {
+          "instrument": "ins_markets_scheme_101",
+          "current_value": "125000.50"
+        }
+      ]
+    },
+    "response": {
+      "portfolio": {
+        "id": "ptf_0123456789abcdef0123456789abcdef",
+        "object": "portfolio",
+        "created": 1792281600,
+        "account": "acct_0123456789abcdef0123456789abcdef",
+        "investor": "inv_0123456789abcdef0123456789abcdef",
+        "name": "Long-term savings",
+        "reporting_currency": "INR"
+      },
+      "investment_account": {
+        "id": "iac_0123456789abcdef0123456789abcdef",
+        "object": "investment_account",
+        "created": 1792281600,
+        "account": "acct_0123456789abcdef0123456789abcdef",
+        "portfolio": "ptf_0123456789abcdef0123456789abcdef",
+        "name": "Manual holdings",
+        "kind": "manual",
+        "institution_name": null,
+        "reference_masked": null,
+        "latest_snapshot": "psn_fedcba9876543210fedcba9876543210"
+      },
+      "snapshot": {
+        "id": "psn_fedcba9876543210fedcba9876543210",
+        "object": "position_snapshot",
+        "created": 1792281600,
+        "account": "acct_0123456789abcdef0123456789abcdef",
+        "investment_account": "iac_0123456789abcdef0123456789abcdef",
+        "as_of": {
+          "precision": "date",
+          "date": "2026-10-18",
+          "time_zone": "Asia/Kolkata"
+        },
+        "source": {
+          "kind": "manual",
+          "name": "User supplied"
+        },
+        "position_count": 1
+      },
+      "positions": [
+        {
+          "id": "pos_fedcba9876543210fedcba9876543210",
+          "object": "position",
+          "created": 1792281600,
+          "account": "acct_0123456789abcdef0123456789abcdef",
+          "snapshot": "psn_fedcba9876543210fedcba9876543210",
+          "instrument": "ins_markets_scheme_101",
+          "listing": null,
+          "quantity": null,
+          "cost_basis": null,
+          "valuation": {
+            "method": "reported",
+            "market_value": {
+              "amount": "125000.5",
+              "currency": "INR"
+            },
+            "as_of": {
+              "precision": "date",
+              "date": "2026-10-18",
+              "time_zone": "Asia/Kolkata"
+            },
+            "source": {
+              "kind": "manual",
+              "name": "User supplied"
+            },
+            "unit_price": null
+          }
+        }
+      ],
+      "instruments": [
+        {
+          "id": "ins_markets_scheme_101",
+          "object": "instrument",
+          "created": 1792281600,
+          "name": "Example Equity Fund \u2014 Direct Growth",
+          "identifiers": [],
+          "domicile_country": "IN",
+          "type": "mutual_fund",
+          "mutual_fund": {
+            "fund_name": "Example Equity Fund",
+            "share_class": "Direct Growth",
+            "class_currency": "INR",
+            "distribution_policy": "accumulating"
+          }
+        }
+      ],
+      "total_current_value": {
+        "amount": "125000.5",
+        "currency": "INR"
+      },
+      "valuation_basis": "manual_current_value",
+      "market_data": {
+        "mode": "live",
+        "notice": "Reference NAV is separate from entered holdings."
+      }
+    }
+  },
+  {
+    "operation_id": "asset_mix",
+    "method": "POST",
+    "path": "/v1/accounts/{account}/portfolios/asset_mix",
+    "query": "",
+    "status": 200,
+    "request": {
+      "portfolio": {
+        "type": "in_memory",
+        "valuation_date": "2026-10-17",
+        "currency": "INR",
+        "positions": [
+          {
+            "instrument": "ins_example_india_equity_direct_growth",
+            "current_value": "100.000000000000000001"
+          },
+          {
+            "instrument": "ins_example_india_hybrid_direct_growth",
+            "current_value": "100.000000000000000001"
+          }
+        ]
+      },
+      "as_of": "2026-10-18"
+    },
+    "response": {
+      "engine_version": "typescript-signed-net-v1",
+      "as_of_date": "2026-10-18",
+      "valuation_date": "2026-10-17",
+      "input_total": {
+        "amount": "200.000000000000000002",
+        "currency": "INR"
+      },
+      "calculation_precision": "float64",
+      "source_roots": [
+        {
+          "mutual_fund_id": "201",
+          "portfolio_id": "301",
+          "date": "2026-09-30"
+        },
+        {
+          "mutual_fund_id": "202",
+          "portfolio_id": "302",
+          "date": "2026-10-15"
+        }
+      ],
+      "warnings": [
+        {
+          "code": "classifications_not_historical",
+          "message": "Classifications are current reference metadata.",
+          "mutual_fund_id": null,
+          "path": null
+        },
+        {
+          "code": "float64_precision",
+          "message": "Calculated mixes use floating-point arithmetic; input totals retain decimal precision.",
+          "mutual_fund_id": null,
+          "path": null
+        }
+      ],
+      "object": "portfolio_mix",
+      "account": "acct_0123456789abcdef0123456789abcdef",
+      "portfolio": null,
+      "mix_type": "asset",
+      "mix": {
+        "status": "available",
+        "denominator": "total_supplied_value_or_root_value",
+        "unavailable_reason": null,
+        "items": [
+          {
+            "code": "equity",
+            "percentage": "75"
+          },
+          {
+            "code": "debt",
+            "percentage": "25"
+          },
+          {
+            "code": "cash",
+            "percentage": "0"
+          },
+          {
+            "code": "gold",
+            "percentage": "0"
+          },
+          {
+            "code": "other",
+            "percentage": "0"
+          },
+          {
+            "code": "unknown",
+            "percentage": "0"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "operation_id": "sector_mix",
+    "method": "POST",
+    "path": "/v1/accounts/{account}/portfolios/sector_mix",
+    "query": "",
+    "status": 200,
+    "request": {
+      "portfolio": {
+        "type": "in_memory",
+        "valuation_date": "2026-10-17",
+        "currency": "INR",
+        "positions": [
+          {
+            "instrument": "ins_example_india_equity_direct_growth",
+            "current_value": "100.000000000000000001"
+          },
+          {
+            "instrument": "ins_example_india_hybrid_direct_growth",
+            "current_value": "100.000000000000000001"
+          }
+        ]
+      },
+      "as_of": "2026-10-18"
+    },
+    "response": {
+      "engine_version": "typescript-signed-net-v1",
+      "as_of_date": "2026-10-18",
+      "valuation_date": "2026-10-17",
+      "input_total": {
+        "amount": "200.000000000000000002",
+        "currency": "INR"
+      },
+      "calculation_precision": "float64",
+      "source_roots": [
+        {
+          "mutual_fund_id": "201",
+          "portfolio_id": "301",
+          "date": "2026-09-30"
+        },
+        {
+          "mutual_fund_id": "202",
+          "portfolio_id": "302",
+          "date": "2026-10-15"
+        }
+      ],
+      "warnings": [
+        {
+          "code": "classifications_not_historical",
+          "message": "Classifications are current reference metadata.",
+          "mutual_fund_id": null,
+          "path": null
+        },
+        {
+          "code": "float64_precision",
+          "message": "Calculated mixes use floating-point arithmetic; input totals retain decimal precision.",
+          "mutual_fund_id": null,
+          "path": null
+        }
+      ],
+      "object": "portfolio_mix",
+      "account": "acct_0123456789abcdef0123456789abcdef",
+      "portfolio": null,
+      "mix_type": "sector",
+      "mix": {
+        "status": "available",
+        "denominator": "recursively_normalized_eligible_equity_sector_contributions",
+        "unavailable_reason": null,
+        "items": [
+          {
+            "code": "healthcare",
+            "label": "Healthcare",
+            "percentage": "66.6666666667"
+          },
+          {
+            "code": "finance",
+            "label": "Finance",
+            "percentage": "33.3333333333"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "operation_id": "issuer_mix",
+    "method": "POST",
+    "path": "/v1/accounts/{account}/portfolios/issuer_mix",
+    "query": "",
+    "status": 200,
+    "request": {
+      "portfolio": {
+        "type": "in_memory",
+        "valuation_date": "2026-10-17",
+        "currency": "INR",
+        "positions": [
+          {
+            "instrument": "ins_example_india_equity_direct_growth",
+            "current_value": "100.000000000000000001"
+          },
+          {
+            "instrument": "ins_example_india_hybrid_direct_growth",
+            "current_value": "100.000000000000000001"
+          }
+        ]
+      },
+      "as_of": "2026-10-18"
+    },
+    "response": {
+      "engine_version": "typescript-signed-net-v1",
+      "as_of_date": "2026-10-18",
+      "valuation_date": "2026-10-17",
+      "input_total": {
+        "amount": "200.000000000000000002",
+        "currency": "INR"
+      },
+      "calculation_precision": "float64",
+      "source_roots": [
+        {
+          "mutual_fund_id": "201",
+          "portfolio_id": "301",
+          "date": "2026-09-30"
+        },
+        {
+          "mutual_fund_id": "202",
+          "portfolio_id": "302",
+          "date": "2026-10-15"
+        }
+      ],
+      "warnings": [
+        {
+          "code": "classifications_not_historical",
+          "message": "Classifications are current reference metadata.",
+          "mutual_fund_id": null,
+          "path": null
+        },
+        {
+          "code": "float64_precision",
+          "message": "Calculated mixes use floating-point arithmetic; input totals retain decimal precision.",
+          "mutual_fund_id": null,
+          "path": null
+        }
+      ],
+      "object": "portfolio_mix",
+      "account": "acct_0123456789abcdef0123456789abcdef",
+      "portfolio": null,
+      "mix_type": "issuer",
+      "mix": {
+        "status": "available",
+        "denominator": "recursively_normalized_eligible_equity_issuer_contributions",
+        "unavailable_reason": null,
+        "items": [
+          {
+            "issuer_type": "Company",
+            "issuer_id": "2",
+            "name": "Synthetic Two",
+            "percentage": "66.6666666667"
+          },
+          {
+            "issuer_type": "Company",
+            "issuer_id": "1",
+            "name": "Synthetic One",
+            "percentage": "33.3333333333"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "operation_id": "import_history",
+    "method": "POST",
+    "path": "/v1/accounts/{account}/portfolios/{portfolio}/history/imports",
+    "query": "",
+    "status": 201,
+    "request": {
+      "source": {
+        "kind": "user",
+        "reference": "synthetic-statement"
+      },
+      "holdings": [
+        {
+          "external_id": "example-holding",
+          "investment_account": "iac_0123456789abcdef0123456789abcdef",
+          "instrument": "ins_markets_scheme_101",
+          "opening": {
+            "date": "2026-01-01",
+            "quantity": "10"
+          },
+          "complete_range": {
+            "from": "2026-01-01",
+            "through": "2026-01-31"
+          },
+          "transactions": [
+            {
+              "external_id": "buy-1",
+              "date": "2026-01-03",
+              "sequence": 1,
+              "kind": "buy",
+              "quantity": "3"
+            }
+          ]
+        }
+      ],
+      "complete_range": {
+        "from": "2026-01-01",
+        "through": "2026-01-31"
+      }
+    },
+    "response": {
+      "object": "history_import",
+      "account": "acct_0123456789abcdef0123456789abcdef",
+      "portfolio": "ptf_0123456789abcdef0123456789abcdef",
+      "holdings": [
+        {
+          "id": "hld_0123456789abcdef0123456789abcdef"
+        }
+      ]
+    }
+  },
+  {
+    "operation_id": "retrieve_history",
+    "method": "GET",
+    "path": "/v1/accounts/{account}/portfolios/{portfolio}/history",
+    "query": "",
+    "status": 200,
+    "request": null,
+    "response": {
+      "object": "portfolio_history",
+      "account": "acct_0123456789abcdef0123456789abcdef",
+      "portfolio": "ptf_0123456789abcdef0123456789abcdef",
+      "source": {
+        "kind": "user",
+        "reference": "synthetic-statement"
+      },
+      "complete_range": {
+        "from": "2026-01-01",
+        "through": "2026-01-31"
+      },
+      "holdings": [
+        {
+          "id": "hld_0123456789abcdef0123456789abcdef",
+          "object": "holding",
+          "account": "acct_0123456789abcdef0123456789abcdef",
+          "portfolio": "ptf_0123456789abcdef0123456789abcdef",
+          "investment_account": "iac_0123456789abcdef0123456789abcdef",
+          "instrument": "ins_markets_scheme_101",
+          "position_backing": "ledger",
+          "external_id": "example-holding",
+          "opening": {
+            "date": "2026-01-01",
+            "quantity": "10",
+            "source": {
+              "kind": "user",
+              "reference": "synthetic-statement"
+            }
+          },
+          "complete_range": {
+            "from": "2026-01-01",
+            "through": "2026-01-31"
+          },
+          "transactions": [
+            {
+              "external_id": "buy-1",
+              "date": "2026-01-03",
+              "sequence": 1,
+              "kind": "buy",
+              "quantity": "3",
+              "source": {
+                "kind": "user",
+                "reference": "synthetic-statement"
+              }
+            }
+          ],
+          "complete_range_source": {
+            "kind": "user",
+            "reference": "synthetic-statement"
+          },
+          "observed_position": null
+        }
+      ]
+    }
+  },
+  {
+    "operation_id": "history_capabilities",
+    "method": "GET",
+    "path": "/v1/accounts/{account}/portfolios/{portfolio}/history/capabilities",
+    "query": "date=2026-01-10",
+    "status": 200,
+    "request": null,
+    "response": {
+      "object": "history_capability",
+      "date": "2026-01-10",
+      "basis": "declared",
+      "can_reconstruct": true,
+      "history_complete": true,
+      "position_backing": "ledger",
+      "reasons": []
+    }
+  },
+  {
+    "operation_id": "list_holdings",
+    "method": "GET",
+    "path": "/v1/accounts/{account}/portfolios/{portfolio}/holdings",
+    "query": "",
+    "status": 200,
+    "request": null,
+    "response": {
+      "object": "list",
+      "data": [
+        {
+          "id": "hld_0123456789abcdef0123456789abcdef",
+          "object": "holding",
+          "account": "acct_0123456789abcdef0123456789abcdef",
+          "portfolio": "ptf_0123456789abcdef0123456789abcdef",
+          "investment_account": "iac_0123456789abcdef0123456789abcdef",
+          "instrument": "ins_markets_scheme_101",
+          "position_backing": "ledger"
+        }
+      ],
+      "has_more": false,
+      "url": "/v1/accounts/acct_0123456789abcdef0123456789abcdef/portfolios/ptf_0123456789abcdef0123456789abcdef/holdings"
+    }
+  },
+  {
+    "operation_id": "retrieve_holding",
+    "method": "GET",
+    "path": "/v1/accounts/{account}/portfolios/{portfolio}/holdings/{holding}",
+    "query": "",
+    "status": 200,
+    "request": null,
+    "response": {
+      "id": "hld_0123456789abcdef0123456789abcdef",
+      "object": "holding",
+      "account": "acct_0123456789abcdef0123456789abcdef",
+      "portfolio": "ptf_0123456789abcdef0123456789abcdef",
+      "investment_account": "iac_0123456789abcdef0123456789abcdef",
+      "instrument": "ins_markets_scheme_101",
+      "position_backing": "ledger"
+    }
+  },
+  {
+    "operation_id": "holding_position",
+    "method": "GET",
+    "path": "/v1/accounts/{account}/portfolios/{portfolio}/holdings/{holding}/position",
+    "query": "date=2026-01-10",
+    "status": 200,
+    "request": null,
+    "response": {
+      "object": "holding_position",
+      "account": "acct_0123456789abcdef0123456789abcdef",
+      "portfolio": "ptf_0123456789abcdef0123456789abcdef",
+      "holding": "hld_0123456789abcdef0123456789abcdef",
+      "position_date": "2026-01-10",
+      "quantity": "13",
+      "valuation": null,
+      "position_backing": "ledger",
+      "history_complete": true
+    }
+  }
+]

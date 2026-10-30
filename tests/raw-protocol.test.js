@@ -1,7 +1,7 @@
 import { spawn } from "node:child_process";
 import { createInterface } from "node:readline";
 import assert from "node:assert/strict";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import test from "node:test";
 const target = resolve(process.env.BHAROSA_TEST_SERVER ?? "src/server.js");
@@ -60,6 +60,7 @@ test(
         });
         assert.equal(init.result.protocolVersion, version);
         assert.equal(init.result.serverInfo.name, "bharosa-docs-local");
+        assert.equal(init.result.serverInfo.version, JSON.parse(readFileSync(new URL("../package.json", import.meta.url))).version);
         proc.stdin.write(
           JSON.stringify({
             jsonrpc: "2.0",
@@ -86,7 +87,7 @@ test(
         const listing = await success("bharosa_docs_list", {});
         assert.equal(listing.contractVersion, "API v1");
         assert.equal(listing.availability, "bundled-snapshot");
-        assert.equal(listing.total, 96);
+        assert.equal(listing.total, 102);
         const allDocuments = [...listing.documents];
         let next = listing.nextOffset;
         while (next !== null) {
@@ -97,7 +98,7 @@ test(
           allDocuments.push(...page.documents);
           next = page.nextOffset;
         }
-        assert.equal(new Set(allDocuments.map((d) => d.id)).size, 96);
+        assert.equal(new Set(allDocuments.map((d) => d.id)).size, 102);
         assert.ok(allDocuments.some((d) => d.id === "schema-unit-input"));
         const first = await success("bharosa_docs_search", {
           query: "the",
@@ -156,7 +157,7 @@ test(
           ["bharosa_docs_list", { limit: 0 }],
           ["bharosa_docs_list", { limit: 21 }],
           ["bharosa_docs_list", { limit: 1.1 }],
-          ["bharosa_docs_list", { offset: 97 }],
+          ["bharosa_docs_list", { offset: 103 }],
           ["bharosa_docs_list", { offset: -1 }],
           ["bharosa_docs_read", { id: "authentication", maxChars: 8001 }],
           ["bharosa_docs_read", { id: "authentication", maxChars: 0 }],
@@ -229,7 +230,7 @@ test(
           -32601,
         );
         assert.equal(existsSync("/tmp/bharosa-mcp-review-executed"), false);
-        assert.equal((await success("bharosa_docs_list", {})).total, 96);
+        assert.equal((await success("bharosa_docs_list", {})).total, 102);
         assert.equal(stderr, "");
         console.log(
           JSON.stringify({

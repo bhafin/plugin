@@ -3,7 +3,7 @@ import { createHash } from "node:crypto";
 import { z } from "zod";
 
 export const codingSha256 =
-  "60ab48e54139f2557013c7b68e2613827e99b00e501c2ac09f986d6092f0d235";
+  "667acde00ac2e5036a725363a0b4c6fd86f5433e0c0357ef30dd50d24946ba08";
 const bytes = readFileSync(new URL("../assets/coding.json", import.meta.url));
 if (createHash("sha256").update(bytes).digest("hex") !== codingSha256)
   throw Error(
@@ -36,7 +36,7 @@ const example = z
     setup: z.string().max(8000),
     codeSha256: z.string(),
     operationIds: z.array(z.string()).max(30),
-    sdkVersion: z.literal("0.1.0"),
+    sdkVersion: z.literal("0.4.0"),
     validation: z.enum([
       "strict-typescript-and-synthetic-transport",
       "strict-typescript",
@@ -48,11 +48,11 @@ const example = z
   .strict();
 export const codingBundle = z
   .object({
-    version: z.literal("0.2.0-coding.1"),
+    version: z.literal("0.3.0-coding.1"),
     docsSnapshotSha256: z.string(),
     approvedManifestSha256: z.string(),
     sources: z.record(z.string(), z.string()),
-    sdkVersion: z.literal("0.1.0"),
+    sdkVersion: z.literal("0.4.0"),
     operations: z.array(operation).max(100),
     examples: z.array(example).max(300),
   })
@@ -115,9 +115,9 @@ export function createCodingTools(metadataShape, docsDigest, checkpoint) {
   };
   const common = {
     ...metadataShape,
-    codingVersion: z.literal("0.2.0-coding.1"),
+    codingVersion: z.literal("0.3.0-coding.1"),
     codingSha256: z.string(),
-    sdkVersion: z.literal("0.1.0"),
+    sdkVersion: z.literal("0.4.0"),
   };
   const inputs = {
     bharosa_api_search: z
@@ -125,7 +125,12 @@ export function createCodingTools(metadataShape, docsDigest, checkpoint) {
         query,
         limit,
         group: z.enum(["resource", "monthly"]).optional(),
-        method: z.enum(["GET", "POST", "PUT", "PATCH", "DELETE"]).optional(),
+        method: z
+          .enum(["GET", "POST", "PUT", "PATCH", "DELETE"])
+          .optional()
+          .describe(
+            "Filter reference documents by their documented HTTP verb. Never executes that method or any network request.",
+          ),
       })
       .strict(),
     bharosa_api_details: z

@@ -82,13 +82,13 @@ test("new tools reject dangerous keys, paths, raw overflow and unknown operation
 });
 
 test("coding index provenance and validation coverage excludes private material", () => {
-  assert.equal(codingBundle.operations.length, 28);
-  assert.equal(codingBundle.examples.length, 116);
+  assert.equal(codingBundle.operations.length, 31);
+  assert.equal(codingBundle.examples.length, 121);
   for (const item of [...codingBundle.operations, ...codingBundle.examples]) {
     assert.equal(item.sourceSha256, codingBundle.sources[item.sourcePath]);
     assert.match(
       item.sourcePath,
-      /^marketing\/(src\/content\/[a-z-]+\.(ts|json)|contracts\/openapi.json)$/,
+      /^(marketing\/src\/content\/[a-z-]+\.(ts|json)|sdk\/test\/(analytics\.)?openapi.json)$/,
     );
     assert.doesNotMatch(
       JSON.stringify(item),
@@ -105,5 +105,23 @@ test("coding index provenance and validation coverage excludes private material"
         codingBundle.operations.some((o) => o.id === id),
         id,
       );
+  }
+});
+
+test("analytics examples are discoverable by their exact operation IDs", () => {
+  for (const [slug, id] of [
+    ["scheme-performance", "analytics_scheme"],
+    ["category-statistics", "analytics_category"],
+  ]) {
+    for (const section of ["request", "http"]) {
+      const example = codingBundle.examples.find(
+        (e) => e.id === `guide-${slug}-${section}`,
+      );
+      assert.ok(example.operationIds.includes(id));
+      assert.equal(
+        example.sourcePath,
+        "marketing/src/content/analytics-guides.ts",
+      );
+    }
   }
 });

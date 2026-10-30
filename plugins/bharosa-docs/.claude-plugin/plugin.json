@@ -1,7 +1,7 @@
 {
   "name": "bharosa-docs",
-  "version": "0.2.0",
-  "description": "Search and read versioned Bharosa developer documentation. No account access or financial tools.",
+  "version": "0.3.0",
+  "description": "Bharosa public reference tools and integration planning skill. No account access.",
   "author": {
     "name": "Bharosa"
   },

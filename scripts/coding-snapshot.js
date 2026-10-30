@@ -21,6 +21,13 @@ const policy = JSON.parse(
   readFileSync(join(root, "scripts/coding-source-checkpoint.json")),
 );
 const docs = JSON.parse(readFileSync(join(root, "assets/docs.json")));
+const sdkVersion = JSON.parse(readFileSync(join(root, "package.json")))
+  .devDependencies.bharosa;
+assert.match(
+  sdkVersion,
+  /^\d+\.\d+\.\d+$/,
+  "SDK validation version must be exactly pinned",
+);
 assert.equal(policy.canonicalCheckpointSha256, docs.approvedManifestSha256);
 const stage = mkdtempSync(join(tmpdir(), "bharosa-public-content-"));
 const examples = [],
@@ -58,6 +65,10 @@ try {
   const { requestExamples } = await import(
     pathToFileURL(join(stage, "src/content/examples.ts"))
   );
+  const { analyticsGuides } = await import(
+    pathToFileURL(join(stage, "src/content/analytics-guides.ts"))
+  );
+  const analyticsSlugs = new Set(analyticsGuides.map((guide) => guide.slug));
   const { guides } = await import(
     pathToFileURL(join(stage, "src/content/guides.ts"))
   );
@@ -67,7 +78,7 @@ try {
   const contractBytes = readFileSync(join(marketing, "contracts/openapi.json"));
   assert.equal(hash(contractBytes), docs.publicContractSha256);
   const contract = JSON.parse(contractBytes);
-  sources["marketing/contracts/openapi.json"] = docs.publicContractSha256;
+  sources["sdk/test/openapi.json"] = docs.publicContractSha256;
   const summary = (id, title, sourcePath, sourcePointer, route) => ({
     id,
     title,
@@ -95,7 +106,7 @@ try {
       setup,
       codeSha256: hash(code),
       operationIds,
-      sdkVersion: "0.1.0",
+      sdkVersion,
       validation:
         language === "typescript"
           ? id.startsWith("sdk-")
@@ -114,24 +125,25 @@ try {
       const e = product.endpoints.find(
         (e) => e.path === path && e.method.toLowerCase() === method,
       );
-      assert.ok(e && e.availability !== "first-party", `${method} ${path}`);
-      slugToOperation.set(e.slug, op.operationId);
+      assert.ok(!e || e.availability !== "first-party", `${method} ${path}`);
+      if (e) slugToOperation.set(e.slug, op.operationId);
       const pointer = `#/paths/${path.replaceAll("~", "~0").replaceAll("/", "~1")}/${method}`;
       operations.push({
         ...summary(
           op.operationId,
           op.summary,
-          "marketing/contracts/openapi.json",
+          "sdk/test/openapi.json",
           pointer,
-          `/docs/${e.slug}`,
+          e ? `/docs/${e.slug}` : "/docs/reference",
         ),
         method: method.toUpperCase(),
         path,
         group: "resource",
         definition: op,
-        sampleResponse: e.response,
-        sampleStatus: e.status,
+        sampleResponse: e?.response,
+        sampleStatus: e?.status,
       });
+      if (!e) continue; // Reference is exact; no canonical example is available.
       for (const delegated of [false, true]) {
         const code = requestExamples(e, delegated),
           auth = delegated ? "delegated" : "account";
@@ -151,6 +163,37 @@ try {
           );
       }
     }
+  const analyticsBytes = readFileSync(
+    join(marketing, "contracts/analytics.openapi.json"),
+  );
+  assert.equal(
+    hash(analyticsBytes),
+    policy.contracts["contracts/analytics.openapi.json"],
+  );
+  sources["sdk/test/analytics.openapi.json"] = hash(analyticsBytes);
+  for (const [path, methods] of Object.entries(
+    JSON.parse(analyticsBytes).paths,
+  )) {
+    for (const [method, op] of Object.entries(methods)) {
+      const slug = path.endsWith("/performance")
+        ? "scheme-performance"
+        : "category-statistics";
+      slugToOperation.set(slug, op.operationId);
+      operations.push({
+        ...summary(
+          op.operationId,
+          op.summary,
+          "sdk/test/analytics.openapi.json",
+          `#/paths/${path.replaceAll("~", "~0").replaceAll("/", "~1")}/${method}`,
+          `/docs/${slug}`,
+        ),
+        method: method.toUpperCase(),
+        path,
+        group: "monthly",
+        definition: op,
+      });
+    }
+  }
   const allowedGuides = new Set(
     docs.docs.filter((d) => d.kind === "guide").map((d) => d.id),
   );
@@ -159,14 +202,19 @@ try {
       if (!section.code) continue;
       const code = section.code,
         start = code.trimStart();
-      let language = /^(curl|npm|node|codex|claude|#)\b/.test(start)
+      let language = /^(?:#|(?:curl|npm|node|codex|claude)\b)/.test(start)
         ? "bash"
         : "typescript";
       if (start.startsWith("{")) {
         JSON.parse(code);
         language = "json";
       }
-      const operationIds = (section.links ?? [])
+      const operationIds = [
+        ...new Set([
+          ...(section.links ?? []),
+          ...(analyticsSlugs.has(guide.slug) ? [guide.slug] : []),
+        ]),
+      ]
         .map((slug) => slugToOperation.get(slug))
         .filter(Boolean);
       example(
@@ -174,7 +222,9 @@ try {
         `${guide.title}: ${section.title}`,
         language,
         code,
-        "marketing/src/content/guides.ts",
+        analyticsSlugs.has(guide.slug)
+          ? "marketing/src/content/analytics-guides.ts"
+          : "marketing/src/content/guides.ts",
         `${guide.slug}#${section.id}`,
         `/docs/${guide.slug}#${section.id}`,
         operationIds,
@@ -225,11 +275,11 @@ for (const value of [...examples, ...operations]) {
 assert.equal(new Set(examples.map((e) => e.id)).size, examples.length);
 assert.equal(new Set(operations.map((e) => e.id)).size, operations.length);
 const value = {
-  version: "0.2.0-coding.1",
+  version: "0.3.0-coding.1",
   docsSnapshotSha256: hash(readFileSync(join(root, "assets/docs.json"))),
   approvedManifestSha256: docs.approvedManifestSha256,
   sources,
-  sdkVersion: "0.1.0",
+  sdkVersion,
   operations,
   examples,
 };

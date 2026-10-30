@@ -3,6 +3,9 @@ import { mkdirSync, copyFileSync, chmodSync } from "node:fs";
 mkdirSync(new URL("../dist/", import.meta.url), { recursive: true });
 for (const file of [
   "server.js",
+  "mcp-server.js",
+  "http-server.js",
+  "admission.js",
   "catalog.js",
   "cli.js",
   "check.js",

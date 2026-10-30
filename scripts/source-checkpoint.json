@@ -1,9 +1,23 @@
 {
-  "approvedManifestSha256": "4c223925f048e40ca1762c781848c677055db447870031328fee017ceb5ee1ac",
-  "checkpointDate": "2026-10-27",
+  "approvedManifestSha256": "d8a99bf46e2c709f72ea65b55c23aae1fd57f9208306553fa0ab9174af949721",
+  "checkpointDate": "2026-10-30",
   "sources": {
-    "src/content/guides.ts": "738e0f1f1c2078759908225cc76e47b8c3f8dba04446eb1faf82bd99a78969c7",
-    "src/content/product.ts": "62c01ecc3e6aabc74ba66128724fa64a20e154ab6457b804df8a102992959db5",
-    "contracts/openapi.json": "5ae700e29c7f54df12d5634f36cad08785240ee5b019d5921bf0792f53b7866c"
+    "src/content/guides.ts": "55dd618bd5691d60b9a9e0add8bc5956aa9e636a394296e98eef4d62b669e821",
+    "src/content/product.ts": "38fb0188f6894c23e190ae040c154df77b35a5a29ea1f6b25572215f78ad25f2",
+    "contracts/openapi.json": "3b791799bf705fd36a257e27a2520257f135e772d617b03bb22063ccea4d04e2",
+    "src/content/analytics-guides.ts": "ab4056e010901bf5a4c74137b5c5fba3d3b51f32deb0495efbf0767d65269d1b",
+    "contracts/analytics.openapi.json": "1d2d37edf6ea65cdd3bac707119c6815ee73c89770a791d7dfdfadc9630b6f2b",
+    "contracts/monthly-market-data.openapi.json": "29463b6a150e368a47ac11e2f8f841e3808d94d3ff9b70221fe3804c93b91004"
+  },
+  "analyticsMetadataCorrection": {
+    "source": "sdk/test/analytics.openapi.json",
+    "sha256": "1d2d37edf6ea65cdd3bac707119c6815ee73c89770a791d7dfdfadc9630b6f2b",
+    "publishedSdk040HistoricalSha256": "ebab801a241565a3b115993b6ae8470d144f8d69f79cdb8acc274ff8c200cf3e",
+    "scope": "Reviewed documentation metadata correction only; not a replacement of the published SDK archive."
+  },
+  "approvedQuickstartCommentRemoval": {
+    "commit": "c717ea64c6b8523600f15a8e7daa83cd8d3f96ee",
+    "sourceSha256": "55dd618bd5691d60b9a9e0add8bc5956aa9e636a394296e98eef4d62b669e821",
+    "scope": "One redundant comment removed; exact comparison to v24 passed."
   }
 }
