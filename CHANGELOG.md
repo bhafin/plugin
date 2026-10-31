@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.3
+
+- Refresh the pinned public corpus to docs v32 and SDK 0.7.0, including baseline market analytics and recorded holdings/history guidance.
+- Index baseline references and map examples to the correct baseline operation, preserving tool names and inputs.
+- Keep authenticated hosted holdings verification distinct from documentation availability.
+
 ## 0.3.2
 
 Align with SDK 0.6.0 and public website v29. Include the baseline market-search specification and public account-connection guide with exact source provenance. JavaScript guide snippets report syntax-only validation. Improve filtered-search query descriptions and error recovery examples without relaxing bounds. Seven read-only tool IDs remain unchanged.

@@ -7,13 +7,13 @@ const json = (doc) =>
 test("expanded corpus is pinned to approved public checkpoint and excludes private sources", () => {
   assert.equal(
     bundle.approvedManifestSha256,
-    "814619b9dda2a19633c4c05fca9ef851392e75de35f57d22c188fcd0b4094d64",
+    "899daecf4a6c504a6a83221bae39a5f482be0baf7b601b65b5e7e2ef9bd3085f",
   );
   assert.equal(
     bundle.publicContractSha256,
-    "3b791799bf705fd36a257e27a2520257f135e772d617b03bb22063ccea4d04e2",
+    "f69f2ee2268f817915617a04e750763126cbba6570da7aae851da1a8c2ae2f9f",
   );
-  assert.equal(bundle.docs.length, 113);
+  assert.equal(bundle.docs.length, 123);
   assert.equal(bundle.docs.filter((d) => d.kind === "guide").length, 39);
   assert.match(bundle.notice, /not a live website fetch/);
   for (const doc of bundle.docs) {
@@ -23,6 +23,7 @@ test("expanded corpus is pinned to approved public checkpoint and excludes priva
         "sdk/test/openapi.json",
         "sdk/test/analytics.openapi.json",
         "sdk/test/market-search.openapi.json",
+        "sdk/test/baseline-market.openapi.json",
         "marketing/src/content/consent-guide.ts",
         "marketing/src/content/analytics-guides.ts",
       ].includes(doc.sourcePath),
@@ -68,7 +69,7 @@ test("public reference pointers cover every resource operation and resolve schem
   const operations = bundle.docs.filter((d) =>
     d.sourcePointer?.startsWith("#/paths/"),
   );
-  assert.equal(operations.length, 27);
+  assert.equal(operations.length, 35);
   const pointers = new Set(bundle.docs.map((d) => d.sourcePointer));
   function walk(value) {
     if (!value || typeof value !== "object") return;
@@ -83,12 +84,14 @@ test("public reference pointers cover every resource operation and resolve schem
     if (doc.sourcePath === "sdk/test/market-search.openapi.json") {
       assert.equal(json(doc).path, "/v1/market-data/schemes/search");
       assert.equal(json(doc).method, "GET");
+    } else if (doc.sourcePath === "sdk/test/baseline-market.openapi.json") {
+      assert.match(json(doc).path, /^\/v1\/market-data\//);
     } else assert.match(json(doc).path, /^\/v1\/accounts\//);
   }
 });
 
 test("reviewed guidance preserves scope and SDK provenance", () => {
-  assert.match(byId("integrations").content, /bharosa@0\.6\.0/);
+  assert.match(byId("integrations").content, /bharosa@0\.7\.0/);
   assert.match(
     byId("documentation-assistant").content,
     /https:\/\/mcp.bharosa.finance\//,
@@ -133,5 +136,18 @@ test("published unified guides preserve current availability", () => {
     byId("authentication").content,
     /unpublished 0\.5\.1-unified/,
   );
-  assert.match(byId("integrations").content, /0\.6\.0/);
+  assert.match(byId("integrations").content, /0\.7\.0/);
+});
+
+test("baseline and search authentication references include exact public schemes", () => {
+  const baseline = json(byId("reference-baseline-authentication"));
+  const search = json(byId("reference-market-search-authentication"));
+  assert.equal(baseline.ActiveApiKey.type, "http");
+  assert.equal(baseline.ActiveApiKey.scheme, "bearer");
+  assert.match(
+    baseline.ActiveApiKey.description,
+    /no private scope or investor grant/,
+  );
+  assert.equal(search.ApiKey.type, "http");
+  assert.equal(search.ApiKey.scheme, "bearer");
 });

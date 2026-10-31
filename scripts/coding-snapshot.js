@@ -225,6 +225,48 @@ try {
       });
     }
   }
+  const baselineBytes = readFileSync(
+    join(marketing, "contracts/baseline-market.openapi.json"),
+  );
+  assert.equal(
+    hash(baselineBytes),
+    policy.contracts["contracts/baseline-market.openapi.json"],
+  );
+  sources["sdk/test/baseline-market.openapi.json"] = hash(baselineBytes);
+  const baselineMethods = new Map();
+  for (const [path, methods] of Object.entries(
+    JSON.parse(baselineBytes).paths,
+  )) {
+    assert.ok(path.startsWith("/v1/market-data/"));
+    if (Object.hasOwn(JSON.parse(marketSearchBytes).paths, path)) continue;
+    for (const [method, op] of Object.entries(methods)) {
+      assert.ok(["get", "post"].includes(method));
+      if (op["x-sdk-method"]) {
+        const accountOperation = operations.find(
+          (existing) =>
+            existing.path.replace(/^\/v1\/accounts\/[^/]+/, "/v1") === path,
+        );
+        baselineMethods.set(op["x-sdk-method"], {
+          id: op.operationId,
+          accountId: accountOperation?.id,
+          path,
+        });
+      }
+      operations.push({
+        ...summary(
+          op.operationId,
+          op.summary ?? op.operationId,
+          "sdk/test/baseline-market.openapi.json",
+          `#/paths/${path.replaceAll("~", "~0").replaceAll("/", "~1")}/${method}`,
+          "/docs/monthly-market-data",
+        ),
+        method: method.toUpperCase(),
+        path,
+        group: "monthly",
+        definition: op,
+      });
+    }
+  }
   const allowedGuides = new Set(
     docs.docs.filter((d) => d.kind === "guide").map((d) => d.id),
   );
@@ -255,6 +297,19 @@ try {
             .get.operationId;
         if (!operationIds.includes(searchOperation))
           operationIds.push(searchOperation);
+      }
+      for (const [method, { id, accountId, path }] of baselineMethods) {
+        if (
+          code.includes(`bharosa.${method}(`) ||
+          (language === "bash" &&
+            new RegExp(
+              path.split("{id}").join("[^/\\s?]+") + "(?:[?\\s\"\']|$)",
+            ).test(code))
+        ) {
+          const accountIndex = operationIds.indexOf(accountId);
+          if (accountIndex >= 0) operationIds.splice(accountIndex, 1);
+          if (!operationIds.includes(id)) operationIds.push(id);
+        }
       }
       example(
         `guide-${guide.slug}-${section.id}`,
@@ -316,7 +371,7 @@ for (const value of [...examples, ...operations]) {
 assert.equal(new Set(examples.map((e) => e.id)).size, examples.length);
 assert.equal(new Set(operations.map((e) => e.id)).size, operations.length);
 const value = {
-  version: "0.3.2-coding.1",
+  version: "0.3.3-coding.1",
   docsSnapshotSha256: hash(readFileSync(join(root, "assets/docs.json"))),
   approvedManifestSha256: docs.approvedManifestSha256,
   sources,

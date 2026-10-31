@@ -3,7 +3,7 @@ import { createHash } from "node:crypto";
 import { z } from "zod";
 
 export const codingSha256 =
-  "4498f89b109ef8702daa3e2807f5e686b187a05e6a6c5775e7029ab50d2d525c";
+  "dca029bfb0d90c1e8fda52509928ef79f1a8f3274e08e1c7ebb4a54d5b762a38";
 const bytes = readFileSync(new URL("../assets/coding.json", import.meta.url));
 if (createHash("sha256").update(bytes).digest("hex") !== codingSha256)
   throw Error(
@@ -36,7 +36,7 @@ const example = z
     setup: z.string().max(8000),
     codeSha256: z.string(),
     operationIds: z.array(z.string()).max(30),
-    sdkVersion: z.literal("0.6.0"),
+    sdkVersion: z.literal("0.7.0"),
     validation: z.enum([
       "strict-typescript-and-synthetic-transport",
       "strict-typescript",
@@ -49,11 +49,11 @@ const example = z
   .strict();
 export const codingBundle = z
   .object({
-    version: z.literal("0.3.2-coding.1"),
+    version: z.literal("0.3.3-coding.1"),
     docsSnapshotSha256: z.string(),
     approvedManifestSha256: z.string(),
     sources: z.record(z.string(), z.string()),
-    sdkVersion: z.literal("0.6.0"),
+    sdkVersion: z.literal("0.7.0"),
     operations: z.array(operation).max(100),
     examples: z.array(example).max(300),
   })
@@ -116,9 +116,9 @@ export function createCodingTools(metadataShape, docsDigest, checkpoint) {
   };
   const common = {
     ...metadataShape,
-    codingVersion: z.literal("0.3.2-coding.1"),
+    codingVersion: z.literal("0.3.3-coding.1"),
     codingSha256: z.string(),
-    sdkVersion: z.literal("0.6.0"),
+    sdkVersion: z.literal("0.7.0"),
   };
   const inputs = {
     bharosa_api_search: z

@@ -84,7 +84,7 @@ test(`every exported example passes its advertised validation against exact inst
     rmSync(work, { recursive: true, force: true });
   }
 });
-test("46 canonical SDK examples execute only through synthetic transport", async () => {
+test("48 canonical SDK examples execute only through synthetic transport", async () => {
   const env = {
     BHAROSA_SECRET_KEY: "synthetic-secret",
     BHAROSA_APPLICATION_KEY: "synthetic-app-key",
@@ -163,5 +163,5 @@ test("46 canonical SDK examples execute only through synthetic transport", async
     assert.ok(seen.length >= 1 && seen.length <= 3);
     count++;
   }
-  assert.equal(count, 46);
+  assert.equal(count, 48);
 });

@@ -21,6 +21,7 @@ const publicPaths = [
   "reviewed-guides.json",
   "src/content/consent-guide.ts",
   "contracts/market-search.openapi.json",
+  "contracts/baseline-market.openapi.json",
 ];
 const texts = Object.fromEntries(
   publicPaths.map((path) => {
@@ -228,6 +229,78 @@ for (const [path, methods] of Object.entries(marketSearchContract.paths)) {
     docs.push(doc);
   }
 }
+// Baseline routes are pinned public documentation, never executable API tools.
+const baselineBytes = texts["contracts/baseline-market.openapi.json"];
+const baseline = JSON.parse(baselineBytes);
+// Only schemas reachable from exposed baseline operations are shared. Unused
+// copied account-write schemas are neither exposed nor treated as baseline inputs.
+const baselineRefs = new Set();
+function collectBaselineRefs(value) {
+  if (!value || typeof value !== "object") return;
+  for (const [key, item] of Object.entries(value)) {
+    if (
+      key === "$ref" &&
+      typeof item === "string" &&
+      item.startsWith("#/components/schemas/")
+    ) {
+      const name = item.slice("#/components/schemas/".length);
+      if (!baselineRefs.has(name)) {
+        baselineRefs.add(name);
+        collectBaselineRefs(baseline.components.schemas[name]);
+      }
+    } else collectBaselineRefs(item);
+  }
+}
+collectBaselineRefs(baseline.paths);
+for (const name of baselineRefs) {
+  const schema = baseline.components.schemas[name];
+  if (
+    !schema ||
+    JSON.stringify(schema) !== JSON.stringify(contract.components.schemas[name])
+  )
+    throw Error(`Baseline referenced schema mismatch: ${name}`);
+}
+for (const [path, methods] of Object.entries(baseline.paths)) {
+  if (!path.startsWith("/v1/market-data/"))
+    throw Error("Unexpected baseline route");
+  if (Object.hasOwn(marketSearchContract.paths, path)) continue; // Dedicated search contract is canonical.
+  for (const [method, operation] of Object.entries(methods)) {
+    if (!["get", "post"].includes(method))
+      throw Error("Unexpected baseline method");
+    const doc = referenceDoc(
+      `reference-${kebab(operation.operationId).replaceAll("_", "-")}`,
+      operation.summary ?? operation.operationId,
+      `#/paths/${pointer(path)}/${method}`,
+      { method: method.toUpperCase(), path, ...operation },
+    );
+    doc.sourcePath = "sdk/test/baseline-market.openapi.json";
+    doc.sourceSha256 = hash(baselineBytes);
+    doc.sourceRoute = "/docs/monthly-market-data";
+    docs.push(doc);
+  }
+}
+for (const [name, contractValue, bytes] of [
+  ["baseline", baseline, baselineBytes],
+  [
+    "market-search",
+    marketSearchContract,
+    texts["contracts/market-search.openapi.json"],
+  ],
+]) {
+  const doc = referenceDoc(
+    `reference-${name}-authentication`,
+    `${name} public authentication schemes`,
+    "#/components/securitySchemes",
+    contractValue.components.securitySchemes,
+  );
+  doc.sourcePath =
+    name === "baseline"
+      ? "sdk/test/baseline-market.openapi.json"
+      : "sdk/test/market-search.openapi.json";
+  doc.sourceSha256 = hash(bytes);
+  doc.sourceRoute = "/docs/authentication";
+  docs.push(doc);
+}
 const forbidden = [
   /\/app-api\//,
   /first-party-md-/,
@@ -245,7 +318,7 @@ for (const doc of docs) {
     throw Error(`Private marker in ${doc.id}`);
 }
 const bundle = {
-  bundleVersion: "0.3.2-docs.1",
+  bundleVersion: "0.3.3-docs.1",
   contractVersion,
   contractSourcePath: "marketing/src/content/product.ts",
   contractSourceSha256: hash(product),

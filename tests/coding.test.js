@@ -59,7 +59,7 @@ test("new tools reject dangerous keys, paths, raw overflow and unknown operation
     }
   for (const name of ["bharosa_api_search", "bharosa_examples_search"]) {
     assert.equal(
-      execute(name, { query: " ".repeat(121) + "portfolio" }).isError,
+      execute(name, { query: " ".repeat(123) + "portfolio" }).isError,
       true,
     );
     assert.deepEqual(
@@ -82,13 +82,13 @@ test("new tools reject dangerous keys, paths, raw overflow and unknown operation
 });
 
 test("coding index provenance and validation coverage excludes private material", () => {
-  assert.equal(codingBundle.operations.length, 32);
-  assert.equal(codingBundle.examples.length, 126);
+  assert.equal(codingBundle.operations.length, 40);
+  assert.equal(codingBundle.examples.length, 131);
   for (const item of [...codingBundle.operations, ...codingBundle.examples]) {
     assert.equal(item.sourceSha256, codingBundle.sources[item.sourcePath]);
     assert.match(
       item.sourcePath,
-      /^(marketing\/src\/content\/[a-z-]+\.(ts|json)|sdk\/test\/((analytics\.|market-search\.)?openapi.json))$/,
+      /^(marketing\/src\/content\/[a-z-]+\.(ts|json)|sdk\/test\/((analytics\.|market-search\.|baseline-market\.)?openapi.json))$/,
     );
     assert.doesNotMatch(
       JSON.stringify(item),
@@ -110,8 +110,8 @@ test("coding index provenance and validation coverage excludes private material"
 
 test("analytics examples are discoverable by their exact operation IDs", () => {
   for (const [slug, id] of [
-    ["scheme-performance", "analytics_scheme"],
-    ["category-statistics", "analytics_category"],
+    ["scheme-performance", "baseline_analytics_scheme"],
+    ["category-statistics", "baseline_analytics_category"],
   ]) {
     for (const section of ["request", "http"]) {
       const example = codingBundle.examples.find(
@@ -169,7 +169,7 @@ test("observed filtered blank-query attempts receive actionable recovery without
     assert.match(error.message, /for example/);
     assert.ok(result(name, corrected).matches.length > 0);
     assert.equal(
-      execute(name, { ...corrected, query: " ".repeat(121) + corrected.query })
+      execute(name, { ...corrected, query: " ".repeat(123) + corrected.query })
         .isError,
       true,
     );
@@ -210,4 +210,25 @@ test("public market search and consent examples preserve exact scope and validat
   assert.equal(consent.length, 3);
   for (const e of consent)
     assert.ok(["javascript-syntax-only", "json-parse"].includes(e.validation));
+});
+
+test("baseline guide examples link to their exact public baseline operations", () => {
+  for (const [id, operationId] of [
+    ["guide-monthly-market-data-market-client", "baseline_monthly_nav"],
+    ["guide-scheme-performance-request", "baseline_analytics_scheme"],
+    ["guide-category-statistics-request", "baseline_analytics_category"],
+    ["guide-category-statistics-http", "baseline_analytics_category"],
+  ]) {
+    const example = codingBundle.examples.find((item) => item.id === id);
+    assert.ok(example, id);
+    assert.ok(example.operationIds.includes(operationId), id);
+    assert.ok(
+      example.operationIds.every((link) =>
+        codingBundle.operations
+          .find((op) => op.id === link)
+          ?.path.startsWith("/v1/market-data/"),
+      ),
+      id,
+    );
+  }
 });
