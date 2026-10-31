@@ -148,7 +148,7 @@ test(
   () => {
     for (const [args, status, pattern] of [
       [["--help"], 0, /Usage:/],
-      [["--version"], 0, /0\.3\.3/],
+      [["--version"], 0, /0\.3\.4/],
       [["--bad"], 2, /Unknown option/],
     ]) {
       const run = spawnSync(process.execPath, [entry, ...args], {

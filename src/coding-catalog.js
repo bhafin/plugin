@@ -3,7 +3,7 @@ import { createHash } from "node:crypto";
 import { z } from "zod";
 
 export const codingSha256 =
-  "dca029bfb0d90c1e8fda52509928ef79f1a8f3274e08e1c7ebb4a54d5b762a38";
+  "5f9f875644b23a7504da54e33763f091ed43d51b6124a9954c09308c6d9bb11b";
 const bytes = readFileSync(new URL("../assets/coding.json", import.meta.url));
 if (createHash("sha256").update(bytes).digest("hex") !== codingSha256)
   throw Error(
@@ -49,7 +49,7 @@ const example = z
   .strict();
 export const codingBundle = z
   .object({
-    version: z.literal("0.3.3-coding.1"),
+    version: z.literal("0.3.4-coding.1"),
     docsSnapshotSha256: z.string(),
     approvedManifestSha256: z.string(),
     sources: z.record(z.string(), z.string()),
@@ -116,7 +116,7 @@ export function createCodingTools(metadataShape, docsDigest, checkpoint) {
   };
   const common = {
     ...metadataShape,
-    codingVersion: z.literal("0.3.3-coding.1"),
+    codingVersion: z.literal("0.3.4-coding.1"),
     codingSha256: z.string(),
     sdkVersion: z.literal("0.7.0"),
   };

@@ -318,7 +318,7 @@ for (const doc of docs) {
     throw Error(`Private marker in ${doc.id}`);
 }
 const bundle = {
-  bundleVersion: "0.3.3-docs.1",
+  bundleVersion: "0.3.4-docs.1",
   contractVersion,
   contractSourcePath: "marketing/src/content/product.ts",
   contractSourceSha256: hash(product),

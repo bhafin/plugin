@@ -1,6 +1,6 @@
 {
   "name": "bharosa-docs-mcp",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "type": "module",
   "description": "Read-only MCP search and reading over versioned Bharosa public developer documentation",
   "license": "MIT",

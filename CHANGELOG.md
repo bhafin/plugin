@@ -1,3 +1,7 @@
+# 0.3.4 — 2026-10-31
+
+Refresh canonical public documentation to v34, correcting deployment availability descriptions. SDK remains 0.7.0; seven tool names, inputs and read-only behavior are unchanged. No account capabilities added.
+
 # Changelog
 
 ## 0.3.3

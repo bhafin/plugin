@@ -7,11 +7,11 @@ const json = (doc) =>
 test("expanded corpus is pinned to approved public checkpoint and excludes private sources", () => {
   assert.equal(
     bundle.approvedManifestSha256,
-    "899daecf4a6c504a6a83221bae39a5f482be0baf7b601b65b5e7e2ef9bd3085f",
+    "cf17b3e9aa9e133d902ce5c180eae97af1b32c70000c829b5a04d313623a3f79",
   );
   assert.equal(
     bundle.publicContractSha256,
-    "f69f2ee2268f817915617a04e750763126cbba6570da7aae851da1a8c2ae2f9f",
+    "d13c694425736145030947fa35163c52b8e5f496ca720f71dd173291ed8828c4",
   );
   assert.equal(bundle.docs.length, 123);
   assert.equal(bundle.docs.filter((d) => d.kind === "guide").length, 39);
