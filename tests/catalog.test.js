@@ -7,8 +7,8 @@ test("catalog carries actual contract provenance and pagination", () => {
   assert.equal(first.contractVersion, "API v1");
   assert.equal(first.documents.length, 1);
   assert.equal(first.nextOffset, 1);
-  assert.equal(first.total, 102);
-  assert.equal(result("bharosa_docs_list", { offset: 102 }).nextOffset, null);
+  assert.equal(first.total, 111);
+  assert.equal(result("bharosa_docs_list", { offset: 111 }).nextOffset, null);
   assert.match(first.documents[0].sourceSha256, /^[a-f0-9]{64}$/);
 });
 test("literal AND search is bounded and has predictable no-match behavior", () => {
@@ -52,7 +52,7 @@ test("invalid inputs never read arbitrary paths or return unbounded data", () =>
     ["bharosa_docs_read", { id: "missing" }],
     ["bharosa_docs_read", { id: "authentication", maxChars: 8001 }],
     ["bharosa_docs_read", { id: "authentication", offset: 30000 }],
-    ["bharosa_docs_list", { offset: 103 }],
+    ["bharosa_docs_list", { offset: 112 }],
     ["bharosa_docs_list", { limit: 21 }],
     ["bharosa_docs_list", { limit: 1.5 }],
     ["bharosa_docs_search", { query: " ".repeat(2) }],

@@ -83,7 +83,7 @@ test("new tools reject dangerous keys, paths, raw overflow and unknown operation
 
 test("coding index provenance and validation coverage excludes private material", () => {
   assert.equal(codingBundle.operations.length, 31);
-  assert.equal(codingBundle.examples.length, 121);
+  assert.equal(codingBundle.examples.length, 122);
   for (const item of [...codingBundle.operations, ...codingBundle.examples]) {
     assert.equal(item.sourceSha256, codingBundle.sources[item.sourcePath]);
     assert.match(

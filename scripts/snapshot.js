@@ -18,6 +18,7 @@ const publicPaths = [
   "contracts/openapi.json",
   "src/content/analytics-guides.ts",
   "contracts/analytics.openapi.json",
+  "reviewed-guides.json",
 ];
 const texts = Object.fromEntries(
   publicPaths.map((path) => {
@@ -107,69 +108,31 @@ function proseReader(text, start) {
     },
   };
 }
-const guideStarts = [...source.matchAll(/^    slug: "([a-z-]+)",/gm)];
-const docs = guideStarts.map((match, index) => {
-  const excerpt = source.slice(
-    match.index,
-    guideStarts[index + 1]?.index ?? source.length,
-  );
-  const title = JSON.parse(excerpt.match(/title: ("[^\n]+"),/)[1]);
-  const sections = [...excerpt.matchAll(/^\s*section\(/gm)].map((section) => {
-    const reader = proseReader(excerpt, section.index + section[0].length);
-    reader.string();
-    reader.take(",");
-    const heading = reader.string();
-    reader.take(",");
-    const paragraphs = reader.array();
-    if (!paragraphs.length) throw Error("Empty public section");
-    return `## ${heading}\n\n${paragraphs.join("\n\n")}`;
-  });
-  if (!sections.length) throw Error(`No public sections: ${match[1]}`);
+// Evaluated public guides are separately hash-pinned by the signed website owner.
+// Preserve computed prose exactly rather than silently dropping expressions.
+const reviewedGuides = JSON.parse(texts["reviewed-guides.json"]);
+const docs = reviewedGuides.map((guide) => {
+  const analytics = texts["src/content/analytics-guides.ts"];
+  const sourcePath = analytics.includes(`slug: "${guide.slug}"`)
+    ? "src/content/analytics-guides.ts"
+    : "src/content/guides.ts";
+  const sourceText = texts[sourcePath];
+  if (!/^[a-z-]+$/.test(guide.slug) || !guide.sections.length)
+    throw Error("Invalid reviewed guide");
   return {
-    id: match[1],
-    title,
+    id: guide.slug,
+    title: guide.title,
     kind: "guide",
-    sourcePath: "marketing/src/content/guides.ts",
-    sourceLine: source.slice(0, match.index).split("\n").length,
-    sourcePointer: null,
-    sourceRoute: `/docs/${match[1]}`,
-    sourceSha256: hash(source),
-    content: `# ${title}\n\n${sections.join("\n\n")}`,
+    sourcePath: `marketing/${sourcePath}`,
+    sourceLine: sourceText
+      .slice(0, Math.max(0, sourceText.indexOf(`slug: "${guide.slug}"`)))
+      .split("\n").length,
+    sourcePointer: guide.slug,
+    sourceRoute: `/docs/${guide.slug}`,
+    sourceSha256: hash(sourceText),
+    content: `# ${guide.title}\n\n${guide.sections.map((section) => `## ${section.title}\n\n${section.paragraphs.join("\n\n")}`).join("\n\n")}`,
   };
 });
-// This reviewed module contains reusable prose arrays, so literal-section parsing
-// cannot represent it faithfully. Stage only its pinned bytes, not the checkout.
-const analyticsStage = mkdtempSync(
-  resolve(tmpdir(), "bharosa-analytics-prose-"),
-);
-try {
-  const text = texts["src/content/analytics-guides.ts"];
-  const modulePath = resolve(analyticsStage, "analytics-guides.ts");
-  writeFileSync(modulePath, text);
-  const { analyticsGuides } = await import(pathToFileURL(modulePath));
-  for (const guide of analyticsGuides) {
-    docs.push({
-      id: guide.slug,
-      title: guide.title,
-      kind: "guide",
-      sourcePath: "marketing/src/content/analytics-guides.ts",
-      sourceLine: text
-        .slice(0, text.indexOf(`slug: "${guide.slug}"`))
-        .split("\n").length,
-      sourcePointer: guide.slug,
-      sourceRoute: `/docs/${guide.slug}`,
-      sourceSha256: hash(text),
-      content: `# ${guide.title}\n\n${guide.sections
-        .map(
-          (section) =>
-            `## ${section.title}\n\n${section.paragraphs.join("\n\n")}`,
-        )
-        .join("\n\n")}`,
-    });
-  }
-} finally {
-  rmSync(analyticsStage, { recursive: true, force: true });
-}
 const referenceDoc = (id, title, pointer, value) => ({
   id,
   title,
@@ -247,7 +210,7 @@ for (const doc of docs) {
     throw Error(`Private marker in ${doc.id}`);
 }
 const bundle = {
-  bundleVersion: "0.3.0-docs.1",
+  bundleVersion: "0.3.1-docs.1",
   contractVersion,
   contractSourcePath: "marketing/src/content/product.ts",
   contractSourceSha256: hash(product),

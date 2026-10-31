@@ -62,7 +62,7 @@ for (const endpoint of ["/"])
         return r.structuredContent;
       };
       const docs = await call("bharosa_docs_list", {});
-      assert.equal(docs.total, 102);
+      assert.equal(docs.total, 111);
       await call("bharosa_docs_search", { query: "authentication" });
       const doc = await call("bharosa_docs_read", { id: "authentication" });
       assert.ok(JSON.stringify(doc).includes("source"));

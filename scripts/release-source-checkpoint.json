@@ -1,0 +1,35 @@
+{
+  "status": "signed website v28 checkpoint; verify public receipt before rollout",
+  "docsCommit": "da8c1eaa330df3f1d73dd3ac60736c8270697982",
+  "sdkVersion": "0.5.1",
+  "sdkArtifactSha256": "f593dd608804fc6f1a7a5b19dce159c1c08f9dc6de8c0f247cd4936c644f98a6",
+  "sources": {
+    "src/content/reference-design.ts": "a7431b6f0c0ef718f8464a8dfc27d2a29747eb9724436563edff3f4b6e13fa25",
+    "src/content/monthly-schema.json": "f251e0b4ca89ad144c08fce6982ba1b405cba55e7e40ef699359ff7f924aaffe",
+    "src/content/history.ts": "f5a5ad7a227e8e80a6d685817a1a9c0acaae5be3207b9f3dc261d52bc43ff799",
+    "src/content/reader-copy.ts": "267bbf4b5e9d4adea7a08f0f5bd11be54dd67ab20b4da3573d20581a1a6d1e15",
+    "src/content/availability.ts": "47d7ff128e70e3b8b6a7dbe28d5b6f1697745cff51c233ab335a53ebf0d0f446",
+    "src/content/monthly.ts": "a3c98d7e951a361f04d333ba6841da6a07dd39c533cc72fa8a26f9b34a573145",
+    "src/content/navigation.ts": "86f0958d45098be47b83a7df104794942b363aa20f27f5ec928e1d118557ac94",
+    "src/content/monthly-fields.ts": "02ed947503a4e39ec7089db8bafc0f4e0cadf724c8c767cf2d119d6522978681",
+    "src/content/product.ts": "e3d7b237e955ddd81e5ee45464d32045e215fd6780ece77a4f104702ee34ae2f",
+    "src/content/doc-schema.ts": "6d0991e38384b4ee93e1da27dcc70b87891db65771db75d1ba90f9448d515ee8",
+    "src/content/examples.ts": "a5bb9f2b0fd42004971003683fe4c4f2810003278bf98d871e3814ed3f1c2182",
+    "src/content/saved-portfolio-example.ts": "c3306111e030a0c62a91c10f53e0828476cf2c9e903e8ccd82aaec036f28f3b4",
+    "src/content/resource-design.ts": "db45879119e3d4de3e2a584640ee1339871d86202e0598c0221e2ca077c2ec04",
+    "src/content/doc-labels.ts": "2c6d64fd7bd710328b55a7112ec741768295dd04c1caf779d7d8be5fef57d3e2",
+    "src/content/analytics-guides.ts": "faefa0c7c37fdc11bef46e60811483476906a402d2040bda18f63fc80533d825",
+    "src/content/response-schemas.json": "8982668717c71522d061204fa489076123b7e8f3aa6ddd72ff485374d7c835a8",
+    "src/content/schema-fields.ts": "63b282d13237e2e44a4acda56ff8d36685edc81f7c2e881979269ce3bb453651",
+    "src/content/reference-directory.ts": "5f1e9df0ac429d8f776df9938612a6bf22ae2efca036b435e36970f4f5ee0b2c",
+    "src/content/home.ts": "085499f0bde7c5d639100f59c46a5328619de2aa97c0154cbd96e3c2e322a6bf",
+    "src/content/response-fields.ts": "089369e0fac37079900dd5e35b233695a6470187ad7b33de83b708341da4fb1b",
+    "src/content/guides.ts": "e3e4dbfc6472139493aae0db9e636f344b3cc91e2302511d8f4f1eac2b3895ce"
+  },
+  "contracts": {
+    "contracts/monthly-market-data.openapi.json": "ef53094920c324ab9d9fd31d8846b6f37da13b757301c6742461ee33b8fe49c4",
+    "contracts/openapi.json": "3b791799bf705fd36a257e27a2520257f135e772d617b03bb22063ccea4d04e2",
+    "contracts/analytics.openapi.json": "1d2d37edf6ea65cdd3bac707119c6815ee73c89770a791d7dfdfadc9630b6f2b"
+  },
+  "evaluatedGuidesSha256": "d01a84a3bb39e0c6fd11c37e54454cbcdca2c28bbd9160638b0fe27e6aa3a826"
+}

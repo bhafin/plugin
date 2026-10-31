@@ -19,7 +19,7 @@ const installedSdkVersion = JSON.parse(
     new URL("../node_modules/bharosa/package.json", import.meta.url),
   ),
 ).version;
-test(`every exported example passes its advertised validation against published SDK ${installedSdkVersion}`, () => {
+test(`every exported example passes its advertised validation against exact installed SDK ${installedSdkVersion}`, () => {
   assert.equal(bundle.sdkVersion, installedSdkVersion);
   for (const example of bundle.examples)
     assert.equal(example.sdkVersion, installedSdkVersion, example.id);

@@ -87,7 +87,7 @@ export function createHttpService({
           status: "ok",
           scope: "public-documentation",
           transport: "stateless-streamable-http",
-          release: "http-0.3.0-sdk040",
+          release: "http-0.3.1-sdk051",
         }),
       );
     }

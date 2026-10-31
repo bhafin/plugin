@@ -23,7 +23,7 @@ const document = z
   .strict();
 const bundleSchema = z
   .object({
-    bundleVersion: z.literal("0.3.0-docs.1"),
+    bundleVersion: z.literal("0.3.1-docs.1"),
     contractVersion: z.literal("API v1"),
     contractSourcePath: z.literal("marketing/src/content/product.ts"),
     contractSourceSha256: z.string().regex(/^[a-f0-9]{64}$/),
@@ -38,7 +38,7 @@ const bundleSchema = z
   })
   .strict();
 export const snapshotSha256 =
-  "b5a77d197f9ddb6f2eb151e7724caf1b4e41de092a57ab744f3e27c404ccddc6";
+  "10127e16aed8b0411e49215391a65cbda6f20d43b6ec1ef593bf7ab2ed743556";
 const bundledText = readFileSync(
   new URL("../assets/docs.json", import.meta.url),
   "utf8",

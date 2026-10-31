@@ -7,14 +7,14 @@ const json = (doc) =>
 test("expanded corpus is pinned to approved public checkpoint and excludes private sources", () => {
   assert.equal(
     bundle.approvedManifestSha256,
-    "d8a99bf46e2c709f72ea65b55c23aae1fd57f9208306553fa0ab9174af949721",
+    "8e6230857c69c8550d647426eb293825a8845fed7f23a583f472c2dc3e24aea5",
   );
   assert.equal(
     bundle.publicContractSha256,
     "3b791799bf705fd36a257e27a2520257f135e772d617b03bb22063ccea4d04e2",
   );
-  assert.equal(bundle.docs.length, 102);
-  assert.equal(bundle.docs.filter((d) => d.kind === "guide").length, 29);
+  assert.equal(bundle.docs.length, 111);
+  assert.equal(bundle.docs.filter((d) => d.kind === "guide").length, 38);
   assert.match(bundle.notice, /not a live website fetch/);
   for (const doc of bundle.docs) {
     assert.ok(
@@ -81,8 +81,8 @@ test("public reference pointers cover every resource operation and resolve schem
     assert.match(json(doc).path, /^\/v1\/accounts\//);
 });
 
-test("v24 public guidance matches published SDK and current scope", () => {
-  assert.match(byId("integrations").content, /bharosa@0\.4\.0/);
+test("reviewed guidance preserves scope and SDK provenance", () => {
+  assert.match(byId("integrations").content, /bharosa@0\.5\.1/);
   assert.match(
     byId("documentation-assistant").content,
     /https:\/\/mcp.bharosa.finance\//,
@@ -93,7 +93,7 @@ test("v24 public guidance matches published SDK and current scope", () => {
   );
   assert.match(byId("documentation-assistant").content, /integration.*skill/);
   assert.match(byId("oauth").content, /setup_required/);
-  assert.match(byId("oauth").content, /does not mean the app is ready/);
+  assert.match(byId("oauth").content, /not readiness to connect users/);
   assert.match(byId("pagination").content, /InvalidResponseError/);
   assert.match(byId("pagination").content, /stop on overlap or cycles/);
   assert.match(byId("errors").content, /original body and idempotency key/);
@@ -120,4 +120,12 @@ test("autocomplete guidance preserves unreleased limits and draft-safe retry", (
   assert.match(text, /Keep meaningful words such as Growth in the fund name/);
   assert.match(text, /not evidence that a portfolio save occurred/);
   assert.match(text, /do not automatically select the first match/);
+});
+
+test("published unified guides preserve current availability", () => {
+  assert.doesNotMatch(
+    byId("authentication").content,
+    /unpublished 0\.5\.1-unified/,
+  );
+  assert.match(byId("integrations").content, /0\.5\.1/);
 });
