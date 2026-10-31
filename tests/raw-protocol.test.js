@@ -91,7 +91,7 @@ test(
         const listing = await success("bharosa_docs_list", {});
         assert.equal(listing.contractVersion, "API v1");
         assert.equal(listing.availability, "bundled-snapshot");
-        assert.equal(listing.total, 111);
+        assert.equal(listing.total, 113);
         const allDocuments = [...listing.documents];
         let next = listing.nextOffset;
         while (next !== null) {
@@ -102,7 +102,7 @@ test(
           allDocuments.push(...page.documents);
           next = page.nextOffset;
         }
-        assert.equal(new Set(allDocuments.map((d) => d.id)).size, 111);
+        assert.equal(new Set(allDocuments.map((d) => d.id)).size, 113);
         assert.ok(allDocuments.some((d) => d.id === "schema-unit-input"));
         const first = await success("bharosa_docs_search", {
           query: "the",
@@ -161,7 +161,7 @@ test(
           ["bharosa_docs_list", { limit: 0 }],
           ["bharosa_docs_list", { limit: 21 }],
           ["bharosa_docs_list", { limit: 1.1 }],
-          ["bharosa_docs_list", { offset: 112 }],
+          ["bharosa_docs_list", { offset: 114 }],
           ["bharosa_docs_list", { offset: -1 }],
           ["bharosa_docs_read", { id: "authentication", maxChars: 8001 }],
           ["bharosa_docs_read", { id: "authentication", maxChars: 0 }],
@@ -234,7 +234,7 @@ test(
           -32601,
         );
         assert.equal(existsSync("/tmp/bharosa-mcp-review-executed"), false);
-        assert.equal((await success("bharosa_docs_list", {})).total, 111);
+        assert.equal((await success("bharosa_docs_list", {})).total, 113);
         assert.equal(stderr, "");
         console.log(
           JSON.stringify({

@@ -3,7 +3,7 @@ import { createHash } from "node:crypto";
 import { z } from "zod";
 
 export const codingSha256 =
-  "d4280b4365cdd8ba964baef5226cce17242c5459e0e85533445e23c520ace127";
+  "4498f89b109ef8702daa3e2807f5e686b187a05e6a6c5775e7029ab50d2d525c";
 const bytes = readFileSync(new URL("../assets/coding.json", import.meta.url));
 if (createHash("sha256").update(bytes).digest("hex") !== codingSha256)
   throw Error(
@@ -31,16 +31,17 @@ const operation = z
 const example = z
   .object({
     ...origin,
-    language: z.enum(["typescript", "bash", "json"]),
+    language: z.enum(["typescript", "javascript", "bash", "json"]),
     code: z.string().max(30000),
     setup: z.string().max(8000),
     codeSha256: z.string(),
     operationIds: z.array(z.string()).max(30),
-    sdkVersion: z.literal("0.5.1"),
+    sdkVersion: z.literal("0.6.0"),
     validation: z.enum([
       "strict-typescript-and-synthetic-transport",
       "strict-typescript",
       "shell-syntax-only",
+      "javascript-syntax-only",
       "json-parse",
     ]),
     notice: z.string().max(500),
@@ -48,11 +49,11 @@ const example = z
   .strict();
 export const codingBundle = z
   .object({
-    version: z.literal("0.3.1-coding.1"),
+    version: z.literal("0.3.2-coding.1"),
     docsSnapshotSha256: z.string(),
     approvedManifestSha256: z.string(),
     sources: z.record(z.string(), z.string()),
-    sdkVersion: z.literal("0.5.1"),
+    sdkVersion: z.literal("0.6.0"),
     operations: z.array(operation).max(100),
     examples: z.array(example).max(300),
   })
@@ -115,14 +116,16 @@ export function createCodingTools(metadataShape, docsDigest, checkpoint) {
   };
   const common = {
     ...metadataShape,
-    codingVersion: z.literal("0.3.1-coding.1"),
+    codingVersion: z.literal("0.3.2-coding.1"),
     codingSha256: z.string(),
-    sdkVersion: z.literal("0.5.1"),
+    sdkVersion: z.literal("0.6.0"),
   };
   const inputs = {
     bharosa_api_search: z
       .object({
-        query,
+        query: query.describe(
+          "Required nonblank literal search text, even when using group or method filters. For monthly API references, try query nav with group monthly. Maximum 120 raw characters.",
+        ),
         limit,
         group: z.enum(["resource", "monthly"]).optional(),
         method: z
@@ -138,9 +141,13 @@ export function createCodingTools(metadataShape, docsDigest, checkpoint) {
       .strict(),
     bharosa_examples_search: z
       .object({
-        query,
+        query: query.describe(
+          "Required nonblank literal search text, even when using language or operationId filters. Use the operation ID as query to find its examples. Maximum 120 raw characters.",
+        ),
         limit,
-        language: z.enum(["typescript", "bash", "json"]).optional(),
+        language: z
+          .enum(["typescript", "javascript", "bash", "json"])
+          .optional(),
         operationId: z
           .string()
           .regex(/^[a-zA-Z0-9_-]{1,100}$/)

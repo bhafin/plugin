@@ -114,7 +114,9 @@ try {
             : "strict-typescript"
           : language === "bash"
             ? "shell-syntax-only"
-            : "json-parse",
+            : language === "javascript"
+              ? "javascript-syntax-only"
+              : "json-parse",
       notice:
         "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization.",
     });
@@ -194,6 +196,35 @@ try {
       });
     }
   }
+  const marketSearchBytes = readFileSync(
+    join(marketing, "contracts/market-search.openapi.json"),
+  );
+  assert.equal(
+    hash(marketSearchBytes),
+    policy.contracts["contracts/market-search.openapi.json"],
+  );
+  sources["sdk/test/market-search.openapi.json"] = hash(marketSearchBytes);
+  for (const [path, methods] of Object.entries(
+    JSON.parse(marketSearchBytes).paths,
+  )) {
+    assert.equal(path, "/v1/market-data/schemes/search");
+    for (const [method, op] of Object.entries(methods)) {
+      assert.equal(method, "get");
+      operations.push({
+        ...summary(
+          op.operationId,
+          op.summary,
+          "sdk/test/market-search.openapi.json",
+          `#/paths/${path.replaceAll("~", "~0").replaceAll("/", "~1")}/${method}`,
+          "/docs/monthly-market-data",
+        ),
+        method: "GET",
+        path,
+        group: "monthly",
+        definition: op,
+      });
+    }
+  }
   const allowedGuides = new Set(
     docs.docs.filter((d) => d.kind === "guide").map((d) => d.id),
   );
@@ -205,6 +236,7 @@ try {
       let language = /^(?:#|(?:curl|npm|node|codex|claude)\b)/.test(start)
         ? "bash"
         : "typescript";
+      if (guide.slug === "connect-an-account") language = "javascript";
       if (start.startsWith("{")) {
         JSON.parse(code);
         language = "json";
@@ -217,14 +249,23 @@ try {
       ]
         .map((slug) => slugToOperation.get(slug))
         .filter(Boolean);
+      if (code.includes("bharosa.markets.schemes.search")) {
+        const searchOperation =
+          JSON.parse(marketSearchBytes).paths["/v1/market-data/schemes/search"]
+            .get.operationId;
+        if (!operationIds.includes(searchOperation))
+          operationIds.push(searchOperation);
+      }
       example(
         `guide-${guide.slug}-${section.id}`,
         `${guide.title}: ${section.title}`,
         language,
         code,
-        analyticsSlugs.has(guide.slug)
-          ? "marketing/src/content/analytics-guides.ts"
-          : "marketing/src/content/guides.ts",
+        guide.slug === "connect-an-account"
+          ? "marketing/src/content/consent-guide.ts"
+          : analyticsSlugs.has(guide.slug)
+            ? "marketing/src/content/analytics-guides.ts"
+            : "marketing/src/content/guides.ts",
         `${guide.slug}#${section.id}`,
         `/docs/${guide.slug}#${section.id}`,
         operationIds,
@@ -275,7 +316,7 @@ for (const value of [...examples, ...operations]) {
 assert.equal(new Set(examples.map((e) => e.id)).size, examples.length);
 assert.equal(new Set(operations.map((e) => e.id)).size, operations.length);
 const value = {
-  version: "0.3.1-coding.1",
+  version: "0.3.2-coding.1",
   docsSnapshotSha256: hash(readFileSync(join(root, "assets/docs.json"))),
   approvedManifestSha256: docs.approvedManifestSha256,
   sources,

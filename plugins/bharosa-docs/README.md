@@ -4,7 +4,7 @@ Bharosa helps coding assistants plan and build integrations using an integration
 
 ## Release and scope
 
-Version `0.3.1` bundles the public website v28 documentation and public `bharosa@0.5.1` contracts: 111 documents, 31 API operations and 122 examples. The source checkpoint is signed commit `da8c1eaa330df3f1d73dd3ac60736c8270697982`. This GitHub full-plugin release is separate from npm server publication and public directory acceptance.
+Version `0.3.2` bundles the public website v29 documentation and public `bharosa@0.6.0` contracts: 113 documents, 32 API operations and 126 examples. The source checkpoint is signed commit `1e1b73a6b4cee0fb0b8e8d9c5a4bb04f5c68fcf4`. This GitHub full-plugin release is separate from npm server publication and public directory acceptance.
 
 The hosted service is `https://mcp.bharosa.finance/`; `/up` is its health check and `/mcp` is retired. The service serves a pinned documentation snapshot. Check tool response provenance when comparing it with the website.
 
@@ -47,7 +47,7 @@ All responses carry snapshot/source provenance. Search is literal and determinis
 Use Node.js 22.12 or later on a supported LTS line. Install the reviewed tarball in an isolated project, then run its CLI directly:
 
 ```sh
-npm install --ignore-scripts /absolute/path/bharosa-docs-mcp-0.3.1.tgz
+npm install --ignore-scripts /absolute/path/bharosa-docs-mcp-0.3.2.tgz
 node node_modules/bharosa-docs-mcp/dist/cli.js --check
 node node_modules/bharosa-docs-mcp/dist/cli.js --stdio
 ```

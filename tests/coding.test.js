@@ -82,13 +82,13 @@ test("new tools reject dangerous keys, paths, raw overflow and unknown operation
 });
 
 test("coding index provenance and validation coverage excludes private material", () => {
-  assert.equal(codingBundle.operations.length, 31);
-  assert.equal(codingBundle.examples.length, 122);
+  assert.equal(codingBundle.operations.length, 32);
+  assert.equal(codingBundle.examples.length, 126);
   for (const item of [...codingBundle.operations, ...codingBundle.examples]) {
     assert.equal(item.sourceSha256, codingBundle.sources[item.sourcePath]);
     assert.match(
       item.sourcePath,
-      /^(marketing\/src\/content\/[a-z-]+\.(ts|json)|sdk\/test\/(analytics\.)?openapi.json)$/,
+      /^(marketing\/src\/content\/[a-z-]+\.(ts|json)|sdk\/test\/((analytics\.|market-search\.)?openapi.json))$/,
     );
     assert.doesNotMatch(
       JSON.stringify(item),
@@ -124,4 +124,90 @@ test("analytics examples are discoverable by their exact operation IDs", () => {
       );
     }
   }
+});
+
+test("observed filtered blank-query attempts receive actionable recovery without relaxing bounds", () => {
+  for (const [name, args, corrected] of [
+    [
+      "bharosa_examples_search",
+      { query: "", operationId: "retrieve_portfolio", language: "typescript" },
+      {
+        query: "retrieve_portfolio",
+        operationId: "retrieve_portfolio",
+        language: "typescript",
+      },
+    ],
+    [
+      "bharosa_api_search",
+      { query: "", group: "monthly", limit: 20 },
+      { query: "nav", group: "monthly", limit: 20 },
+    ],
+    [
+      "bharosa_examples_search",
+      { query: "", operationId: "list_portfolios", language: "typescript" },
+      {
+        query: "list_portfolios",
+        operationId: "list_portfolios",
+        language: "typescript",
+      },
+    ],
+    [
+      "bharosa_examples_search",
+      { query: "", operationId: "search_funds", language: "typescript" },
+      {
+        query: "search_funds",
+        operationId: "search_funds",
+        language: "typescript",
+      },
+    ],
+  ]) {
+    const failed = execute(name, args);
+    assert.equal(failed.isError, true);
+    const error = JSON.parse(failed.content[0].text).error;
+    assert.equal(error.code, "invalid_arguments");
+    assert.match(error.message, /even with/);
+    assert.match(error.message, /for example/);
+    assert.ok(result(name, corrected).matches.length > 0);
+    assert.equal(
+      execute(name, { ...corrected, query: " ".repeat(121) + corrected.query })
+        .isError,
+      true,
+    );
+    assert.match(inputs[name].shape.query.description, /even when/);
+  }
+});
+
+test("each search schema describes only its applicable filters", () => {
+  const api = inputs.bharosa_api_search.shape.query.description;
+  const examples = inputs.bharosa_examples_search.shape.query.description;
+  assert.match(api, /group or method/);
+  assert.doesNotMatch(api, /language|operationId/);
+  assert.match(examples, /language or operationId/);
+  assert.doesNotMatch(examples, /group|method/);
+});
+
+test("public market search and consent examples preserve exact scope and validation", () => {
+  const search = result("bharosa_api_details", {
+    operationId: "searchMarketSchemes",
+  });
+  assert.equal(search.operation.path, "/v1/market-data/schemes/search");
+  assert.equal(search.operation.method, "GET");
+  assert.equal(
+    search.operation.sourcePath,
+    "sdk/test/market-search.openapi.json",
+  );
+  assert.match(search.operation.definition.description, /Any active API key/);
+  assert.ok(
+    search.exampleIds.includes("guide-fund-autocomplete-baseline-search"),
+  );
+  const e = result("bharosa_examples_read", {
+    id: "guide-fund-autocomplete-baseline-search",
+  });
+  assert.match(e.code, /bharosa.markets.schemes.search/);
+  const consent = codingBundle.examples.filter(
+    (x) => x.sourcePath === "marketing/src/content/consent-guide.ts",
+  );
+  assert.equal(consent.length, 3);
+  for (const e of consent)
+    assert.ok(["javascript-syntax-only", "json-parse"].includes(e.validation));
 });

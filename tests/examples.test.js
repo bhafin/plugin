@@ -40,6 +40,15 @@ test(`every exported example passes its advertised validation against exact inst
         );
         files.push(path);
       }
+      if (e.language === "javascript") {
+        const checked = spawnSync(
+          process.execPath,
+          ["--input-type=module", "--check"],
+          { input: e.code, encoding: "utf8" },
+        );
+        assert.equal(checked.status, 0, e.id + ": " + checked.stderr);
+        assert.equal(e.validation, "javascript-syntax-only");
+      }
       if (e.language === "bash") {
         const r = spawnSync("/bin/bash", ["-n"], {
           input: e.code,

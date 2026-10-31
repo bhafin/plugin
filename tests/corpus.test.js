@@ -7,14 +7,14 @@ const json = (doc) =>
 test("expanded corpus is pinned to approved public checkpoint and excludes private sources", () => {
   assert.equal(
     bundle.approvedManifestSha256,
-    "8e6230857c69c8550d647426eb293825a8845fed7f23a583f472c2dc3e24aea5",
+    "814619b9dda2a19633c4c05fca9ef851392e75de35f57d22c188fcd0b4094d64",
   );
   assert.equal(
     bundle.publicContractSha256,
     "3b791799bf705fd36a257e27a2520257f135e772d617b03bb22063ccea4d04e2",
   );
-  assert.equal(bundle.docs.length, 111);
-  assert.equal(bundle.docs.filter((d) => d.kind === "guide").length, 38);
+  assert.equal(bundle.docs.length, 113);
+  assert.equal(bundle.docs.filter((d) => d.kind === "guide").length, 39);
   assert.match(bundle.notice, /not a live website fetch/);
   for (const doc of bundle.docs) {
     assert.ok(
@@ -22,6 +22,8 @@ test("expanded corpus is pinned to approved public checkpoint and excludes priva
         "marketing/src/content/guides.ts",
         "sdk/test/openapi.json",
         "sdk/test/analytics.openapi.json",
+        "sdk/test/market-search.openapi.json",
+        "marketing/src/content/consent-guide.ts",
         "marketing/src/content/analytics-guides.ts",
       ].includes(doc.sourcePath),
     );
@@ -66,7 +68,7 @@ test("public reference pointers cover every resource operation and resolve schem
   const operations = bundle.docs.filter((d) =>
     d.sourcePointer?.startsWith("#/paths/"),
   );
-  assert.equal(operations.length, 26);
+  assert.equal(operations.length, 27);
   const pointers = new Set(bundle.docs.map((d) => d.sourcePointer));
   function walk(value) {
     if (!value || typeof value !== "object") return;
@@ -77,12 +79,16 @@ test("public reference pointers cover every resource operation and resolve schem
   }
   for (const doc of bundle.docs.filter((d) => d.kind === "reference"))
     walk(json(doc));
-  for (const doc of operations)
-    assert.match(json(doc).path, /^\/v1\/accounts\//);
+  for (const doc of operations) {
+    if (doc.sourcePath === "sdk/test/market-search.openapi.json") {
+      assert.equal(json(doc).path, "/v1/market-data/schemes/search");
+      assert.equal(json(doc).method, "GET");
+    } else assert.match(json(doc).path, /^\/v1\/accounts\//);
+  }
 });
 
 test("reviewed guidance preserves scope and SDK provenance", () => {
-  assert.match(byId("integrations").content, /bharosa@0\.5\.1/);
+  assert.match(byId("integrations").content, /bharosa@0\.6\.0/);
   assert.match(
     byId("documentation-assistant").content,
     /https:\/\/mcp.bharosa.finance\//,
@@ -127,5 +133,5 @@ test("published unified guides preserve current availability", () => {
     byId("authentication").content,
     /unpublished 0\.5\.1-unified/,
   );
-  assert.match(byId("integrations").content, /0\.5\.1/);
+  assert.match(byId("integrations").content, /0\.6\.0/);
 });

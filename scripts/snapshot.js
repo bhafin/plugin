@@ -19,6 +19,8 @@ const publicPaths = [
   "src/content/analytics-guides.ts",
   "contracts/analytics.openapi.json",
   "reviewed-guides.json",
+  "src/content/consent-guide.ts",
+  "contracts/market-search.openapi.json",
 ];
 const texts = Object.fromEntries(
   publicPaths.map((path) => {
@@ -113,9 +115,12 @@ function proseReader(text, start) {
 const reviewedGuides = JSON.parse(texts["reviewed-guides.json"]);
 const docs = reviewedGuides.map((guide) => {
   const analytics = texts["src/content/analytics-guides.ts"];
-  const sourcePath = analytics.includes(`slug: "${guide.slug}"`)
-    ? "src/content/analytics-guides.ts"
-    : "src/content/guides.ts";
+  const sourcePath =
+    guide.slug === "connect-an-account"
+      ? "src/content/consent-guide.ts"
+      : analytics.includes(`slug: "${guide.slug}"`)
+        ? "src/content/analytics-guides.ts"
+        : "src/content/guides.ts";
   const sourceText = texts[sourcePath];
   if (!/^[a-z-]+$/.test(guide.slug) || !guide.sections.length)
     throw Error("Invalid reviewed guide");
@@ -193,6 +198,36 @@ for (const [path, methods] of Object.entries(analyticsContract.paths)) {
     docs.push(doc);
   }
 }
+const marketSearchContract = JSON.parse(
+  texts["contracts/market-search.openapi.json"],
+);
+for (const [name, schema] of Object.entries(
+  marketSearchContract.components.schemas,
+)) {
+  if (
+    JSON.stringify(schema) !== JSON.stringify(contract.components.schemas[name])
+  )
+    throw Error(
+      `Market search schema differs from shared public schema: ${name}`,
+    );
+}
+for (const [path, methods] of Object.entries(marketSearchContract.paths)) {
+  if (path !== "/v1/market-data/schemes/search")
+    throw Error("Unexpected market search route");
+  for (const [method, operation] of Object.entries(methods)) {
+    if (method !== "get") throw Error("Unexpected market search method");
+    const doc = referenceDoc(
+      `reference-${kebab(operation.operationId).replaceAll("_", "-")}`,
+      operation.summary,
+      `#/paths/${pointer(path)}/${method}`,
+      { method: method.toUpperCase(), path, ...operation },
+    );
+    doc.sourcePath = "sdk/test/market-search.openapi.json";
+    doc.sourceSha256 = hash(texts["contracts/market-search.openapi.json"]);
+    doc.sourceRoute = "/docs/monthly-market-data";
+    docs.push(doc);
+  }
+}
 const forbidden = [
   /\/app-api\//,
   /first-party-md-/,
@@ -210,7 +245,7 @@ for (const doc of docs) {
     throw Error(`Private marker in ${doc.id}`);
 }
 const bundle = {
-  bundleVersion: "0.3.1-docs.1",
+  bundleVersion: "0.3.2-docs.1",
   contractVersion,
   contractSourcePath: "marketing/src/content/product.ts",
   contractSourceSha256: hash(product),

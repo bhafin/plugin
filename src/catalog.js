@@ -12,6 +12,8 @@ const document = z
       "marketing/src/content/analytics-guides.ts",
       "sdk/test/openapi.json",
       "sdk/test/analytics.openapi.json",
+      "sdk/test/market-search.openapi.json",
+      "marketing/src/content/consent-guide.ts",
     ]),
     sourceLine: z.number().int().positive(),
     sourcePointer: z.string().nullable(),
@@ -23,7 +25,7 @@ const document = z
   .strict();
 const bundleSchema = z
   .object({
-    bundleVersion: z.literal("0.3.1-docs.1"),
+    bundleVersion: z.literal("0.3.2-docs.1"),
     contractVersion: z.literal("API v1"),
     contractSourcePath: z.literal("marketing/src/content/product.ts"),
     contractSourceSha256: z.string().regex(/^[a-f0-9]{64}$/),
@@ -38,7 +40,7 @@ const bundleSchema = z
   })
   .strict();
 export const snapshotSha256 =
-  "10127e16aed8b0411e49215391a65cbda6f20d43b6ec1ef593bf7ab2ed743556";
+  "31c0e3ddf3ba1ba27731b6b94f7e3612f2b81a46ce8a49e25cb8b159bc61db41";
 const bundledText = readFileSync(
   new URL("../assets/docs.json", import.meta.url),
   "utf8",
@@ -145,6 +147,10 @@ export function execute(name, raw) {
           "Use integer offset 0–128 and limit 1–20; omit both for the first page.",
         bharosa_docs_search:
           "Use a nonblank query of at most 120 raw characters and integer limit 1–20. Whitespace counts toward the raw bound.",
+        bharosa_api_search:
+          'Supply a nonblank query even with group or method filters, for example {"query":"nav","group":"monthly"}. Query is at most 120 raw characters; limit is an integer 1–20.',
+        bharosa_examples_search:
+          'Supply a nonblank query even with operationId or language filters. To find an operation example, use its ID as query, for example {"query":"retrieve_portfolio","operationId":"retrieve_portfolio","language":"typescript"}. Query is at most 120 raw characters; limit is an integer 1–20.',
         bharosa_docs_read:
           "Choose an ID from bharosa_docs_list; use integer offset 0–30000 and maxChars 1–8000.",
       }[name] ??

@@ -105,7 +105,7 @@ test(
             arguments: {},
           })
         ).result.structuredContent.total,
-        111,
+        113,
       );
       assert.equal(h.stderr(), "");
       h.child.stdin.end();
@@ -148,7 +148,7 @@ test(
   () => {
     for (const [args, status, pattern] of [
       [["--help"], 0, /Usage:/],
-      [["--version"], 0, /0\.3\.1/],
+      [["--version"], 0, /0\.3\.2/],
       [["--bad"], 2, /Unknown option/],
     ]) {
       const run = spawnSync(process.execPath, [entry, ...args], {
@@ -165,7 +165,7 @@ test(
     assert.equal(run.status, 0, run.stderr);
     const result = JSON.parse(run.stdout);
     assert.equal(result.status, "pass");
-    assert.equal(result.documents, 111);
+    assert.equal(result.documents, 113);
     assert.equal(result.desktopHostVerified, false);
     assert.equal(run.stderr, "");
   },
