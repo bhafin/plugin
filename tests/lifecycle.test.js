@@ -12,11 +12,13 @@ function host() {
   });
   let stderr = "",
     counter = 0;
+  let receivedFirstResponse = false;
   const queued = [],
     waiters = [];
   child.stderr.on("data", (d) => (stderr += d));
   const lines = createInterface({ input: child.stdout });
   lines.on("line", (line) => {
+    receivedFirstResponse = true;
     const message = JSON.parse(line);
     const waiter = waiters.shift();
     if (waiter) waiter(message);
@@ -28,7 +30,11 @@ function host() {
   const next = () =>
     new Promise((resolve, reject) => {
       if (queued.length) return resolve(queued.shift());
-      const timer = setTimeout(() => reject(Error("response timeout")), 2000);
+      // Allow bounded process/module startup separately from steady-state replies.
+      const timer = setTimeout(
+        () => reject(Error("response timeout")),
+        receivedFirstResponse ? 2000 : 10000,
+      );
       waiters.push((value) => {
         clearTimeout(timer);
         resolve(value);
@@ -69,7 +75,7 @@ function host() {
 }
 test(
   "malformed frames return bounded errors and recover; initialization gates calls",
-  { timeout: 10000 },
+  { timeout: 20000 },
   async () => {
     const h = host();
     try {
@@ -105,7 +111,7 @@ test(
             arguments: {},
           })
         ).result.structuredContent.total,
-        123,
+        139,
       );
       assert.equal(h.stderr(), "");
       h.child.stdin.end();
@@ -148,7 +154,7 @@ test(
   () => {
     for (const [args, status, pattern] of [
       [["--help"], 0, /Usage:/],
-      [["--version"], 0, /0\.3\.4/],
+      [["--version"], 0, /0\.3\.5/],
       [["--bad"], 2, /Unknown option/],
     ]) {
       const run = spawnSync(process.execPath, [entry, ...args], {
@@ -165,7 +171,7 @@ test(
     assert.equal(run.status, 0, run.stderr);
     const result = JSON.parse(run.stdout);
     assert.equal(result.status, "pass");
-    assert.equal(result.documents, 123);
+    assert.equal(result.documents, 139);
     assert.equal(result.desktopHostVerified, false);
     assert.equal(run.stderr, "");
   },

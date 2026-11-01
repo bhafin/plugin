@@ -32,7 +32,7 @@ test(`every exported example passes its advertised validation against exact inst
         const path = `${work}/${e.id}.mts`;
         writeFileSync(
           path,
-          "declare const process: {env: Record<string,string|undefined>};\n" +
+          "declare const process: {env: Record<string,string|undefined>; argv: string[]};\n" +
             e.setup +
             "\n" +
             e.code +

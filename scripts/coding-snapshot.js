@@ -267,6 +267,56 @@ try {
       });
     }
   }
+  for (const [file, route] of [
+    ["fund-aum", "/docs/fund-portfolio-aum-preview"],
+    ["benchmarks", "/docs/index-fund-benchmarks"],
+  ]) {
+    const bytes = readFileSync(
+      join(marketing, `contracts/${file}.openapi.json`),
+    );
+    assert.equal(
+      hash(bytes),
+      policy.contracts[`contracts/${file}.openapi.json`],
+    );
+    sources[`sdk/test/${file}.openapi.json`] = hash(bytes);
+    for (const [path, methods] of Object.entries(JSON.parse(bytes).paths)) {
+      assert.ok(path.startsWith("/v1/market-data/"));
+      for (const [method, op] of Object.entries(methods)) {
+        assert.equal(method, "get");
+        operations.push({
+          ...summary(
+            op.operationId,
+            op.summary ?? op.operationId,
+            `sdk/test/${file}.openapi.json`,
+            `#/paths/${path.replaceAll("~", "~0").replaceAll("/", "~1")}/${method}`,
+            route,
+          ),
+          method: "GET",
+          path,
+          group: "monthly",
+          definition: op,
+        });
+        const benchmarkMethod = {
+          benchmark_indexes: "markets.indexes.list",
+          benchmark_index: "markets.indexes.retrieve",
+          benchmark_index_performance: "markets.indexes.performance.retrieve",
+          benchmark_fund: "markets.funds.benchmark.retrieve",
+          benchmark_fund_performance:
+            "markets.funds.benchmark.performance.retrieve",
+          benchmark_scheme: "markets.schemes.benchmark.retrieve",
+          benchmark_scheme_performance:
+            "markets.schemes.benchmark.performance.retrieve",
+        }[op.operationId];
+        const sdkMethod =
+          benchmarkMethod ??
+          (file === "fund-aum"
+            ? `markets.${op["x-sdk-method"]}`
+            : op["x-sdk-method"]);
+        if (sdkMethod)
+          baselineMethods.set(sdkMethod, { id: op.operationId, path });
+      }
+    }
+  }
   const allowedGuides = new Set(
     docs.docs.filter((d) => d.kind === "guide").map((d) => d.id),
   );
@@ -303,7 +353,8 @@ try {
           code.includes(`bharosa.${method}(`) ||
           (language === "bash" &&
             new RegExp(
-              path.split("{id}").join("[^/\\s?]+") + "(?:[?\\s\"\']|$)",
+              path.replace(/\{[A-Za-z0-9_]+\}/g, "[^/\\s?]+") +
+                "(?:[?\\s\"\']|$)",
             ).test(code))
         ) {
           const accountIndex = operationIds.indexOf(accountId);
@@ -316,11 +367,13 @@ try {
         `${guide.title}: ${section.title}`,
         language,
         code,
-        guide.slug === "connect-an-account"
-          ? "marketing/src/content/consent-guide.ts"
-          : analyticsSlugs.has(guide.slug)
-            ? "marketing/src/content/analytics-guides.ts"
-            : "marketing/src/content/guides.ts",
+        guide.slug === "index-fund-benchmarks"
+          ? "marketing/src/content/benchmark-guide.ts"
+          : guide.slug === "connect-an-account"
+            ? "marketing/src/content/consent-guide.ts"
+            : analyticsSlugs.has(guide.slug)
+              ? "marketing/src/content/analytics-guides.ts"
+              : "marketing/src/content/guides.ts",
         `${guide.slug}#${section.id}`,
         `/docs/${guide.slug}#${section.id}`,
         operationIds,
@@ -371,7 +424,7 @@ for (const value of [...examples, ...operations]) {
 assert.equal(new Set(examples.map((e) => e.id)).size, examples.length);
 assert.equal(new Set(operations.map((e) => e.id)).size, operations.length);
 const value = {
-  version: "0.3.4-coding.1",
+  version: "0.3.5-coding.1",
   docsSnapshotSha256: hash(readFileSync(join(root, "assets/docs.json"))),
   approvedManifestSha256: docs.approvedManifestSha256,
   sources,

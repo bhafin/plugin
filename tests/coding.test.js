@@ -82,13 +82,13 @@ test("new tools reject dangerous keys, paths, raw overflow and unknown operation
 });
 
 test("coding index provenance and validation coverage excludes private material", () => {
-  assert.equal(codingBundle.operations.length, 40);
-  assert.equal(codingBundle.examples.length, 131);
+  assert.equal(codingBundle.operations.length, 48);
+  assert.equal(codingBundle.examples.length, 133);
   for (const item of [...codingBundle.operations, ...codingBundle.examples]) {
     assert.equal(item.sourceSha256, codingBundle.sources[item.sourcePath]);
     assert.match(
       item.sourcePath,
-      /^(marketing\/src\/content\/[a-z-]+\.(ts|json)|sdk\/test\/((analytics\.|market-search\.|baseline-market\.)?openapi.json))$/,
+      /^(marketing\/src\/content\/[a-z-]+\.(ts|json)|sdk\/test\/((analytics\.|market-search\.|baseline-market\.|fund-aum\.|benchmarks\.)?openapi.json))$/,
     );
     assert.doesNotMatch(
       JSON.stringify(item),
@@ -231,4 +231,38 @@ test("baseline guide examples link to their exact public baseline operations", (
       id,
     );
   }
+});
+
+test("SDK 0.8 public market operations retain canonical schemas and useful example links", () => {
+  const expected = [
+    "baseline_fund_aum",
+    "benchmark_indexes",
+    "benchmark_index",
+    "benchmark_index_performance",
+    "benchmark_fund",
+    "benchmark_fund_performance",
+    "benchmark_scheme",
+    "benchmark_scheme_performance",
+  ];
+  for (const id of expected) {
+    const detail = result("bharosa_api_details", { operationId: id });
+    assert.equal(detail.operation.method, "GET");
+    assert.ok(detail.operation.path.startsWith("/v1/market-data/"));
+    assert.ok(
+      detail.schemaDocumentIds.every((id) =>
+        bundle.docs.some((d) => d.id === id),
+      ),
+    );
+  }
+  assert.ok(
+    result("bharosa_api_details", { operationId: "benchmark_fund_performance" })
+      .exampleIds.length > 0,
+  );
+  assert.ok(
+    bundle.docs.some(
+      (d) =>
+        d.id === "index-fund-benchmarks" &&
+        d.sourcePath === "marketing/src/content/benchmark-guide.ts",
+    ),
+  );
 });

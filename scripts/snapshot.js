@@ -17,11 +17,14 @@ const publicPaths = [
   "src/content/product.ts",
   "contracts/openapi.json",
   "src/content/analytics-guides.ts",
+  "src/content/benchmark-guide.ts",
   "contracts/analytics.openapi.json",
   "reviewed-guides.json",
   "src/content/consent-guide.ts",
   "contracts/market-search.openapi.json",
   "contracts/baseline-market.openapi.json",
+  "contracts/fund-aum.openapi.json",
+  "contracts/benchmarks.openapi.json",
 ];
 const texts = Object.fromEntries(
   publicPaths.map((path) => {
@@ -117,11 +120,13 @@ const reviewedGuides = JSON.parse(texts["reviewed-guides.json"]);
 const docs = reviewedGuides.map((guide) => {
   const analytics = texts["src/content/analytics-guides.ts"];
   const sourcePath =
-    guide.slug === "connect-an-account"
-      ? "src/content/consent-guide.ts"
-      : analytics.includes(`slug: "${guide.slug}"`)
-        ? "src/content/analytics-guides.ts"
-        : "src/content/guides.ts";
+    guide.slug === "index-fund-benchmarks"
+      ? "src/content/benchmark-guide.ts"
+      : guide.slug === "connect-an-account"
+        ? "src/content/consent-guide.ts"
+        : analytics.includes(`slug: "${guide.slug}"`)
+          ? "src/content/analytics-guides.ts"
+          : "src/content/guides.ts";
   const sourceText = texts[sourcePath];
   if (!/^[a-z-]+$/.test(guide.slug) || !guide.sections.length)
     throw Error("Invalid reviewed guide");
@@ -301,6 +306,50 @@ for (const [name, contractValue, bytes] of [
   doc.sourceRoute = "/docs/authentication";
   docs.push(doc);
 }
+// Explicitly pinned public 0.8 market contracts; reference data only.
+for (const [file, route] of [
+  ["fund-aum", "/docs/fund-portfolio-aum-preview"],
+  ["benchmarks", "/docs/index-fund-benchmarks"],
+]) {
+  const bytes = texts[`contracts/${file}.openapi.json`];
+  const value = JSON.parse(bytes);
+  const add = (id, title, pointerValue, body) => {
+    if (docs.some((d) => d.id === id))
+      throw Error(`Duplicate public document: ${id}`);
+    const doc = referenceDoc(id, title, pointerValue, body);
+    doc.sourcePath = `sdk/test/${file}.openapi.json`;
+    doc.sourceSha256 = hash(bytes);
+    doc.sourceRoute = route;
+    docs.push(doc);
+  };
+  for (const [path, methods] of Object.entries(value.paths)) {
+    if (!path.startsWith("/v1/market-data/"))
+      throw Error("Unexpected public market route");
+    for (const [method, op] of Object.entries(methods)) {
+      if (method !== "get") throw Error("Unexpected public market method");
+      add(
+        `reference-${kebab(op.operationId).replaceAll("_", "-")}`,
+        op.summary ?? op.operationId,
+        `#/paths/${pointer(path)}/${method}`,
+        { method: "GET", path, ...op },
+      );
+    }
+  }
+  if (Object.keys(value.components?.securitySchemes ?? {}).length)
+    add(
+      `reference-${file}-authentication`,
+      `${file} public authentication schemes`,
+      "#/components/securitySchemes",
+      value.components.securitySchemes,
+    );
+  for (const [name, schema] of Object.entries(value.components?.schemas ?? {}))
+    add(
+      `schema-${kebab(name)}`,
+      `${name} schema`,
+      `#/components/schemas/${pointer(name)}`,
+      schema,
+    );
+}
 const forbidden = [
   /\/app-api\//,
   /first-party-md-/,
@@ -318,7 +367,7 @@ for (const doc of docs) {
     throw Error(`Private marker in ${doc.id}`);
 }
 const bundle = {
-  bundleVersion: "0.3.4-docs.1",
+  bundleVersion: "0.3.5-docs.1",
   contractVersion,
   contractSourcePath: "marketing/src/content/product.ts",
   contractSourceSha256: hash(product),

@@ -7,8 +7,8 @@ test("catalog carries actual contract provenance and pagination", () => {
   assert.equal(first.contractVersion, "API v1");
   assert.equal(first.documents.length, 1);
   assert.equal(first.nextOffset, 1);
-  assert.equal(first.total, 123);
-  assert.equal(result("bharosa_docs_list", { offset: 123 }).nextOffset, null);
+  assert.equal(first.total, 139);
+  assert.equal(result("bharosa_docs_list", { offset: 139 }).nextOffset, null);
   assert.match(first.documents[0].sourceSha256, /^[a-f0-9]{64}$/);
 });
 test("literal AND search is bounded and has predictable no-match behavior", () => {

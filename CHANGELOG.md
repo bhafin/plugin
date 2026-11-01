@@ -1,3 +1,7 @@
+# 0.3.5 — 2026-11-01
+
+Refresh canonical API documentation and examples for SDK 0.8.0, including stored AUM and index/benchmark methods and consent typing corrections. Seven read-only documentation tools remain; no account execution or new OAuth capability is added.
+
 # 0.3.4 — 2026-10-31
 
 Refresh canonical public documentation to v34, correcting deployment availability descriptions. SDK remains 0.7.0; seven tool names, inputs and read-only behavior are unchanged. No account capabilities added.

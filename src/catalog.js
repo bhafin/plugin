@@ -10,10 +10,13 @@ const document = z
     sourcePath: z.enum([
       "marketing/src/content/guides.ts",
       "marketing/src/content/analytics-guides.ts",
+      "marketing/src/content/benchmark-guide.ts",
       "sdk/test/openapi.json",
       "sdk/test/analytics.openapi.json",
       "sdk/test/market-search.openapi.json",
       "sdk/test/baseline-market.openapi.json",
+      "sdk/test/fund-aum.openapi.json",
+      "sdk/test/benchmarks.openapi.json",
       "marketing/src/content/consent-guide.ts",
     ]),
     sourceLine: z.number().int().positive(),
@@ -26,7 +29,7 @@ const document = z
   .strict();
 const bundleSchema = z
   .object({
-    bundleVersion: z.literal("0.3.4-docs.1"),
+    bundleVersion: z.literal("0.3.5-docs.1"),
     contractVersion: z.literal("API v1"),
     contractSourcePath: z.literal("marketing/src/content/product.ts"),
     contractSourceSha256: z.string().regex(/^[a-f0-9]{64}$/),
@@ -37,11 +40,11 @@ const bundleSchema = z
     reviewedOn: z.string(),
     availability: z.literal("bundled-snapshot"),
     notice: z.string(),
-    docs: z.array(document).min(1).max(128),
+    docs: z.array(document).min(1).max(192),
   })
   .strict();
 export const snapshotSha256 =
-  "4c0b8bb31d713bbed29b841a12f549efd29acea05bb3171dc97da01222f515e9";
+  "815a75a8a4c185957e66466c8598f4fa78141d76ab4f341327425bf56112bc47";
 const bundledText = readFileSync(
   new URL("../assets/docs.json", import.meta.url),
   "utf8",
@@ -64,7 +67,7 @@ export const inputs = {
   ...coding.inputs,
   bharosa_docs_list: z
     .object({
-      offset: z.number().int().min(0).max(128).default(0),
+      offset: z.number().int().min(0).max(192).default(0),
       limit: z.number().int().min(1).max(20).default(10),
     })
     .strict(),
@@ -145,7 +148,7 @@ export function execute(name, raw) {
       "invalid_arguments",
       {
         bharosa_docs_list:
-          "Use integer offset 0–128 and limit 1–20; omit both for the first page.",
+          "Use integer offset 0–192 and limit 1–20; omit both for the first page.",
         bharosa_docs_search:
           "Use a nonblank query of at most 120 raw characters and integer limit 1–20. Whitespace counts toward the raw bound.",
         bharosa_api_search:
