@@ -1,12 +1,12 @@
 {
   "name": "bharosa-docs-mcp",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "lockfileVersion": 3,
   "requires": true,
   "packages": {
     "": {
       "name": "bharosa-docs-mcp",
-      "version": "0.3.5",
+      "version": "0.3.6",
       "bundleDependencies": [
         "@modelcontextprotocol/sdk",
         "zod"
@@ -20,7 +20,7 @@
         "bharosa-docs-mcp": "dist/cli.js"
       },
       "devDependencies": {
-        "bharosa": "0.8.0",
+        "bharosa": "0.9.0",
         "prettier": "3.6.2",
         "typescript": "7.0.2"
       },
@@ -447,9 +447,9 @@
       }
     },
     "node_modules/bharosa": {
-      "version": "0.8.0",
-      "resolved": "https://registry.npmjs.org/bharosa/-/bharosa-0.8.0.tgz",
-      "integrity": "sha512-Q1mLXTRTBTJP5GW3uUX66hE+CtpWGXUNnXK9oUYHhzBPnVf4q8cYW3nc2Yx3U8vyZRX6u6Rvb4WHV80PVMEHLg==",
+      "version": "0.9.0",
+      "resolved": "https://registry.npmjs.org/bharosa/-/bharosa-0.9.0.tgz",
+      "integrity": "sha512-E4yjezz6WgZIpstS/t/JrZhXQEkDNC29Rl9rd7ge/6r89Z5jKQill1LDISyd8NivHcA9q7xYIj7XiTPnXF38QA==",
       "dev": true,
       "engines": {
         "node": ">=22.12.0"

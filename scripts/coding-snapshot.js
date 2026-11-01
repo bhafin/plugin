@@ -378,7 +378,11 @@ try {
         `/docs/${guide.slug}#${section.id}`,
         operationIds,
         language === "typescript" && !code.includes("import { Bharosa }")
-          ? product.sdkInitialization
+          ? product.sdkInitialization +
+              (guide.slug === "retrieve-mutual-fund" &&
+              section.id === "retrieve"
+                ? '\n// Required selected fund ID described by the canonical snippet.\nconst fundId = process.argv[2];\nif (!fundId) throw new Error("Pass the selected fund ID as the first argument.");'
+                : "")
           : "",
       );
     }
@@ -424,7 +428,7 @@ for (const value of [...examples, ...operations]) {
 assert.equal(new Set(examples.map((e) => e.id)).size, examples.length);
 assert.equal(new Set(operations.map((e) => e.id)).size, operations.length);
 const value = {
-  version: "0.3.5-coding.1",
+  version: "0.3.6-coding.1",
   docsSnapshotSha256: hash(readFileSync(join(root, "assets/docs.json"))),
   approvedManifestSha256: docs.approvedManifestSha256,
   sources,

@@ -1,3 +1,7 @@
+# 0.3.6
+
+Refresh the bundled public documentation to v44 and SDK 0.9.0, including fund retrieval/portfolio/holdings guidance and corrected onboarding availability. Preserve the seven read-only tools and existing plugin identifiers. No account access or API execution added.
+
 # 0.3.5 — 2026-11-01
 
 Refresh canonical API documentation and examples for SDK 0.8.0, including stored AUM and index/benchmark methods and consent typing corrections. Seven read-only documentation tools remain; no account execution or new OAuth capability is added.

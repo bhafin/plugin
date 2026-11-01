@@ -1,39 +1,30 @@
 {
-  "version": "0.3.5-coding.1",
-  "docsSnapshotSha256": "815a75a8a4c185957e66466c8598f4fa78141d76ab4f341327425bf56112bc47",
-  "approvedManifestSha256": "33ae5fac066e79069e4d5f537e97ff382026bcefbc9588746d38b983c636bc6f",
+  "version": "0.3.6-coding.1",
+  "docsSnapshotSha256": "774e55d16d5499e41c23ba6d093637651ce5e442c84aed5a4941f7ab6acb0f7b",
+  "approvedManifestSha256": "78627930776de703694cd6c08d28d9dffb703cead71c2f8381dc554a87d5f84f",
   "sources": {
-    "marketing/src/content/analytics-guides.ts": "191722ca408b8cc8afd9140256c4b57e384c9486f76322ad8df35ce2909d8f15",
-    "marketing/src/content/availability.ts": "47d7ff128e70e3b8b6a7dbe28d5b6f1697745cff51c233ab335a53ebf0d0f446",
-    "marketing/src/content/benchmark-guide.ts": "1484ca4313fc42ae104137460af0bff26d193193ee55566407bcee516be53707",
-    "marketing/src/content/consent-guide.ts": "46390a3ff6969afbb0a3ca55cc458dde23da6ddcb88e35fd21693ca3bf4162eb",
+    "marketing/src/content/analytics-guides.ts": "469a5fa1ab5054d657951b598c66fa2d088aa7fec9d04b82f47fa6a125d776f9",
+    "marketing/src/content/availability.ts": "f8b1c23a89446877ca7467f58a319350e47142baf0051ee8f1181b050d864598",
+    "marketing/src/content/benchmark-guide.ts": "9f08e9f2fee49fb7a4ea7b0194c9eb3ebb3a3cd99e31bb8ef248d8020249300c",
+    "marketing/src/content/consent-guide.ts": "389e318ef47eea5208777915771a74197128739f7c83168ac1d5ec4180f184c2",
     "marketing/src/content/doc-labels.ts": "2c6d64fd7bd710328b55a7112ec741768295dd04c1caf779d7d8be5fef57d3e2",
     "marketing/src/content/doc-schema.ts": "6d0991e38384b4ee93e1da27dcc70b87891db65771db75d1ba90f9448d515ee8",
     "marketing/src/content/examples.ts": "a5bb9f2b0fd42004971003683fe4c4f2810003278bf98d871e3814ed3f1c2182",
-    "marketing/src/content/guides.ts": "7b7c738b001442698db57cf03326f0ee25e6676e3b331d753704642ecd3ff089",
+    "marketing/src/content/guides.ts": "7db4f9f5fb0409ff32f2a4910345b11769fcabbd0f4a706031163e129e06c435",
     "marketing/src/content/history.ts": "b62373b8c128d9f0d9f8d3b634f90ea43af4544bf441c9d129825fe2bf82c1b9",
-    "marketing/src/content/home.ts": "085499f0bde7c5d639100f59c46a5328619de2aa97c0154cbd96e3c2e322a6bf",
-    "marketing/src/content/monthly-fields.ts": "4c929e7dfbc27743fabdbc1b25157a2fd5078a6292237e12995f6bc0909a0528",
     "marketing/src/content/monthly-schema.json": "f251e0b4ca89ad144c08fce6982ba1b405cba55e7e40ef699359ff7f924aaffe",
     "marketing/src/content/monthly.ts": "78c50e61605a4148350c1978d0988ea0762f7b280c220514a01b2e567b18ae84",
-    "marketing/src/content/navigation.ts": "5aef5fbf589370850dc6f20c87d84c4236333700fbc86371ee898abfa371d3a4",
-    "marketing/src/content/product.ts": "515f6dc772c6ff5fd258a107b1206cf1fe763b6caa01407ba2e93d29a74ff916",
-    "marketing/src/content/reader-copy.ts": "cc31c1d776bb0c7faf52b14d4115b3ffc38b31e66555768e45c510fefbd985c4",
-    "marketing/src/content/reference-design.ts": "926ad61497ef4fac9073f4759df9218aa7cd2f9b8908db40e119b2826e8532af",
-    "marketing/src/content/reference-directory.ts": "5f1e9df0ac429d8f776df9938612a6bf22ae2efca036b435e36970f4f5ee0b2c",
-    "marketing/src/content/resource-design.ts": "db45879119e3d4de3e2a584640ee1339871d86202e0598c0221e2ca077c2ec04",
-    "marketing/src/content/response-fields.ts": "089369e0fac37079900dd5e35b233695a6470187ad7b33de83b708341da4fb1b",
-    "marketing/src/content/response-schemas.json": "fe5d734c5f531044b0eb892e792ae853522d143c00154462b5a46258d4fa39c1",
+    "marketing/src/content/product.ts": "11ff46243d6d9bee76b4a5272c2adf633981abd9ce4872848faffa79ca9d662b",
+    "marketing/src/content/reference-design.ts": "49f69670ac147b30b8889e597307eecc09e964625279fdd73ded8bf2cb16c1da",
     "marketing/src/content/saved-portfolio-example.ts": "c3306111e030a0c62a91c10f53e0828476cf2c9e903e8ccd82aaec036f28f3b4",
-    "marketing/src/content/schema-fields.ts": "63b282d13237e2e44a4acda56ff8d36685edc81f7c2e881979269ce3bb453651",
     "sdk/test/openapi.json": "d13c694425736145030947fa35163c52b8e5f496ca720f71dd173291ed8828c4",
     "sdk/test/analytics.openapi.json": "12aa615e6712093f2d26730be97c83eac4e72e7c214c59f64d9cb76e7fdde7bf",
     "sdk/test/market-search.openapi.json": "fe25e407694bf0bc0df85d16d1ab14ab974cc8376ffd202de2973d93ecf88345",
-    "sdk/test/baseline-market.openapi.json": "c067cbac4373fdbaafa08b12776bfae341acd369b14d800597e72944315f1175",
+    "sdk/test/baseline-market.openapi.json": "8923b8339f68dc3fff6bec82cdae27563b371bb013e63431befb20f503774272",
     "sdk/test/fund-aum.openapi.json": "c54b826e21acc80c4393e68149974b3753bd9b9665f95ad909a6115b217c0304",
     "sdk/test/benchmarks.openapi.json": "0b72ecc57f5a1b455205c98aef871dcdb286d6f25ec425adf4c6bc58e4c49908"
   },
-  "sdkVersion": "0.8.0",
+  "sdkVersion": "0.9.0",
   "operations": [
     {
       "id": "retrieve_account",
@@ -10737,7 +10728,7 @@
       "sourcePath": "sdk/test/baseline-market.openapi.json",
       "sourcePointer": "#/paths/~1v1~1market-data~1schemes~1{id}~1performance/get",
       "sourceRoute": "/docs/monthly-market-data",
-      "sourceSha256": "c067cbac4373fdbaafa08b12776bfae341acd369b14d800597e72944315f1175",
+      "sourceSha256": "8923b8339f68dc3fff6bec82cdae27563b371bb013e63431befb20f503774272",
       "method": "GET",
       "path": "/v1/market-data/schemes/{id}/performance",
       "group": "monthly",
@@ -11111,7 +11102,7 @@
       "sourcePath": "sdk/test/baseline-market.openapi.json",
       "sourcePointer": "#/paths/~1v1~1market-data~1categories~1{id}~1statistics/get",
       "sourceRoute": "/docs/monthly-market-data",
-      "sourceSha256": "c067cbac4373fdbaafa08b12776bfae341acd369b14d800597e72944315f1175",
+      "sourceSha256": "8923b8339f68dc3fff6bec82cdae27563b371bb013e63431befb20f503774272",
       "method": "GET",
       "path": "/v1/market-data/categories/{id}/statistics",
       "group": "monthly",
@@ -11448,7 +11439,7 @@
       "sourcePath": "sdk/test/baseline-market.openapi.json",
       "sourcePointer": "#/paths/~1v1~1market-data~1schemes~1{id}~1navs/get",
       "sourceRoute": "/docs/monthly-market-data",
-      "sourceSha256": "c067cbac4373fdbaafa08b12776bfae341acd369b14d800597e72944315f1175",
+      "sourceSha256": "8923b8339f68dc3fff6bec82cdae27563b371bb013e63431befb20f503774272",
       "method": "GET",
       "path": "/v1/market-data/schemes/{id}/navs",
       "group": "monthly",
@@ -11619,7 +11610,7 @@
       "sourcePath": "sdk/test/baseline-market.openapi.json",
       "sourcePointer": "#/paths/~1v1~1market-data~1schemes~1{id}~1expense-ratios/get",
       "sourceRoute": "/docs/monthly-market-data",
-      "sourceSha256": "c067cbac4373fdbaafa08b12776bfae341acd369b14d800597e72944315f1175",
+      "sourceSha256": "8923b8339f68dc3fff6bec82cdae27563b371bb013e63431befb20f503774272",
       "method": "GET",
       "path": "/v1/market-data/schemes/{id}/expense-ratios",
       "group": "monthly",
@@ -11792,7 +11783,7 @@
       "sourcePath": "sdk/test/baseline-market.openapi.json",
       "sourcePointer": "#/paths/~1v1~1market-data~1funds~1{id}~1portfolios/get",
       "sourceRoute": "/docs/monthly-market-data",
-      "sourceSha256": "c067cbac4373fdbaafa08b12776bfae341acd369b14d800597e72944315f1175",
+      "sourceSha256": "8923b8339f68dc3fff6bec82cdae27563b371bb013e63431befb20f503774272",
       "method": "GET",
       "path": "/v1/market-data/funds/{id}/portfolios",
       "group": "monthly",
@@ -11814,12 +11805,13 @@
           {
             "name": "as_of",
             "in": "query",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "string",
               "format": "date",
               "pattern": "^[0-9]{4}-[0-9]{2}-01$"
-            }
+            },
+            "description": "Omit for latest stored fund portfolio as of today in Asia/Kolkata. Explicit historical dates remain month-start only."
           }
         ],
         "responses": {
@@ -11945,7 +11937,8 @@
           "sdk_introduced": "0.7.0",
           "authenticated_positive_verification": "pending_separate_trial"
         },
-        "summary": "Retrieve a monthly fund portfolio"
+        "summary": "Retrieve a monthly fund portfolio",
+        "x-release-note": "Latest selection and portfolio identity pin are supported by the deployed API and SDK 0.9.0."
       }
     },
     {
@@ -11954,7 +11947,7 @@
       "sourcePath": "sdk/test/baseline-market.openapi.json",
       "sourcePointer": "#/paths/~1v1~1market-data~1funds~1{id}~1holdings/get",
       "sourceRoute": "/docs/monthly-market-data",
-      "sourceSha256": "c067cbac4373fdbaafa08b12776bfae341acd369b14d800597e72944315f1175",
+      "sourceSha256": "8923b8339f68dc3fff6bec82cdae27563b371bb013e63431befb20f503774272",
       "method": "GET",
       "path": "/v1/market-data/funds/{id}/holdings",
       "group": "monthly",
@@ -11996,12 +11989,23 @@
           {
             "name": "as_of",
             "in": "query",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "string",
               "format": "date",
               "pattern": "^[0-9]{4}-[0-9]{2}-01$"
-            }
+            },
+            "description": "Omit for latest stored fund portfolio as of today in Asia/Kolkata. Explicit historical dates remain month-start only."
+          },
+          {
+            "name": "portfolio_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^[1-9][0-9]{0,18}$"
+            },
+            "description": "Expected public portfolio ID. Reject changed/missing selection with 409 fund_portfolio_changed before reading holdings."
           }
         ],
         "responses": {
@@ -12201,6 +12205,9 @@
               }
             }
           },
+          "409": {
+            "description": "fund_portfolio_changed; restart portfolio selection."
+          },
           "default": {
             "description": "Structured API error; authentication, authorization, validation or dataset unavailable.",
             "content": {
@@ -12233,7 +12240,8 @@
           "sdk_introduced": "0.7.0",
           "authenticated_positive_verification": "pending_separate_trial"
         },
-        "summary": "List monthly fund holdings"
+        "summary": "List monthly fund holdings",
+        "x-release-note": "Latest selection and portfolio identity pin are supported by the deployed API and SDK 0.9.0."
       }
     },
     {
@@ -12242,7 +12250,7 @@
       "sourcePath": "sdk/test/baseline-market.openapi.json",
       "sourcePointer": "#/paths/~1v1~1market-data~1valuations/post",
       "sourceRoute": "/docs/monthly-market-data",
-      "sourceSha256": "c067cbac4373fdbaafa08b12776bfae341acd369b14d800597e72944315f1175",
+      "sourceSha256": "8923b8339f68dc3fff6bec82cdae27563b371bb013e63431befb20f503774272",
       "method": "POST",
       "path": "/v1/market-data/valuations",
       "group": "monthly",
@@ -12632,7 +12640,7 @@
       "sourcePath": "sdk/test/baseline-market.openapi.json",
       "sourcePointer": "#/paths/~1v1~1market-data~1schemes~1references/get",
       "sourceRoute": "/docs/monthly-market-data",
-      "sourceSha256": "c067cbac4373fdbaafa08b12776bfae341acd369b14d800597e72944315f1175",
+      "sourceSha256": "8923b8339f68dc3fff6bec82cdae27563b371bb013e63431befb20f503774272",
       "method": "GET",
       "path": "/v1/market-data/schemes/references",
       "group": "monthly",
@@ -12984,6 +12992,107 @@
           "authenticated_positive_verification": "pending_separate_trial"
         },
         "x-sdk-method": "markets.schemes.references"
+      }
+    },
+    {
+      "id": "baseline_fund",
+      "title": "baseline_fund",
+      "sourcePath": "sdk/test/baseline-market.openapi.json",
+      "sourcePointer": "#/paths/~1v1~1market-data~1funds~1{id}/get",
+      "sourceRoute": "/docs/monthly-market-data",
+      "sourceSha256": "8923b8339f68dc3fff6bec82cdae27563b371bb013e63431befb20f503774272",
+      "method": "GET",
+      "path": "/v1/market-data/funds/{id}",
+      "group": "monthly",
+      "definition": {
+        "operationId": "baseline_fund",
+        "x-availability": "deployed",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[1-9][0-9]{0,18}$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Existing public mutual fund identity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "name",
+                    "amc_id",
+                    "category",
+                    "active",
+                    "manager_ids"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "pattern": "^[1-9][0-9]{0,18}$"
+                    },
+                    "name": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "amc_id": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "pattern": "^[1-9][0-9]{0,18}$"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "category": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "active": {
+                      "anyOf": [
+                        {
+                          "type": "boolean"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "manager_ids": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "pattern": "^[1-9][0-9]{0,18}$"
+                      }
+                    }
+                  },
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        }
       }
     },
     {
@@ -15087,7 +15196,7 @@
       "operationIds": [
         "retrieve_account"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15105,7 +15214,7 @@
       "operationIds": [
         "retrieve_account"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15123,7 +15232,7 @@
       "operationIds": [
         "retrieve_account"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15141,7 +15250,7 @@
       "operationIds": [
         "retrieve_account"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15159,7 +15268,7 @@
       "operationIds": [
         "list_clients"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15177,7 +15286,7 @@
       "operationIds": [
         "list_clients"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15195,7 +15304,7 @@
       "operationIds": [
         "list_clients"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15213,7 +15322,7 @@
       "operationIds": [
         "list_clients"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15231,7 +15340,7 @@
       "operationIds": [
         "retrieve_client"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15249,7 +15358,7 @@
       "operationIds": [
         "retrieve_client"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15267,7 +15376,7 @@
       "operationIds": [
         "retrieve_client"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15285,7 +15394,7 @@
       "operationIds": [
         "retrieve_client"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15303,7 +15412,7 @@
       "operationIds": [
         "list_investors"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15321,7 +15430,7 @@
       "operationIds": [
         "list_investors"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15339,7 +15448,7 @@
       "operationIds": [
         "list_investors"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15357,7 +15466,7 @@
       "operationIds": [
         "list_investors"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15375,7 +15484,7 @@
       "operationIds": [
         "create_investor"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15393,7 +15502,7 @@
       "operationIds": [
         "create_investor"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15411,7 +15520,7 @@
       "operationIds": [
         "create_investor"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15429,7 +15538,7 @@
       "operationIds": [
         "create_investor"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15447,7 +15556,7 @@
       "operationIds": [
         "retrieve_investor"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15465,7 +15574,7 @@
       "operationIds": [
         "retrieve_investor"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15483,7 +15592,7 @@
       "operationIds": [
         "retrieve_investor"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15501,7 +15610,7 @@
       "operationIds": [
         "retrieve_investor"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15519,7 +15628,7 @@
       "operationIds": [
         "update_investor"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15537,7 +15646,7 @@
       "operationIds": [
         "update_investor"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15555,7 +15664,7 @@
       "operationIds": [
         "update_investor"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15573,7 +15682,7 @@
       "operationIds": [
         "update_investor"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15591,7 +15700,7 @@
       "operationIds": [
         "list_portfolios"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15609,7 +15718,7 @@
       "operationIds": [
         "list_portfolios"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15627,7 +15736,7 @@
       "operationIds": [
         "list_portfolios"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15645,7 +15754,7 @@
       "operationIds": [
         "list_portfolios"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15663,7 +15772,7 @@
       "operationIds": [
         "create_portfolio"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15681,7 +15790,7 @@
       "operationIds": [
         "create_portfolio"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15699,7 +15808,7 @@
       "operationIds": [
         "create_portfolio"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15717,7 +15826,7 @@
       "operationIds": [
         "create_portfolio"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15735,7 +15844,7 @@
       "operationIds": [
         "retrieve_portfolio"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15753,7 +15862,7 @@
       "operationIds": [
         "retrieve_portfolio"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15771,7 +15880,7 @@
       "operationIds": [
         "retrieve_portfolio"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15789,7 +15898,7 @@
       "operationIds": [
         "retrieve_portfolio"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15807,7 +15916,7 @@
       "operationIds": [
         "update_portfolio"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15825,7 +15934,7 @@
       "operationIds": [
         "update_portfolio"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15843,7 +15952,7 @@
       "operationIds": [
         "update_portfolio"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15861,7 +15970,7 @@
       "operationIds": [
         "update_portfolio"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15879,7 +15988,7 @@
       "operationIds": [
         "search_funds"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15897,7 +16006,7 @@
       "operationIds": [
         "search_funds"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15915,7 +16024,7 @@
       "operationIds": [
         "search_funds"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15933,7 +16042,7 @@
       "operationIds": [
         "search_funds"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15951,7 +16060,7 @@
       "operationIds": [
         "fund_references"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15969,7 +16078,7 @@
       "operationIds": [
         "fund_references"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -15987,7 +16096,7 @@
       "operationIds": [
         "fund_references"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16005,7 +16114,7 @@
       "operationIds": [
         "fund_references"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16023,7 +16132,7 @@
       "operationIds": [
         "current_snapshot"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16041,7 +16150,7 @@
       "operationIds": [
         "current_snapshot"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16059,7 +16168,7 @@
       "operationIds": [
         "current_snapshot"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16077,7 +16186,7 @@
       "operationIds": [
         "current_snapshot"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16095,7 +16204,7 @@
       "operationIds": [
         "replace_snapshot"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16113,7 +16222,7 @@
       "operationIds": [
         "replace_snapshot"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16131,7 +16240,7 @@
       "operationIds": [
         "replace_snapshot"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16149,7 +16258,7 @@
       "operationIds": [
         "replace_snapshot"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16167,7 +16276,7 @@
       "operationIds": [
         "asset_mix"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16185,7 +16294,7 @@
       "operationIds": [
         "asset_mix"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16203,7 +16312,7 @@
       "operationIds": [
         "asset_mix"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16221,7 +16330,7 @@
       "operationIds": [
         "asset_mix"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16239,7 +16348,7 @@
       "operationIds": [
         "sector_mix"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16257,7 +16366,7 @@
       "operationIds": [
         "sector_mix"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16275,7 +16384,7 @@
       "operationIds": [
         "sector_mix"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16293,7 +16402,7 @@
       "operationIds": [
         "sector_mix"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16311,7 +16420,7 @@
       "operationIds": [
         "issuer_mix"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16329,7 +16438,7 @@
       "operationIds": [
         "issuer_mix"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16347,7 +16456,7 @@
       "operationIds": [
         "issuer_mix"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16365,7 +16474,7 @@
       "operationIds": [
         "issuer_mix"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16383,7 +16492,7 @@
       "operationIds": [
         "import_history"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16401,7 +16510,7 @@
       "operationIds": [
         "import_history"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16419,7 +16528,7 @@
       "operationIds": [
         "import_history"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16437,7 +16546,7 @@
       "operationIds": [
         "import_history"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16455,7 +16564,7 @@
       "operationIds": [
         "retrieve_history"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16473,7 +16582,7 @@
       "operationIds": [
         "retrieve_history"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16491,7 +16600,7 @@
       "operationIds": [
         "retrieve_history"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16509,7 +16618,7 @@
       "operationIds": [
         "retrieve_history"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16527,7 +16636,7 @@
       "operationIds": [
         "history_capabilities"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16545,7 +16654,7 @@
       "operationIds": [
         "history_capabilities"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16563,7 +16672,7 @@
       "operationIds": [
         "history_capabilities"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16581,7 +16690,7 @@
       "operationIds": [
         "history_capabilities"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16599,7 +16708,7 @@
       "operationIds": [
         "list_holdings"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16617,7 +16726,7 @@
       "operationIds": [
         "list_holdings"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16635,7 +16744,7 @@
       "operationIds": [
         "list_holdings"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16653,7 +16762,7 @@
       "operationIds": [
         "list_holdings"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16671,7 +16780,7 @@
       "operationIds": [
         "retrieve_holding"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16689,7 +16798,7 @@
       "operationIds": [
         "retrieve_holding"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16707,7 +16816,7 @@
       "operationIds": [
         "retrieve_holding"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16725,7 +16834,7 @@
       "operationIds": [
         "retrieve_holding"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16743,7 +16852,7 @@
       "operationIds": [
         "holding_position"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16761,7 +16870,7 @@
       "operationIds": [
         "holding_position"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16779,7 +16888,7 @@
       "operationIds": [
         "holding_position"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript-and-synthetic-transport",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16797,7 +16906,7 @@
       "operationIds": [
         "holding_position"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16807,13 +16916,13 @@
       "sourcePath": "marketing/src/content/consent-guide.ts",
       "sourcePointer": "connect-an-account#step-1",
       "sourceRoute": "/docs/connect-an-account#step-1",
-      "sourceSha256": "46390a3ff6969afbb0a3ca55cc458dde23da6ddcb88e35fd21693ca3bf4162eb",
+      "sourceSha256": "389e318ef47eea5208777915771a74197128739f7c83168ac1d5ec4180f184c2",
       "language": "json",
       "code": "{\n  \"requested_scopes\": [\"portfolios:read\"],\n  \"return_uri\": \"https://your-app.example/connection/return\",\n  \"state\": \"<32 random bytes encoded as base64url>\",\n  \"code_challenge\": \"<base64url SHA-256 of the receipt verifier>\",\n  \"code_challenge_method\": \"S256\"\n}",
       "setup": "",
       "codeSha256": "1373445f3010d257949684644f95189e4fd21da2aee34940c6e7e103897e5a56",
       "operationIds": [],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "json-parse",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16823,13 +16932,13 @@
       "sourcePath": "marketing/src/content/consent-guide.ts",
       "sourcePointer": "connect-an-account#step-3",
       "sourceRoute": "/docs/connect-an-account#step-3",
-      "sourceSha256": "46390a3ff6969afbb0a3ca55cc458dde23da6ddcb88e35fd21693ca3bf4162eb",
+      "sourceSha256": "389e318ef47eea5208777915771a74197128739f7c83168ac1d5ec4180f184c2",
       "language": "javascript",
       "code": "// Use values from the validated, server-stored delivery—not user input.\nconst bharosa = new Bharosa({\n  account: delivery.account_id,\n  auth: {\n    type: \"delegated_application\",\n    apiKey: applicationKey,\n    userAccessToken: delivery.access_token,\n  },\n});\nconst portfolios = await bharosa.portfolios.list({ limit: 10 });",
       "setup": "",
       "codeSha256": "6bf882ed10243d2a9c5b4ac71348389b6a1ab955c439fa7778d683d776e565fc",
       "operationIds": [],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "javascript-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16839,13 +16948,13 @@
       "sourcePath": "marketing/src/content/consent-guide.ts",
       "sourcePointer": "connect-an-account#helper",
       "sourceRoute": "/docs/connect-an-account#helper",
-      "sourceSha256": "46390a3ff6969afbb0a3ca55cc458dde23da6ddcb88e35fd21693ca3bf4162eb",
+      "sourceSha256": "389e318ef47eea5208777915771a74197128739f7c83168ac1d5ec4180f184c2",
       "language": "javascript",
       "code": "// Server-only HTTP building blocks. The caller owns durable session binding,\n// CSRF checks, encrypted storage and serialization; these functions do not replace them.\nimport { randomBytes, createHash, timingSafeEqual } from \"node:crypto\";\n// Call under a per-attempt durable lock. Persist successful completion so reloads\n// do not exchange again; retry a lost response with the original operation ID.\n/**\n * @param {string | URL} url\n * @param {string | null | undefined} initiatingSession\n * @param {{id:string, expires:number, completed?:boolean, session:string, state:string, exchangeOperation:string} | null | undefined} saved\n */\nexport function validateReturn(url, initiatingSession, saved, now = Date.now() / 1000) {\n  const u = new URL(url), p = u.searchParams;\n  /** @param {unknown} a @param {unknown} b */\n  const same = (a, b) => {\n    if (typeof a !== \"string\" || typeof b !== \"string\") return false;\n    const x = Buffer.from(a), y = Buffer.from(b);\n    return x.length === y.length && timingSafeEqual(x, y);\n  };\n  const denied = p.has(\"bharosa_error\");\n  const allowed = [\"bharosa_request\", \"bharosa_state\", denied ? \"bharosa_error\" : \"bharosa_code\"];\n  if (allowed.some(k => p.getAll(k).length !== 1) ||\n      [...p.keys()].some(k => k.startsWith(\"bharosa_\") && !allowed.includes(k)))\n    throw new Error(\"Invalid connection return\");\n  if (!saved || saved.expires <= now || saved.completed || !initiatingSession ||\n      p.get(\"bharosa_request\") !== saved.id || !same(initiatingSession, saved.session) ||\n      !same(p.get(\"bharosa_state\"), saved.state)) throw new Error(\"Invalid connection binding\");\n  if (denied) {\n    const error = p.get(\"bharosa_error\");\n    if (error === null || ![\"access_denied\", \"expired\"].includes(error)) throw new Error(\"Invalid connection error\");\n    return { status: error === \"access_denied\" ? \"denied\" : \"expired\" };\n  }\n  const code = p.get(\"bharosa_code\");\n  if (code === null || !/^[A-Za-z0-9_-]{43}$/.test(code)) throw new Error(\"Invalid receipt\");\n  return { status: \"exchange\", code, operation: saved.exchangeOperation };\n}\nexport function receiptInputs() {\n  const secret = () => randomBytes(32).toString(\"base64url\");\n  const verifier = secret();\n  return { state: secret(), sessionSecret: secret(), verifier,\n    challenge: createHash(\"sha256\").update(verifier).digest(\"base64url\") };\n}\n/** @param {string} applicationKey @param {string} sessionSecret @param {typeof fetch} [fetcher] */\nexport function connectionRequests(applicationKey, sessionSecret, fetcher = fetch) {\n  if (!applicationKey || !sessionSecret) throw new Error(\"Missing server credential\");\n  /** @param {string} value */\n  const part = (value) => encodeURIComponent(value);\n  /** @param {string} method @param {string} path @param {unknown} [body] @param {string} [operation] */\n  async function send(method, path, body = undefined, operation = undefined) {\n    /** @type {Record<string,string>} */\n    const headers = { Authorization: `Bearer ${applicationKey}`,\n      \"X-Bharosa-Server-Session\": sessionSecret };\n    if (body !== undefined) headers[\"Content-Type\"] = \"application/json\";\n    if (operation) headers[\"Idempotency-Key\"] = operation;\n    const response = await fetcher(`https://app.bharosa.finance/connect/v1/sessions${path}`, {\n      method, headers, redirect: \"error\", credentials: \"omit\",\n      signal: AbortSignal.timeout(5000),\n      ...(body === undefined ? {} : { body: JSON.stringify(body) }),\n    });\n    if (!response.ok) {\n      // Do not log the body: successful deliveries and callback data contain secrets.\n      /** @type {Error & {status:number, code?:string, requestId:string|null}} */\n      const error = Object.assign(new Error(`Connection request failed (${response.status})`), {\n        status: response.status, requestId: response.headers.get(\"Request-Id\"),\n      });\n      const payload = await response.json().catch(() => null);\n      const code = payload?.error?.code;\n      if (typeof code === \"string\" && /^[a-z][a-z0-9_]{0,63}$/.test(code)) error.code = code;\n      throw error;\n    }\n    return response.status === 204 ? undefined : response.json();\n  }\n  return {\n    /** @param {unknown} body @param {string} operation */\n    create: (body, operation) => send(\"POST\", \"\", body, operation),\n    /** @param {string} id */\n    status: (id) => send(\"GET\", `/${part(id)}`),\n    /** @param {string} id */\n    end: (id) => send(\"DELETE\", `/${part(id)}`),\n    /** @param {string} id @param {string} code @param {string} verifier @param {string} operation */\n    exchange: (id, code, verifier, operation) => send(\"POST\", `/${part(id)}/exchange`, { code, code_verifier: verifier }, operation),\n    /** @param {string} id @param {string} delivery */\n    retrieve: (id, delivery) => send(\"POST\", `/${part(id)}/deliveries/${part(delivery)}/retrieve`, {}),\n    /** @param {string} id @param {string} delivery */\n    acknowledge: (id, delivery) => send(\"POST\", `/${part(id)}/deliveries/${part(delivery)}/ack`, {}),\n    /** @param {string} id @param {string} grant @param {string} operation */\n    refresh: (id, grant, operation) => send(\"POST\", `/${part(id)}/grants/${part(grant)}/refresh`, {}, operation),\n    /** @param {string} id @param {string} grant */\n    disconnect: (id, grant) => send(\"POST\", `/${part(id)}/grants/${part(grant)}/disconnect`, {}),\n  };\n}\n",
       "setup": "",
       "codeSha256": "cd5e71cb0e4796006b2fd9ecc1f31645bf061a6dde395c9d50db106ab8c99227",
       "operationIds": [],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "javascript-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16855,7 +16964,7 @@
       "sourcePath": "marketing/src/content/benchmark-guide.ts",
       "sourcePointer": "index-fund-benchmarks#request",
       "sourceRoute": "/docs/index-fund-benchmarks#request",
-      "sourceSha256": "1484ca4313fc42ae104137460af0bff26d193193ee55566407bcee516be53707",
+      "sourceSha256": "9f08e9f2fee49fb7a4ea7b0194c9eb3ebb3a3cd99e31bb8ef248d8020249300c",
       "language": "typescript",
       "code": "// Pass the exact fund ID selected by your application.\nasync function showFundBenchmark(fundId: string) {\nconst result = await bharosa.markets.funds.benchmark.performance.retrieve(\n  fundId,\n  {\n    asOf: \"2026-10-01\",\n    periods: [\"1y\", \"3y\", \"5y\"],\n  },\n);\nfor (const period of result.periods) {\n  const metric =\n    period.period === \"1y\" ? period.total_return_pct : period.cagr_pct;\n  console.log(\n    period.period,\n    metric.status === \"available\" ? metric.value : metric.reason,\n  );\n}\nreturn result;\n}",
       "setup": "// Server only. Values come from your deployment configuration.\nimport { Bharosa } from \"bharosa\";\n\nconst bharosa = new Bharosa({\n  apiKey: process.env.BHAROSA_SECRET_KEY!,\n});",
@@ -16863,7 +16972,7 @@
       "operationIds": [
         "benchmark_fund_performance"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16873,7 +16982,7 @@
       "sourcePath": "marketing/src/content/analytics-guides.ts",
       "sourcePointer": "scheme-performance#request",
       "sourceRoute": "/docs/scheme-performance#request",
-      "sourceSha256": "191722ca408b8cc8afd9140256c4b57e384c9486f76322ad8df35ce2909d8f15",
+      "sourceSha256": "469a5fa1ab5054d657951b598c66fa2d088aa7fec9d04b82f47fa6a125d776f9",
       "language": "typescript",
       "code": "// Pass the exact scheme selected from search, including its plan and option.\nasync function showSchemePerformance(selectedSchemeId: string) {\n  const result = await bharosa.markets.schemes.performance.retrieve(selectedSchemeId, {\n    asOf: \"2026-10-01\", // Monthly cutoff; inspect the actual NAV dates below.\n    periods: [\"1y\", \"3y\"],\n  });\n  for (const period of result.periods) {\n    // An unavailable value is not a zero return.\n    console.log(period.period, period.total_return_pct.status === \"available\"\n      ? period.total_return_pct.value : period.total_return_pct.reason);\n    console.log(period.start_observation_date, period.end_observation_date);\n  }\n  return result;\n}",
       "setup": "// Server only. Values come from your deployment configuration.\nimport { Bharosa } from \"bharosa\";\n\nconst bharosa = new Bharosa({\n  apiKey: process.env.BHAROSA_SECRET_KEY!,\n});",
@@ -16881,7 +16990,7 @@
       "operationIds": [
         "baseline_analytics_scheme"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16891,7 +17000,7 @@
       "sourcePath": "marketing/src/content/analytics-guides.ts",
       "sourcePointer": "scheme-performance#http",
       "sourceRoute": "/docs/scheme-performance#http",
-      "sourceSha256": "191722ca408b8cc8afd9140256c4b57e384c9486f76322ad8df35ce2909d8f15",
+      "sourceSha256": "469a5fa1ab5054d657951b598c66fa2d088aa7fec9d04b82f47fa6a125d776f9",
       "language": "bash",
       "code": "# Use the selected scheme ID; the monthly cutoff is explicit.\ncurl --get \"https://api.bharosa.finance/v1/market-data/schemes/$SELECTED_SCHEME_ID/performance\" \\\n  -H \"Authorization: Bearer $BHAROSA_SECRET_KEY\" \\\n  --data-urlencode \"as_of=2026-10-01\" \\\n  --data-urlencode \"periods=1y,3y\"",
       "setup": "",
@@ -16899,7 +17008,7 @@
       "operationIds": [
         "baseline_analytics_scheme"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16909,7 +17018,7 @@
       "sourcePath": "marketing/src/content/analytics-guides.ts",
       "sourcePointer": "category-statistics#request",
       "sourceRoute": "/docs/category-statistics#request",
-      "sourceSha256": "191722ca408b8cc8afd9140256c4b57e384c9486f76322ad8df35ce2909d8f15",
+      "sourceSha256": "469a5fa1ab5054d657951b598c66fa2d088aa7fec9d04b82f47fa6a125d776f9",
       "language": "typescript",
       "code": "// Supply the category identifier chosen in your application, not a guessed label.\nasync function showCategoryReturns(selectedCategory: string) {\n  const result = await bharosa.markets.categories.statistics.retrieve(selectedCategory, {\n    asOf: \"2026-10-01\", periods: [\"1y\", \"3y\"],\n    metrics: [\"return\"], plan: \"direct\", option: \"growth\",\n  });\n  for (const [name, metric] of Object.entries(result.metrics)) {\n    // Show coverage alongside the result; do not hide exclusions.\n    console.log(name, metric.status === \"available\" ? metric.value : metric.reason,\n      metric.valid_count, metric.eligible_count, metric.coverage_pct);\n  }\n  return result;\n}",
       "setup": "// Server only. Values come from your deployment configuration.\nimport { Bharosa } from \"bharosa\";\n\nconst bharosa = new Bharosa({\n  apiKey: process.env.BHAROSA_SECRET_KEY!,\n});",
@@ -16917,7 +17026,7 @@
       "operationIds": [
         "baseline_analytics_category"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16927,7 +17036,7 @@
       "sourcePath": "marketing/src/content/analytics-guides.ts",
       "sourcePointer": "category-statistics#http",
       "sourceRoute": "/docs/category-statistics#http",
-      "sourceSha256": "191722ca408b8cc8afd9140256c4b57e384c9486f76322ad8df35ce2909d8f15",
+      "sourceSha256": "469a5fa1ab5054d657951b598c66fa2d088aa7fec9d04b82f47fa6a125d776f9",
       "language": "bash",
       "code": "# Keep plan and option consistent across comparisons.\ncurl --get \"https://api.bharosa.finance/v1/market-data/categories/$SELECTED_CATEGORY/statistics\" \\\n  -H \"Authorization: Bearer $BHAROSA_SECRET_KEY\" \\\n  --data-urlencode \"as_of=2026-10-01\" \\\n  --data-urlencode \"periods=1y,3y\" \\\n  --data-urlencode \"metrics=return\" \\\n  --data-urlencode \"plan=direct\" \\\n  --data-urlencode \"option=growth\"",
       "setup": "",
@@ -16935,8 +17044,24 @@
       "operationIds": [
         "baseline_analytics_category"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
+      "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
+    },
+    {
+      "id": "guide-fund-portfolio-aum-preview-fund-chain-preview",
+      "title": "Fund portfolio AUM: Read a fund’s portfolio and holdings",
+      "sourcePath": "marketing/src/content/guides.ts",
+      "sourcePointer": "fund-portfolio-aum-preview#fund-chain-preview",
+      "sourceRoute": "/docs/fund-portfolio-aum-preview#fund-chain-preview",
+      "sourceSha256": "7db4f9f5fb0409ff32f2a4910345b11769fcabbd0f4a706031163e129e06c435",
+      "language": "typescript",
+      "code": "// fundId must be the parent mutual fund selected by your application.\nasync function readFundHoldings(fundId: string) {\n  const fund = await bharosa.mutualFunds.retrieve(fundId);\n  // No date means latest stored portfolio on or before today in India.\n  const portfolio = await fund.portfolio();\n  if (!portfolio) return null; // No portfolio is available; this is not zero AUM.\n\n  const holdings = [];\n  let startingAfter: string | undefined;\n  do {\n    const page = await portfolio.holdings({ limit: 100, startingAfter });\n    holdings.push(...page.data);\n    if (!page.has_more) break;\n    if (!page.next_cursor) throw new Error(\"Missing holdings cursor\");\n    startingAfter = page.next_cursor;\n  } while (true);\n\n  // Return only after all pages succeed. AUM belongs to this same stored record.\n  return { date: portfolio.observation_date, aum: portfolio.aum, holdings };\n}",
+      "setup": "// Server only. Values come from your deployment configuration.\nimport { Bharosa } from \"bharosa\";\n\nconst bharosa = new Bharosa({\n  apiKey: process.env.BHAROSA_SECRET_KEY!,\n});",
+      "codeSha256": "6eb0e97aa447ba446ddbcdd3460ae19c5b856d2a8e0c556cb7d04317cf365ef9",
+      "operationIds": [],
+      "sdkVersion": "0.9.0",
+      "validation": "strict-typescript",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
     {
@@ -16945,13 +17070,29 @@
       "sourcePath": "marketing/src/content/guides.ts",
       "sourcePointer": "fund-portfolio-aum-preview#usage",
       "sourceRoute": "/docs/fund-portfolio-aum-preview#usage",
-      "sourceSha256": "7b7c738b001442698db57cf03326f0ee25e6676e3b331d753704642ecd3ff089",
+      "sourceSha256": "7db4f9f5fb0409ff32f2a4910345b11769fcabbd0f4a706031163e129e06c435",
       "language": "typescript",
       "code": "// Use the actual parent fund ID selected by your application.\nasync function inspectFundPortfolio(fundId: string) {\n  const selection = { asOf: \"2026-10-01\" };\n  const portfolio = await bharosa.mutualFunds.portfolios.retrieve(fundId, selection);\n  const holdings = await bharosa.mutualFunds.portfolios.holdings.list(fundId, selection);\n  if (portfolio.status === \"available\" && holdings.status === \"available\") {\n    if (portfolio.data.id !== holdings.data.portfolio.id || portfolio.observation_date !== holdings.observation_date)\n      throw new Error(\"The portfolio changed. Restart the lookup.\");\n    const aum = holdings.data.portfolio.aum;\n    if (aum?.status === \"available\") console.log(aum.data.amount, aum.data.currency, aum.data.source);\n    // Follow holdings.data.holdings.next_cursor while has_more is true.\n  }\n  return { portfolio, holdings };\n}",
       "setup": "// Server only. Values come from your deployment configuration.\nimport { Bharosa } from \"bharosa\";\n\nconst bharosa = new Bharosa({\n  apiKey: process.env.BHAROSA_SECRET_KEY!,\n});",
       "codeSha256": "2918aab512900563297d28020a34b103f9fdd931627dffb8a2ffc2de4b03b59a",
       "operationIds": [],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
+      "validation": "strict-typescript",
+      "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
+    },
+    {
+      "id": "guide-retrieve-mutual-fund-retrieve",
+      "title": "Retrieve a mutual fund: Retrieve a selected fund",
+      "sourcePath": "marketing/src/content/guides.ts",
+      "sourcePointer": "retrieve-mutual-fund#retrieve",
+      "sourceRoute": "/docs/retrieve-mutual-fund#retrieve",
+      "sourceSha256": "7db4f9f5fb0409ff32f2a4910345b11769fcabbd0f4a706031163e129e06c435",
+      "language": "typescript",
+      "code": "// fundId is the verified parent fund selected by your application.\nconst fund = await bharosa.mutualFunds.retrieve(fundId);\nconsole.log(fund.id, fund.name);\n// The fund can exist even when no disclosed portfolio is available.\nconst portfolio = await fund.portfolio();",
+      "setup": "// Server only. Values come from your deployment configuration.\nimport { Bharosa } from \"bharosa\";\n\nconst bharosa = new Bharosa({\n  apiKey: process.env.BHAROSA_SECRET_KEY!,\n});\n// Required selected fund ID described by the canonical snippet.\nconst fundId = process.argv[2];\nif (!fundId) throw new Error(\"Pass the selected fund ID as the first argument.\");",
+      "codeSha256": "8489c45936455d37d589876cc5ac38df4637a380268797ff82730888011da3ef",
+      "operationIds": [],
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16961,7 +17102,7 @@
       "sourcePath": "marketing/src/content/guides.ts",
       "sourcePointer": "portfolio-records#history",
       "sourceRoute": "/docs/portfolio-records#history",
-      "sourceSha256": "7b7c738b001442698db57cf03326f0ee25e6676e3b331d753704642ecd3ff089",
+      "sourceSha256": "7db4f9f5fb0409ff32f2a4910345b11769fcabbd0f4a706031163e129e06c435",
       "language": "typescript",
       "code": "// Use a portfolio ID selected from the caller's authorized portfolio list.\nasync function readRecordedHoldings(portfolioId: string) {\n  const portfolio = await bharosa.portfolios.retrieve(portfolioId);\n  const holdings = await portfolio.holdings.list();\n  // This is recorded holding membership, not a latest-NAV total or a saved snapshot.\n  // Inspect each holding's backing and dated evidence before presenting quantities.\n  return holdings;\n}",
       "setup": "// Server only. Values come from your deployment configuration.\nimport { Bharosa } from \"bharosa\";\n\nconst bharosa = new Bharosa({\n  apiKey: process.env.BHAROSA_SECRET_KEY!,\n});",
@@ -16973,7 +17114,7 @@
         "history_capabilities",
         "holding_position"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16983,13 +17124,13 @@
       "sourcePath": "marketing/src/content/guides.ts",
       "sourcePointer": "documentation-assistant#plugins",
       "sourceRoute": "/docs/documentation-assistant#plugins",
-      "sourceSha256": "7b7c738b001442698db57cf03326f0ee25e6676e3b331d753704642ecd3ff089",
+      "sourceSha256": "7db4f9f5fb0409ff32f2a4910345b11769fcabbd0f4a706031163e129e06c435",
       "language": "bash",
       "code": "# Choose one host to install the full plugin from the Bharosa marketplace.\ncodex plugin marketplace add bhafin/plugin\ncodex plugin add bharosa-docs@bharosa\n\n# Alternatively, for Claude Code:\nclaude plugin marketplace add bhafin/plugin\nclaude plugin install bharosa-docs@bharosa --scope user",
       "setup": "",
       "codeSha256": "5eeb3e30494705ef2b397c93e72fe8c0a0b7680596951f69170afc42f6f8e090",
       "operationIds": [],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -16999,13 +17140,13 @@
       "sourcePath": "marketing/src/content/guides.ts",
       "sourcePointer": "documentation-assistant#hosted",
       "sourceRoute": "/docs/documentation-assistant#hosted",
-      "sourceSha256": "7b7c738b001442698db57cf03326f0ee25e6676e3b331d753704642ecd3ff089",
+      "sourceSha256": "7db4f9f5fb0409ff32f2a4910345b11769fcabbd0f4a706031163e129e06c435",
       "language": "bash",
       "code": "# Choose one host. No Bharosa credentials or authorization headers are needed.\ncodex mcp add bharosa_docs --url https://mcp.bharosa.finance/\n\n# Alternatively, register the HTTP service in Claude Code for this project.\nclaude mcp add --transport http --scope local bharosa_docs https://mcp.bharosa.finance/",
       "setup": "",
       "codeSha256": "028324aedf1b09600ddbc4d5bfc84101fd548e01126b818642c95c981fccd17b",
       "operationIds": [],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -17015,13 +17156,13 @@
       "sourcePath": "marketing/src/content/guides.ts",
       "sourcePointer": "documentation-assistant#install",
       "sourceRoute": "/docs/documentation-assistant#install",
-      "sourceSha256": "7b7c738b001442698db57cf03326f0ee25e6676e3b331d753704642ecd3ff089",
+      "sourceSha256": "7db4f9f5fb0409ff32f2a4910345b11769fcabbd0f4a706031163e129e06c435",
       "language": "bash",
       "code": "# Run in the folder where you want to install the standalone MCP server.\nnpm init --yes\nnpm install --ignore-scripts bharosa-docs-mcp@0.2.1\nnode node_modules/bharosa-docs-mcp/dist/cli.js --check",
       "setup": "",
       "codeSha256": "cb9ca69864591fb15662da4110452249c4b5ecd165c5c0c76bd20264dde84acc",
       "operationIds": [],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -17031,13 +17172,13 @@
       "sourcePath": "marketing/src/content/guides.ts",
       "sourcePointer": "documentation-assistant#host",
       "sourceRoute": "/docs/documentation-assistant#host",
-      "sourceSha256": "7b7c738b001442698db57cf03326f0ee25e6676e3b331d753704642ecd3ff089",
+      "sourceSha256": "7db4f9f5fb0409ff32f2a4910345b11769fcabbd0f4a706031163e129e06c435",
       "language": "json",
       "code": "{\n  \"mcpServers\": {\n    \"bharosa\": {\n      \"command\": \"/absolute/path/to/node\",\n      \"args\": [\"/absolute/path/to/project/node_modules/bharosa-docs-mcp/dist/cli.js\", \"--stdio\"]\n    }\n  }\n}",
       "setup": "",
       "codeSha256": "ab3a2c4f14e316cdabebe6c32ced81243438fb9ee28959f4fe167507367de01d",
       "operationIds": [],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "json-parse",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -17047,7 +17188,7 @@
       "sourcePath": "marketing/src/content/guides.ts",
       "sourcePointer": "monthly-market-data#market-client",
       "sourceRoute": "/docs/monthly-market-data#market-client",
-      "sourceSha256": "7b7c738b001442698db57cf03326f0ee25e6676e3b331d753704642ecd3ff089",
+      "sourceSha256": "7db4f9f5fb0409ff32f2a4910345b11769fcabbd0f4a706031163e129e06c435",
       "language": "typescript",
       "code": "import { Bharosa } from \"bharosa\";\n\nconst bharosa = new Bharosa({ apiKey: process.env.BHAROSA_SECRET_KEY! });\nasync function readNav(schemeId: string) {\n  const latest = await bharosa.markets.schemes.nav(schemeId);\n  const monthly = await bharosa.markets.schemes.nav(schemeId, { asOf: \"2026-10-01\" });\n  return { latest, monthly };\n}",
       "setup": "",
@@ -17055,7 +17196,7 @@
       "operationIds": [
         "baseline_monthly_nav"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -17065,13 +17206,13 @@
       "sourcePath": "marketing/src/content/guides.ts",
       "sourcePointer": "testing-samples#offline",
       "sourceRoute": "/docs/testing-samples#offline",
-      "sourceSha256": "7b7c738b001442698db57cf03326f0ee25e6676e3b331d753704642ecd3ff089",
+      "sourceSha256": "7db4f9f5fb0409ff32f2a4910345b11769fcabbd0f4a706031163e129e06c435",
       "language": "typescript",
       "code": "import { samplePortfolios, sampleFunds } from \"bharosa/testing\";\n// Fictional offline fixtures: no network requests or real market identifiers.\nconst portfolios = samplePortfolios();\nconst funds = sampleFunds();",
       "setup": "// Server only. Values come from your deployment configuration.\nimport { Bharosa } from \"bharosa\";\n\nconst bharosa = new Bharosa({\n  apiKey: process.env.BHAROSA_SECRET_KEY!,\n});",
       "codeSha256": "c4aac426c2a38815acbe311bb358140ddbf0f85cd215915857661a1c855ef440",
       "operationIds": [],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -17081,13 +17222,13 @@
       "sourcePath": "marketing/src/content/guides.ts",
       "sourcePointer": "saved-portfolio-allocation#choose",
       "sourceRoute": "/docs/saved-portfolio-allocation#choose",
-      "sourceSha256": "7b7c738b001442698db57cf03326f0ee25e6676e3b331d753704642ecd3ff089",
+      "sourceSha256": "7db4f9f5fb0409ff32f2a4910345b11769fcabbd0f4a706031163e129e06c435",
       "language": "typescript",
       "code": "// client is already configured; select is your UI selection callback.\nasync function selectedSavedMix(\n  client: Bharosa,\n  select: (\n    kind: \"family\" | \"investor\" | \"portfolio\",\n    choices: ReadonlyArray<{ id: string; name?: string }>,\n  ) => Promise<string>,\n) {\n  // Load all pages so a choice is not limited to the first page.\n  async function all<T extends { id: string }>(\n    load: (cursor?: string) => Promise<{ data: T[]; has_more: boolean }>,\n  ): Promise<T[]> {\n    const rows: T[] = [];\n    let cursor: string | undefined;\n    for (;;) {\n      const page = await load(cursor);\n      rows.push(...page.data);\n      if (!page.has_more) return rows;\n      const next = page.data.at(-1)?.id;\n      if (!next || next === cursor)\n        throw new Error(\n          \"The list could not be completed. Try loading it again.\",\n        );\n      cursor = next;\n    }\n  }\n  const families = await all((cursor) =>\n    client.clients.list({\n      limit: 100,\n      ...(cursor ? { startingAfter: cursor } : {}),\n    }),\n  );\n  // Select returned IDs, never infer identity from a name or list order.\n  const familyId = await select(\"family\", families);\n  if (!families.some((f) => f.id === familyId))\n    throw new Error(\"Choose a family from the returned list.\");\n  const investors = await all((cursor) =>\n    client.investors.list({\n      client: familyId,\n      limit: 100,\n      ...(cursor ? { startingAfter: cursor } : {}),\n    }),\n  );\n  const investorId = await select(\"investor\", investors);\n  if (!investors.some((i) => i.id === investorId))\n    throw new Error(\"Choose an investor from this family.\");\n  const portfolios = (\n    await all((cursor) =>\n      client.portfolios.list({\n        client: familyId,\n        limit: 100,\n        ...(cursor ? { startingAfter: cursor } : {}),\n      }),\n    )\n  ).filter((p) => p.investor === investorId);\n  const portfolioId = await select(\"portfolio\", portfolios);\n  const portfolio = portfolios.find((p) => p.id === portfolioId);\n  if (!portfolio)\n    throw new Error(\"Choose a saved portfolio belonging to this investor.\");\n  // This mix uses the saved snapshot; it does not reprice it with latest NAV.\n  return {\n    asset: await portfolio.assetMix(),\n  };\n}\n",
       "setup": "// Server only. Values come from your deployment configuration.\nimport { Bharosa } from \"bharosa\";\n\nconst bharosa = new Bharosa({\n  apiKey: process.env.BHAROSA_SECRET_KEY!,\n});",
       "codeSha256": "5110145c6b6817bf6b6b03ad531dba55038478ebd4b6011e38607d58fda185d8",
       "operationIds": [],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -17097,13 +17238,13 @@
       "sourcePath": "marketing/src/content/guides.ts",
       "sourcePointer": "quickstart#first-app",
       "sourceRoute": "/docs/quickstart#first-app",
-      "sourceSha256": "7b7c738b001442698db57cf03326f0ee25e6676e3b331d753704642ecd3ff089",
+      "sourceSha256": "7db4f9f5fb0409ff32f2a4910345b11769fcabbd0f4a706031163e129e06c435",
       "language": "typescript",
       "code": "import { samplePortfolios } from \"bharosa/testing\";\n\n// Start with fictional data so you can build a list without secrets or API calls.\nconst portfolios = samplePortfolios();\nfor (const portfolio of portfolios) {\n  // Keep a useful empty state: zero positions is a valid sample, not a load error.\n  console.log(`${portfolio.name}: ${portfolio.positions.length} positions`);\n}\n// These sample symbols are not real instrument IDs. Do not submit them to the API.",
       "setup": "// Server only. Values come from your deployment configuration.\nimport { Bharosa } from \"bharosa\";\n\nconst bharosa = new Bharosa({\n  apiKey: process.env.BHAROSA_SECRET_KEY!,\n});",
       "codeSha256": "054f82f94912ecfda6c77ad35923b982ce01f14ebd5e672630e8d875dbceda24",
       "operationIds": [],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -17113,7 +17254,7 @@
       "sourcePath": "marketing/src/content/guides.ts",
       "sourcePointer": "app-quickstart#initialize",
       "sourceRoute": "/docs/app-quickstart#initialize",
-      "sourceSha256": "7b7c738b001442698db57cf03326f0ee25e6676e3b331d753704642ecd3ff089",
+      "sourceSha256": "7db4f9f5fb0409ff32f2a4910345b11769fcabbd0f4a706031163e129e06c435",
       "language": "typescript",
       "code": "import { Bharosa } from \"bharosa\";\n\n// Run on your server, after the configured consent callback has stored this grant.\nasync function readAuthorizedAccount(applicationKey: string, grant: { accountId: string; accessToken: string }) {\n  const bharosa = new Bharosa({\n    auth: { type: \"delegated_application\", apiKey: applicationKey, userAccessToken: grant.accessToken },\n    account: grant.accountId,\n  });\n  return bharosa.accounts.retrieve();\n}",
       "setup": "",
@@ -17121,7 +17262,7 @@
       "operationIds": [
         "retrieve_account"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -17131,13 +17272,13 @@
       "sourcePath": "marketing/src/content/guides.ts",
       "sourcePointer": "app-quickstart#http",
       "sourceRoute": "/docs/app-quickstart#http",
-      "sourceSha256": "7b7c738b001442698db57cf03326f0ee25e6676e3b331d753704642ecd3ff089",
+      "sourceSha256": "7db4f9f5fb0409ff32f2a4910345b11769fcabbd0f4a706031163e129e06c435",
       "language": "bash",
       "code": "# Both credentials must authorize the account selected in the user grant.\ncurl \"https://api.bharosa.finance/v1/accounts/$BHAROSA_ACCOUNT_ID\" \\\n  -H \"Authorization: Bearer $BHAROSA_APPLICATION_KEY\" \\\n  -H \"Bharosa-User-Authorization: Bearer $BHAROSA_USER_ACCESS_TOKEN\"",
       "setup": "",
       "codeSha256": "049716a01330b771d429dca02fd860d8eb988e0b4822a2fcb1686daaacc79e27",
       "operationIds": [],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -17147,13 +17288,13 @@
       "sourcePath": "marketing/src/content/guides.ts",
       "sourcePointer": "own-account#initialize",
       "sourceRoute": "/docs/own-account#initialize",
-      "sourceSha256": "7b7c738b001442698db57cf03326f0ee25e6676e3b331d753704642ecd3ff089",
+      "sourceSha256": "7db4f9f5fb0409ff32f2a4910345b11769fcabbd0f4a706031163e129e06c435",
       "language": "typescript",
-      "code": "// Server only. Values come from your deployment configuration.\nimport { Bharosa } from \"bharosa\";\n\n// Fail before a request if server configuration is missing; never print secrets.\nfunction required(name: string): string {\n  const value = process.env[name];\n  if (!value) throw new Error(`Missing ${name}`);\n  return value;\n}\n\nconst bharosa = new Bharosa({\n  apiKey: required(\"BHAROSA_SECRET_KEY\"),\n});\n\n// List your portfolios, then rerun with an ID from this page as the first argument.\nconst page = await bharosa.portfolios.list({ limit: 10 });\nconst selectedId = process.argv[2];\nconst selected = page.data.find((portfolio) => portfolio.id === selectedId);\nif (!selected) {\n  console.table(page.data.map(({ id, name }) => ({ id, name })));\n  console.log(\"Choose a portfolio ID from this list and pass it as the first argument.\");\n  if (page.has_more) console.log(\"More portfolios are available; see the pagination guide.\");\n} else {\n  // Uses this portfolio's saved snapshot values, not a latest-NAV repricing.\n  const portfolio = await bharosa.portfolios.retrieve(selected.id);\n  const result = await portfolio.assetMix();\n  console.log(result.mix);\n}",
+      "code": "// Server only. Values come from your deployment configuration.\nimport { Bharosa } from \"bharosa\";\n\n// Fail before a request if server configuration is missing; never print secrets.\nfunction required(name: string): string {\n  const value = process.env[name];\n  if (!value) throw new Error(`Missing ${name}`);\n  return value;\n}\n\nconst bharosa = new Bharosa({\n  apiKey: required(\"BHAROSA_SECRET_KEY\"),\n});\n\n// List your portfolios, then rerun with an ID from this page as the first argument.\nconst page = await bharosa.portfolios.list({ limit: 10 });\nconst selectedId = process.argv[2];\nconst selected = page.data.find((portfolio) => portfolio.id === selectedId);\nif (!selected) {\n  console.table(page.data.map(({ id, name }) => ({ id, name })));\n  console.log(\"Choose a portfolio ID from this list and pass it as the first argument.\");\n  if (page.has_more) console.log(\"More portfolios are available; see the pagination guide.\");\n} else {\n  // Uses this portfolio's saved snapshot values, not a latest-NAV repricing.\n  const portfolio = await bharosa.portfolios.retrieve(selected.id);\n  const result = await portfolio.assetMix();\n  // Keep the valuation date and data warnings alongside the allocation.\n  console.log({ mix: result.mix, valuation_date: result.valuation_date, warnings: result.warnings });\n}",
       "setup": "",
-      "codeSha256": "6de9e0b896f97e1f37328b31bf804bb69841b5463ab1a69dfb56056761460153",
+      "codeSha256": "7f671b09203fbe75df969caf41e282816f71e8ad19eb2f78af7baf4e32a01a33",
       "operationIds": [],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -17163,7 +17304,7 @@
       "sourcePath": "marketing/src/content/guides.ts",
       "sourcePointer": "own-account#first-request",
       "sourceRoute": "/docs/own-account#first-request",
-      "sourceSha256": "7b7c738b001442698db57cf03326f0ee25e6676e3b331d753704642ecd3ff089",
+      "sourceSha256": "7db4f9f5fb0409ff32f2a4910345b11769fcabbd0f4a706031163e129e06c435",
       "language": "bash",
       "code": "# Select BHAROSA_PORTFOLIO_ID from your own portfolio list.\ncurl \"https://api.bharosa.finance/v1/accounts/me/portfolios/asset_mix\" \\\n  -H \"Authorization: Bearer $BHAROSA_SECRET_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  --data '{\"portfolio\":{\"type\":\"saved\",\"id\":\"'\"$BHAROSA_PORTFOLIO_ID\"'\"}}'",
       "setup": "",
@@ -17171,7 +17312,7 @@
       "operationIds": [
         "asset_mix"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -17181,7 +17322,7 @@
       "sourcePath": "marketing/src/content/guides.ts",
       "sourcePointer": "oauth#requests",
       "sourceRoute": "/docs/oauth#requests",
-      "sourceSha256": "7b7c738b001442698db57cf03326f0ee25e6676e3b331d753704642ecd3ff089",
+      "sourceSha256": "7db4f9f5fb0409ff32f2a4910345b11769fcabbd0f4a706031163e129e06c435",
       "language": "typescript",
       "code": "import { Bharosa } from \"bharosa\";\n\n// Call only with the authoritative grant from your validated server consent flow.\nasync function retrieveGrantedAccount(grant: { accountId: string; accessToken: string }) {\n  const bharosa = new Bharosa({\n    account: grant.accountId,\n    auth: {\n      type: \"delegated_application\",\n      apiKey: process.env.BHAROSA_APPLICATION_KEY!,\n      userAccessToken: grant.accessToken,\n    },\n  });\n  return bharosa.accounts.retrieve();\n}",
       "setup": "",
@@ -17189,7 +17330,7 @@
       "operationIds": [
         "retrieve_account"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -17199,13 +17340,13 @@
       "sourcePath": "marketing/src/content/guides.ts",
       "sourcePointer": "pagination#order",
       "sourceRoute": "/docs/pagination#order",
-      "sourceSha256": "7b7c738b001442698db57cf03326f0ee25e6676e3b331d753704642ecd3ff089",
+      "sourceSha256": "7db4f9f5fb0409ff32f2a4910345b11769fcabbd0f4a706031163e129e06c435",
       "language": "typescript",
       "code": "// Start without a cursor; keep any filters unchanged on later pages.\nlet cursor: string | undefined;\ndo {\n  const page = await bharosa.investors.list({ limit: 100, startingAfter: cursor });\n  for (const investor of page.data) console.log(investor.id);\n  // A short page alone does not prove completion.\n  if (!page.has_more) break;\n  cursor = page.data.at(-1)!.id;\n} while (cursor);",
       "setup": "// Server only. Values come from your deployment configuration.\nimport { Bharosa } from \"bharosa\";\n\nconst bharosa = new Bharosa({\n  apiKey: process.env.BHAROSA_SECRET_KEY!,\n});",
       "codeSha256": "4fba3d9ada2cda57283428eb23c9c4890ac958d8ee8eaa88a90d59190158e0d3",
       "operationIds": [],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -17215,13 +17356,13 @@
       "sourcePath": "marketing/src/content/guides.ts",
       "sourcePointer": "errors#envelope",
       "sourceRoute": "/docs/errors#envelope",
-      "sourceSha256": "7b7c738b001442698db57cf03326f0ee25e6676e3b331d753704642ecd3ff089",
+      "sourceSha256": "7db4f9f5fb0409ff32f2a4910345b11769fcabbd0f4a706031163e129e06c435",
       "language": "json",
       "code": "{\n  \"error\": {\n    \"type\": \"invalid_request_error\",\n    \"code\": \"snapshot_conflict\",\n    \"message\": \"The current snapshot has changed.\",\n    \"param\": \"expected_snapshot\",\n    \"request_id\": \"req_fictional_example\"\n  }\n}",
       "setup": "",
       "codeSha256": "759c8021047c2260cc10cd2dd4f927bec94d31f532043f64b0de2367b56f08ba",
       "operationIds": [],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "json-parse",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -17231,7 +17372,7 @@
       "sourcePath": "marketing/src/content/guides.ts",
       "sourcePointer": "first-portfolio#create",
       "sourceRoute": "/docs/first-portfolio#create",
-      "sourceSha256": "7b7c738b001442698db57cf03326f0ee25e6676e3b331d753704642ecd3ff089",
+      "sourceSha256": "7db4f9f5fb0409ff32f2a4910345b11769fcabbd0f4a706031163e129e06c435",
       "language": "typescript",
       "code": "// Replace fictional IDs with selected records from this account.\n// Retain this key and the unchanged input when retrying an uncertain save.\nconst idempotencyKey = crypto.randomUUID();\nconst result = await bharosa.portfolios.create({\n  \"name\": \"Long-term savings\",\n  \"investor\": \"inv_0123456789abcdef0123456789abcdef\",\n  \"as_of\": \"2026-10-18\",\n  \"positions\": [\n    {\n      \"instrument\": \"ins_markets_scheme_101\",\n      \"current_value\": \"125000.50\"\n    }\n  ]\n}, { idempotencyKey });",
       "setup": "// Server only. Values come from your deployment configuration.\nimport { Bharosa } from \"bharosa\";\n\nconst bharosa = new Bharosa({\n  apiKey: process.env.BHAROSA_SECRET_KEY!,\n});",
@@ -17239,7 +17380,7 @@
       "operationIds": [
         "create_portfolio"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -17249,7 +17390,7 @@
       "sourcePath": "marketing/src/content/guides.ts",
       "sourcePointer": "first-portfolio#units",
       "sourceRoute": "/docs/first-portfolio#units",
-      "sourceSha256": "7b7c738b001442698db57cf03326f0ee25e6676e3b331d753704642ecd3ff089",
+      "sourceSha256": "7db4f9f5fb0409ff32f2a4910345b11769fcabbd0f4a706031163e129e06c435",
       "language": "typescript",
       "code": "// Fictional IDs: select the investor and instrument before saving.\n// Reuse this key and identical input only when retrying this save.\nconst idempotencyKey = crypto.randomUUID();\nconst result = await bharosa.portfolios.create({\n  name: \"Selected investor's portfolio\",\n  investor: \"inv_0123456789abcdef0123456789abcdef\",\n  // This is the date the units were observed, not a NAV date.\n  as_of: \"2026-10-01\",\n  positions: [{ instrument: \"ins_example_selected_scheme\", quantity: \"12.5\" }],\n}, { idempotencyKey });",
       "setup": "// Server only. Values come from your deployment configuration.\nimport { Bharosa } from \"bharosa\";\n\nconst bharosa = new Bharosa({\n  apiKey: process.env.BHAROSA_SECRET_KEY!,\n});",
@@ -17258,7 +17399,7 @@
         "create_portfolio",
         "current_snapshot"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -17268,7 +17409,7 @@
       "sourcePath": "marketing/src/content/guides.ts",
       "sourcePointer": "family-member#create",
       "sourceRoute": "/docs/family-member#create",
-      "sourceSha256": "7b7c738b001442698db57cf03326f0ee25e6676e3b331d753704642ecd3ff089",
+      "sourceSha256": "7db4f9f5fb0409ff32f2a4910345b11769fcabbd0f4a706031163e129e06c435",
       "language": "typescript",
       "code": "// Replace fictional IDs with selected records from this account.\n// Retain this key and the unchanged input when retrying an uncertain save.\nconst idempotencyKey = crypto.randomUUID();\nconst member = await bharosa.investors.create({\n  \"name\": \"Meera Rao\",\n  \"relationship_to_owner\": \"spouse\",\n  \"client\": \"clt_0123456789abcdef0123456789abcdef\"\n}, { idempotencyKey });",
       "setup": "// Server only. Values come from your deployment configuration.\nimport { Bharosa } from \"bharosa\";\n\nconst bharosa = new Bharosa({\n  apiKey: process.env.BHAROSA_SECRET_KEY!,\n});",
@@ -17276,7 +17417,7 @@
       "operationIds": [
         "create_investor"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -17286,7 +17427,7 @@
       "sourcePath": "marketing/src/content/guides.ts",
       "sourcePointer": "fund-autocomplete#baseline-search",
       "sourceRoute": "/docs/fund-autocomplete#baseline-search",
-      "sourceSha256": "7b7c738b001442698db57cf03326f0ee25e6676e3b331d753704642ecd3ff089",
+      "sourceSha256": "7db4f9f5fb0409ff32f2a4910345b11769fcabbd0f4a706031163e129e06c435",
       "language": "typescript",
       "code": "// Use the configured server-side client; no private account permissions are needed.\nasync function chooseScheme(query: string, choose: (choices: Awaited<ReturnType<typeof bharosa.markets.schemes.search>>[\"data\"]) => Promise<string | null>) {\n  const matches = await bharosa.markets.schemes.search({ query, limit: 10 });\n  if (matches.data.length === 0) return { status: \"empty\" as const };\n  // Present scheme, plan and option. The user chooses; never take the first match automatically.\n  const selectedId = await choose(matches.data);\n  if (selectedId === null) return { status: \"cancelled\" as const };\n  const selected = matches.data.find(item => item.scheme_id === selectedId);\n  if (!selected || selected.identity_status !== \"resolved\") {\n    throw new Error(\"Choose a resolved scheme from these results.\");\n  }\n  // has_more means refine the query; this search does not accept a pagination cursor.\n  const latest = await bharosa.markets.schemes.nav(selected.scheme_id);\n  return { status: \"selected\" as const, selected, latest, refineQuery: matches.has_more };\n}",
       "setup": "// Server only. Values come from your deployment configuration.\nimport { Bharosa } from \"bharosa\";\n\nconst bharosa = new Bharosa({\n  apiKey: process.env.BHAROSA_SECRET_KEY!,\n});",
@@ -17295,7 +17436,7 @@
         "searchMarketSchemes",
         "baseline_monthly_nav"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -17305,7 +17446,7 @@
       "sourcePath": "marketing/src/content/guides.ts",
       "sourcePointer": "update-holdings#replace",
       "sourceRoute": "/docs/update-holdings#replace",
-      "sourceSha256": "7b7c738b001442698db57cf03326f0ee25e6676e3b331d753704642ecd3ff089",
+      "sourceSha256": "7db4f9f5fb0409ff32f2a4910345b11769fcabbd0f4a706031163e129e06c435",
       "language": "typescript",
       "code": "// Send every desired position; omitted instruments are removed.\n// Use the snapshot ID you loaded; a conflict means reload and reconcile, not overwrite.\n// Replace fictional IDs with selected records from this account.\n// Retain this key and the unchanged input when retrying an uncertain save.\nconst idempotencyKey = crypto.randomUUID();\nconst result = await bharosa.portfolios.snapshots.create(\"ptf_0123456789abcdef0123456789abcdef\", {\n  \"expected_snapshot\": \"psn_0123456789abcdef0123456789abcdef\",\n  \"as_of\": \"2026-10-18\",\n  \"positions\": [\n    {\n      \"instrument\": \"ins_markets_scheme_101\",\n      \"current_value\": \"125000.50\"\n    }\n  ]\n}, { idempotencyKey });",
       "setup": "// Server only. Values come from your deployment configuration.\nimport { Bharosa } from \"bharosa\";\n\nconst bharosa = new Bharosa({\n  apiKey: process.env.BHAROSA_SECRET_KEY!,\n});",
@@ -17313,7 +17454,7 @@
       "operationIds": [
         "replace_snapshot"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -17323,13 +17464,13 @@
       "sourcePath": "marketing/src/content/guides.ts",
       "sourcePointer": "integrations#install",
       "sourceRoute": "/docs/integrations#install",
-      "sourceSha256": "7b7c738b001442698db57cf03326f0ee25e6676e3b331d753704642ecd3ff089",
+      "sourceSha256": "7db4f9f5fb0409ff32f2a4910345b11769fcabbd0f4a706031163e129e06c435",
       "language": "bash",
-      "code": "# Run in a new project folder; these checks make no authenticated API calls.\nnpm init --yes\nnpm install bharosa@0.8.0 --ignore-scripts\nnode --input-type=module -e 'import { Bharosa } from \"bharosa\"; console.log(\"Bharosa export:\", typeof Bharosa);'\nnode node_modules/bharosa/examples/offline-smoke.mjs",
+      "code": "# Run in a new project folder; these checks make no authenticated API calls.\nnpm init --yes\nnpm install bharosa@0.9.0 --ignore-scripts\nnode --input-type=module -e 'import { Bharosa } from \"bharosa\"; console.log(\"Bharosa export:\", typeof Bharosa);'\nnode node_modules/bharosa/examples/offline-smoke.mjs",
       "setup": "",
-      "codeSha256": "578f61f2b4746b692c6e898603f099c32610d3c02c04089b082f1de45e51be9b",
+      "codeSha256": "24312da27292e880cc98e1df99ba06887d36939b18e474b69d8ef40d9460a87a",
       "operationIds": [],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "shell-syntax-only",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -17339,13 +17480,13 @@
       "sourcePath": "marketing/src/content/guides.ts",
       "sourcePointer": "integrations#client",
       "sourceRoute": "/docs/integrations#client",
-      "sourceSha256": "7b7c738b001442698db57cf03326f0ee25e6676e3b331d753704642ecd3ff089",
+      "sourceSha256": "7db4f9f5fb0409ff32f2a4910345b11769fcabbd0f4a706031163e129e06c435",
       "language": "typescript",
       "code": "// Configure once on the server; subsequent examples reuse this client.\n// Server only. Values come from your deployment configuration.\nimport { Bharosa } from \"bharosa\";\n\nconst bharosa = new Bharosa({\n  apiKey: process.env.BHAROSA_SECRET_KEY!,\n});",
       "setup": "",
       "codeSha256": "864fba81e1075e9b933bcdb89007f5728fc6338c2c273547d69bf49cf9b8ec0e",
       "operationIds": [],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -17363,7 +17504,7 @@
       "operationIds": [
         "monthly_nav"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -17381,7 +17522,7 @@
       "operationIds": [
         "monthly_expense"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -17399,7 +17540,7 @@
       "operationIds": [
         "monthly_portfolio"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -17417,7 +17558,7 @@
       "operationIds": [
         "monthly_holdings"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     },
@@ -17435,7 +17576,7 @@
       "operationIds": [
         "monthly_valuation"
       ],
-      "sdkVersion": "0.8.0",
+      "sdkVersion": "0.9.0",
       "validation": "strict-typescript",
       "notice": "Example text only. Never executed by this tool. Placeholders are synthetic; live account actions require separate authorization."
     }
